@@ -1,0 +1,132 @@
+@font-face {
+    font-family: overpass-light;
+    src: url('../../assets/fonts/overpass/Overpass-Light.ttf');
+}
+
+
+
+.wmodal-container {
+    width: 20%;
+    height: 55%;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    padding: 20px;
+    gap: 2px;
+    display: grid;
+    grid-template-rows: .2fr .1fr .6fr .1fr;
+    z-index: 101;
+}
+
+.wclose-btn-container {
+    padding: 5px;
+}
+
+.wclose-btn {
+    position: fixed;
+    right: 2%;
+    font-family: overpass-light;
+    font-weight: bold;
+    cursor: pointer;
+    font-stretch: expanded;
+}
+
+.welcome-text-container {
+    width: 100%;
+    margin-top: 0px;
+}
+
+.welcome-text {
+    font-size: 30px;
+    font-weight: bolder;
+    font-family: overpass-light;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    line-height: 1.3;
+    height: 100%;
+}
+
+.welcome-text p {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.winput-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: -60px;
+}
+
+.welcome-username-container {
+    width: 100%;
+    height: 18%;
+}
+
+.welcome-username-container input {
+    width: 100%;
+    height: 40px;
+    padding: 0;
+    margin: 0;
+    border: solid 1px black;
+    font-family: overpass-light;
+    border-radius: 4px;
+    background-color: transparent;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.welcome-password-container {
+    width: 100%;
+    height: 18%;
+    box-sizing: border-box;
+}
+
+.welcome-password-container input {
+    width: 100%;
+    height: 40px;
+    padding: 5px;
+    margin: 0;
+    border: solid 1px black;
+    box-sizing: border-box;
+    font-family: overpass-light;
+    font-size: 18px;
+    border-radius: 4px;
+}
+
+.welcome-submit-container {
+    width: 100%;
+    height: 18%;
+}
+
+.welcome-submit-container button {
+    width: 100%;
+    height: 40px;
+    padding: 0;
+    margin: 0;
+    border: solid 1px black;
+    font-family: overpass-light;
+    font-size: 16px;
+    border: none;
+    background-color: #FF5500;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.welcome-end-text {
+    text-align: center;
+    margin-top: -130px;
+    color: blue;
+    font-family: overpass-light;
+    font-size: 14px;
+}
+

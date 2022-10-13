@@ -1,0 +1,138 @@
+@font-face {
+    font-family: overpass-light;
+    src: url('../../assets/fonts/overpass/Overpass-Light.ttf');
+}
+
+.smodal-container {
+    width: 20%;
+    min-height: 55%;
+    max-height: 650px;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    display: grid;
+    grid-template-rows: .1fr 1.5fr 1.1fr 1.1fr 1.1fr 1.1fr;
+    grid-auto-rows: minmax(min-content, max-content);
+    justify-items: center;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    gap: 2px;
+    z-index: 101;
+}
+
+.sclose-btn-container {
+    padding: 5px;
+}
+
+.sclose-btn {
+    position: fixed;
+    right: 2%;
+    font-family: overpass-light;
+    font-weight: bold;
+    cursor: pointer;
+    font-stretch: expanded;
+}
+
+.signup-text {
+    font-size: 30px;
+    font-weight: bolder;
+    font-family: overpass-light;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    line-height: 1.3;
+}
+
+.username-btn-container {
+    width: 100%;
+    height: fit-content;
+    justify-content: center;
+    display: inline-grid;
+    grid-template-columns: 100%;
+    margin-top: -30px;
+}
+
+.username-signup-input {
+    width: 100%;
+    height: 42px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    box-shadow: none;
+    border: 1px solid black;
+    border-radius: 4px;
+    font-family: overpass-light;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.password-container {
+    width: 100%;
+    height: fit-content;
+    display: inline-block;
+    font-family: overpass-light;
+    margin-top: -55px;
+}
+
+.password-label {
+    line-height: 10px;
+}
+
+.password-input {
+    width: 100%;
+    box-sizing: border-box;
+    height: 42px;
+    border-radius: 4px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    box-shadow: none;
+    border: 1px solid black;
+}
+
+.signup-button-container {
+    width: 100%;
+    height: fit-content;
+    margin-top: -40px;
+}
+
+.signup-form-button {
+    width: 100%;
+    box-sizing: border-box;
+    font-family: overpass-light;
+    height: 42px;
+    border-radius: 4px;
+    background-color: #FF5500;
+    color: white;
+    background-repeat: no-repeat;
+    box-shadow: none;
+    cursor: pointer;
+    display: flex;    
+    justify-content: center;
+    align-items: center;
+}
+
+.signup-filler-text {
+    font-family: overpass-light;
+    text-align: center;
+    line-height: 1.2;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: -10px;
+}
+
+.captcha-container {
+    margin-right: auto;
+    margin-left: 0;
+    margin-top: -40px;
+}
+
+.signup-error-container {
+    padding: 5px;
+}
+
+.signup-errors li {
+    list-style-type: none;
+}

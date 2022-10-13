@@ -1,0 +1,238 @@
+@font-face {
+    font-family: overpass-light;
+    src: url('../../assets/fonts/overpass/Overpass-Light.ttf');
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.modal-overlay {
+    background-color: rgba(230, 230, 230, 0.8);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    z-index: 100;
+}
+
+.modal-container {
+    width: 20%;
+    height: 55%;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: grid;
+    grid-template-rows: .2fr 1.2fr 1.2fr 1.2fr 1.2fr;
+    background-color: #ffffff;
+    box-shadow: 0px, 0px, 18px, 0px, rgba(0, 0, 0, 0.75);
+    padding: 20px;
+    animation: fadeIn 1.5s, slideIn .6s linear;
+}
+
+@keyframes slideIn {
+    from {
+        margin-top: -100%;
+    }
+
+    to {
+        margin-bottom: 0%;
+    }
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+.modal-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    margin-top: 35px;
+}
+
+.modal-links div {
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 10px;
+}
+
+.modal-links button {
+    display: block;
+    width: 100%;
+    height: 85%;
+    box-sizing: border-box;
+    font-family: overpass-light;
+    font-size: 18px;
+    border-style: none;
+    border-radius: 4px;
+    padding: 8px;
+
+}
+
+.modal-links a {
+    text-decoration: none;
+    height: 100%;
+}
+
+.github-link {
+    background-color: #24292f;
+    color: #ffffff;
+    cursor: pointer;
+    background-image: url('../../assets/icons/github.svg');
+    background-repeat: no-repeat;
+    background-position: 36%;
+    background-size: 5%;
+    letter-spacing: 1px;
+}
+
+.linkedin-link {
+    cursor: pointer;
+    background-color: #0A66C2;
+    color: white;
+    background-image: url('../../assets/icons/linkedin.svg');
+    background-repeat: no-repeat;
+    background-position: 33%;
+    letter-spacing: 1px;
+    background-size: 5%;
+}
+
+#wiki-link {
+    cursor: pointer;
+    background-color: transparent;
+    border: 1px solid black;
+    background-image: url('../../assets/icons/book-bookmark-solid.svg');
+    background-repeat: no-repeat;
+    background-position: 30%;
+    letter-spacing: 1px;
+    background-size: 4%;
+}
+
+.login-form-input {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.login-form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.login-form input {
+    width: 100%;
+    height: 50%;
+    box-sizing: border-box;
+    font-family: overpass-light;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid black;
+    padding: 5px;
+    color: #b9b9b9;
+    margin-bottom: 20px;
+}
+
+.login-sep {
+    height: 0px;
+}
+
+.login-border {
+    display: flex;
+    height: 100%;
+}
+
+.border-front {
+    border-bottom: 1px solid black;
+    flex-grow: 1;
+    width: 100%;
+    margin-bottom: 15px;
+    margin-right: 8px;
+    padding: 8px;
+}
+
+.border-box-text {
+    width: 100%;
+    flex-grow: 1;
+    padding: 8px;
+    font-weight: bold;
+    font-family: overpass-light;
+    font-stretch: expanded;
+}
+
+.border-back {
+    border-bottom: 1px solid black;
+    flex-grow: 1;
+    width: 100%;
+    margin-bottom: 15px;
+    margin-left: 8px;
+    padding: 8px;
+}
+
+.close-btn-container {
+    padding: 5px;
+}
+
+.close-btn {
+    position: fixed;
+    right: 2%;
+    font-family: overpass-light;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.login-form button {
+    display: flex;
+    box-sizing: border-box;
+    font-size: 16px;
+    color: white;
+    flex-grow: 1;
+    width: 100%;
+    height: 50%;
+    font-family: overpass-light;
+    background-color: #FF5500;
+    border-style: none;
+    border-radius: 4px;
+    padding: 5px;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.username-input {
+    text-align: center;
+}
+
+.login-btn {
+    justify-content: center;
+    align-items: center;
+}
+
+.demo-btn {
+    align-items: center;
+    justify-content: center;
+}
+
+.session-text {
+    flex-grow: 1;
+    font-family: overpass-light;
+    color: #b9b9b9;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
