@@ -8,7 +8,6 @@ import SplashPage from "./components/Splash";
 function App() {
   return (
     <>
-      <Header />
       <Switch>
         <Route path={"/login"}>
           <LoginFormPage />
