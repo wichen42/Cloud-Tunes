@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import './WelcomeBackForm.css';
 import * as sessionActions from '../../store/session';
+import { Redirect } from 'react-router-dom';
 
 const WelcomeBack = ({welcomeOpen, welcomeClose, username}) => {
 
@@ -18,6 +19,7 @@ const WelcomeBack = ({welcomeOpen, welcomeClose, username}) => {
     }
 
     const handleClick = (e) => {
+        e.preventDefault();
         const user = {username: username, password: password}
         dispatch(sessionActions.login(user))
         .catch(async (res) => {
@@ -31,6 +33,8 @@ const WelcomeBack = ({welcomeOpen, welcomeClose, username}) => {
             else if (data) setErrors([data]);
             else setErrors([res.statusText]);
           });
+
+          <Redirect to="/discover" />
     }
 
     const handleOverlayClose = (e) => {
@@ -83,7 +87,7 @@ const WelcomeBack = ({welcomeOpen, welcomeClose, username}) => {
                         <button
                         onClick={(e) => handleClick(e)}
                         >
-                            Create Account
+                            Login
                         </button>
                     </div>
                 </div>

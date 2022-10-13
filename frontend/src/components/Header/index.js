@@ -7,6 +7,7 @@ import * as sessionActions from '../../store/session';
 import { useDispatch } from 'react-redux';
 import WelcomeBack from '../WelcomeBackForm';
 import * as usersActions from '../../store/users';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
 
@@ -53,6 +54,9 @@ const Header = () => {
                 <button className='logout-button' onClick={handleClick}>Logout</button>
             </div>
             
+            <div>
+                <button className='home'><Link to='/'>HOME</Link></button>
+            </div>
 
         </div>
     )

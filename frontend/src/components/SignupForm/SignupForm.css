@@ -142,6 +142,11 @@
     align-items: center;
 }
 
+.signup-link {
+    text-decoration: none;
+    color: white;
+}
+
 .signup-filler-text {
     font-family: overpass-light;
     text-align: center;

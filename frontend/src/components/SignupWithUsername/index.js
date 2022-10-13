@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import * as usersActions from '../../store/users';
 import * as sessionActions from '../../store/session';
+import { Link} from "react-router-dom";
 
 const SignupWithUsername = ({swuOpen, swuClose}) => {
 
@@ -97,7 +98,7 @@ const SignupWithUsername = ({swuOpen, swuClose}) => {
                 <div className='signup-button-container'>
                     <div className='signup-form-button'
                     onClick={(e) => handleClick(e)}
-                    >Create Account</div>
+                    ><Link to='/discover'>Create Account</Link></div>
                 </div>
                 <div className='signup-filler-text'>
                     Are you trying to sign in?

@@ -1,16 +1,17 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
-import LoginFormPage from "./components/LoginForm";
-import SplashPage from "./components/Splash";
+import SplashPage from "./components/SplashPage";
+import DiscoverPage from "./components/Discover";
 
 
 function App() {
   return (
     <>
       <Switch>
-        <Route path={"/login"}>
-          <LoginFormPage />
+        <Route path="/discover">
+          <Header />
+          <DiscoverPage />
         </Route>
         <Route path={"/"}>
           <SplashPage />

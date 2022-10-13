@@ -4,10 +4,12 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import * as usersActions from '../../store/users';
 import * as sessionActions from '../../store/session';
+import { Link, useHistory } from 'react-router-dom';
 
 const SignupForm = ({signupOpen, signupClose, username}) => {
 
     const dispatch = useDispatch();
+    const history = useHistory();
     const [errors, setErrors] = useState("");
     const [password, setPassword] = useState("");
     const [submitClicked, setSubmitClicked] = useState(false);
@@ -39,8 +41,8 @@ const SignupForm = ({signupOpen, signupClose, username}) => {
             else setErrors([res.statusText]);
           });
 
-          const newUserState = user;
-          setUsers(oldUsers => ({...oldUsers, user}))
+
+          history.push('/discover');
     }
 
     console.log("username " + username);
@@ -108,7 +110,7 @@ const SignupForm = ({signupOpen, signupClose, username}) => {
                 <div className='signup-button-container'>
                     <div className='signup-form-button'
                     onClick={(e) => handleClick(e)}
-                    >Create Account</div>
+                    ><Link className='signup-link' to='/discover'>Create Account</Link></div>
                 </div>
                 <div className='signup-filler-text'>
                     Are you trying to sign in?
