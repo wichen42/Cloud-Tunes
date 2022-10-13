@@ -1,16 +1,14 @@
 import './ImageSlider.css'
 import { useEffect, useState } from "react";
-import logo from '../../assets/icons/soundcloud.svg';
 import LoginForm from '../LoginForm';
-import SignupForm from '../SignupForm';
+import SignupWithUsername from '../SignupWithUsername';
 
 
 
 const ImageSlider = ({slides}) => {
 
- 
     const [loginModal, setLoginModal] = useState(false);
-    const [signupModal, setSignupModal] = useState(false);
+    const [swUsername, setswUsername] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [dotOneColor, setDotOneColor] = useState({backgroundColor: "#FFFFFF", border: "1px solid #FFFFFF"})
     const [dotTwoColor, setDotTwoColor] = useState({backgroundColor: "transparent", border: "1px solid #FFFFFF"})
@@ -78,7 +76,7 @@ const ImageSlider = ({slides}) => {
 
         <>
             <LoginForm open={loginModal} onClose={() => setLoginModal(false)}/>
-            <SignupForm signupOpen={signupModal} signupClose={() => setSignupModal(false)}/>
+            <SignupWithUsername swuOpen={swUsername} swuClose={() => setswUsername(false) }/>
             <div className="slider-container" >
                 <div className='slider-header'>
                     <div className='slider-logo'>
@@ -91,7 +89,7 @@ const ImageSlider = ({slides}) => {
                         onClick={() => setLoginModal(true)}
                         >Sign In</div>
                         <div className='slider-signup'
-                        onClick={() => setSignupModal(true)}
+                        onClick={() => setswUsername(true)}
                         >Create Account</div>
                         <div className='slider-creators'>For Creators</div>
                     </div>

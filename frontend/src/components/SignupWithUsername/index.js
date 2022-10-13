@@ -1,30 +1,22 @@
-import './SignupForm.css'
 import ReCAPTCHA from "react-google-recaptcha";
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import * as usersActions from '../../store/users';
 import * as sessionActions from '../../store/session';
 
-const SignupForm = ({signupOpen, signupClose, username}) => {
+const SignupWithUsername = ({swuOpen, swuClose}) => {
 
     const dispatch = useDispatch();
+    const [username, setUsername] = useState("");
     const [errors, setErrors] = useState("");
     const [password, setPassword] = useState("");
-    const [submitClicked, setSubmitClicked] = useState(false);
-    const [users, setUsers] = useState({});
 
-    useEffect(() => {
-        dispatch(usersActions.fetchUsers());
-
-    }, [submitClicked])
-
-    if (!signupOpen) return null;
+    if (!swuOpen) return null;
 
 
     const handleClick = (e) => {
         e.preventDefault();
         const user = {username: username, password: password};
-        setSubmitClicked(true);
         dispatch(sessionActions.signup(user))
         .catch(async (res) => {
             let data;
@@ -39,20 +31,16 @@ const SignupForm = ({signupOpen, signupClose, username}) => {
             else setErrors([res.statusText]);
           });
 
-          const newUserState = user;
-          setUsers(oldUsers => ({...oldUsers, user}))
     }
-
-    console.log("username " + username);
 
     const handleOverlayClick = (e) => {
         e.preventDefault();
-        signupClose();
+        swuClose();
     }
 
     const handleCloseButton = (e) => {
         e.preventDefault();
-        signupClose();
+        swuClose();
     }
 
     function onChange(value) {
@@ -69,11 +57,12 @@ const SignupForm = ({signupOpen, signupClose, username}) => {
                     <p>Create your CloudTunes account</p>
                 </div>
                 <div className='username-btn-container'>
-                    <button className='username-signup-input'
-                    onClick={signupClose}
-                    >
-                        {username}
-                    </button>
+                    <label>Enter Username</label>
+                    <input type="text"
+                    className="swu-username-input"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    />
                 </div>
                 <div className='password-container'>
                     <label className='password-label'>
@@ -122,4 +111,4 @@ const SignupForm = ({signupOpen, signupClose, username}) => {
     )
 }
 
-export default SignupForm;
+export default SignupWithUsername;
