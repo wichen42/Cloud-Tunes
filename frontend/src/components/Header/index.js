@@ -34,7 +34,6 @@ const Header = () => {
                 <button ref={buttonRef} className='login-button' onClick={() => {
                     setOpenModal(true)
                     setButtonName(buttonRef.current.className);
-                    // console.log(buttonName);
                     }}>Sign In</button>
                 <LoginForm open={openModal} onClose={() => setOpenModal(false)} buttonName={buttonName} />
             </div>

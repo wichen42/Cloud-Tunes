@@ -24,9 +24,7 @@ const SignupForm = ({signupOpen, signupClose, username}) => {
     const handleClick = (e) => {
         e.preventDefault();
         const user = {username: username, password: password};
-        console.log(user);
         setSubmitClicked(true);
-        // dispatch(sessionActions.setSession(user));
         dispatch(sessionActions.signup(user))
         .catch(async (res) => {
             let data;
@@ -45,7 +43,6 @@ const SignupForm = ({signupOpen, signupClose, username}) => {
           setUsers(oldUsers => ({...oldUsers, user}))
     }
 
-    console.log(errors);
 
 
     const handleOverlayClick = (e) => {
@@ -59,7 +56,6 @@ const SignupForm = ({signupOpen, signupClose, username}) => {
     }
 
     function onChange(value) {
-        console.log("Captcha value:", value);
     }
 
     return (

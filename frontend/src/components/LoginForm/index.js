@@ -33,11 +33,9 @@ const LoginForm = ({open, onClose}) => {
         usernames.push(users[i].username);
     }
 
-    console.log(usernames);
 
 
     const handleLogin = (e) => {
-        // console.log(username)
         e.preventDefault();
         if (usernames.includes(username)) {
             setWelcomeModal(true);
@@ -46,7 +44,6 @@ const LoginForm = ({open, onClose}) => {
         }
     }
 
-    // console.log(signupModal);
 
     const handleDemoLogin = (e) => {
         e.preventDefault();

@@ -8,7 +8,6 @@ const slides = [
     {url: `${musicians}`, title: 'musicians-image'},
     {url: `${concert}`, title: 'concert-image'}
 ];
-console.log(concert)
 
 const SplashPage = () => {
 

@@ -31,7 +31,6 @@ export const createUser = (user) => async dispatch => {
         }
     });
     const data = await res.json();
-    // console.log(data.user);
     dispatch(receiveUser(data.user));
 }
 

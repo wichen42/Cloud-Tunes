@@ -61,13 +61,11 @@ const ImageSlider = ({slides}) => {
 
     const slideOne = (e) => {
         e.preventDefault();
-        console.log("one")
         setCurrentIndex(0);
     }
 
     const slideTwo = (e) => {
         e.preventDefault();
-        console.log("two")
         setCurrentIndex(1);
     }
 

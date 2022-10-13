@@ -15,12 +15,10 @@ const WelcomeBack = ({welcomeOpen, welcomeClose, username}) => {
     const handleClose = (e) => {
         e.preventDefault();
         welcomeClose();
-        console.log("wmodal overlay")
     }
 
     const handleClick = (e) => {
         const user = {username: username, password: password}
-        console.log(user);
         dispatch(sessionActions.login(user))
         .catch(async (res) => {
             let data;
