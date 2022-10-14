@@ -1,10 +1,12 @@
+import NavItem from '../NavItem';
+import './Navbar.css'
 
 
-const Navbar = () => {
+const Navbar = (props) => {
 
     return(
         <nav className="navbar">
-            <ul className="navbar-nav"></ul>
+            <ul className='navbar-nav'>{props.children}</ul>
         </nav>
     )
 }

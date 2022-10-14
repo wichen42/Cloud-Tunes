@@ -1,0 +1,24 @@
+.sessionDropdown {
+    position: absolute;
+    top: 65px;
+    width: 300px;
+    transform: translate(-45%);
+    background-color: aqua;
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 1rem;
+    overflow: hidden;
+}
+
+.sessionMenuItem {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    padding: 0.5rem;
+    transition: background 300ms;
+}
+
+.sessionMenuItem:hover {
+    background-color: beige;
+}

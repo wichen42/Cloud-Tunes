@@ -1,6 +1,5 @@
 .navbar {
-    display: flex;
-    height: 35px;
+    height: var(--nav-size);
     background-color: dodgerblue;
     padding: 0 1rem;
 }
