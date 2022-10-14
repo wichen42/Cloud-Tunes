@@ -236,3 +236,39 @@
     justify-content: center;
     align-items: center;
 }
+
+@media (max-width: 1410px) {
+    .github-link {
+        background-image: none;
+    }
+}
+
+@media (max-width: 1410px) {
+    #wiki-link {
+        background-image: none;
+    }
+}
+
+@media (max-width: 1410px) {
+    .linkedin-link {
+        background-image: none;
+    }
+}
+
+@media (max-width: 975px) {
+    .session-text p {
+        display: none;
+    }
+}
+
+@media (max-width: 485px) {
+    .modal-container {
+        display: none;
+    }
+}
+
+@media (max-width: 485px) {
+    .modal-overlay {
+        display: none;
+    }
+}
