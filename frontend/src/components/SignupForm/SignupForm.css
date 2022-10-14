@@ -104,6 +104,7 @@
     display: inline-block;
     font-family: overpass-light;
     margin-top: -55px;
+    position: relative;
 }
 
 .password-label {
@@ -175,8 +176,8 @@
     height: 20px;
     width: 20px;
     position: absolute;
-    top: 238px;
-    right: 40px;
+    top: 29px;
+    right: 20px;
     background-image: url(../../assets/icons/eye-slash-regular.svg);
     background-repeat: no-repeat;
     cursor: pointer;

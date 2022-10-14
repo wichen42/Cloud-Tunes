@@ -51,7 +51,7 @@ const LoginForm = ({open, onClose}) => {
             username: "demolition",
             password: "password"
         }
-        dispatch(sessionActions.setSession(demoUser));
+        dispatch(sessionActions.login(demoUser));
     }
 
     const handleOverlayClick = (e) => {

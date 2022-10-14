@@ -7,7 +7,7 @@ import * as sessionActions from '../../store/session';
 import { useDispatch } from 'react-redux';
 import WelcomeBack from '../WelcomeBackForm';
 import * as usersActions from '../../store/users';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 const Header = () => {
 
@@ -28,6 +28,16 @@ const Header = () => {
     useEffect(() => {
         dispatch(usersActions.fetchUsers());
     }, [openModal, signupModal, welcomeModal])
+
+    const handleHome = (e) => {
+        e.preventDefault();
+        console.log(user);
+        if(user.username) {
+            console.log("Logged In....cannot go to splash");
+            <Redirect to='/discover' /> 
+        }
+        
+    }
 
     return (
         <div className='header'>
@@ -55,7 +65,7 @@ const Header = () => {
             </div>
             
             <div>
-                <button className='home'><Link to='/'>HOME</Link></button>
+                <button className='home' onClick={(e) => handleHome(e)}>HOME</button>
             </div>
 
         </div>
