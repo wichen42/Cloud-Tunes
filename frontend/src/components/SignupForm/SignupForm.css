@@ -171,3 +171,13 @@
     list-style-type: none;
 }
 
+.password-eye {
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    top: 238px;
+    right: 40px;
+    background-image: url(../../assets/icons/eye-slash-regular.svg);
+    background-repeat: no-repeat;
+    cursor: pointer;
+}

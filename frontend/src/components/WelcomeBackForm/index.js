@@ -9,9 +9,20 @@ const WelcomeBack = ({welcomeOpen, welcomeClose, username}) => {
     const dispatch = useDispatch();
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
+    const [showPassword, setShowPassword] = useState(false);
+
 
     if (!welcomeOpen) return null;
 
+
+    const handleShowPassword = (e) => {
+
+        if (showPassword) {
+            setShowPassword(false);
+        } else {
+            setShowPassword(true);
+        }   
+    }
 
     const handleClose = (e) => {
         e.preventDefault();
@@ -65,13 +76,15 @@ const WelcomeBack = ({welcomeOpen, welcomeClose, username}) => {
                     </div>
     
                     <div className='welcome-password-container'>
-                        <input type="password" 
+                        <input type={showPassword ? 'password' : 'text'}
                         className='welcome-password' 
                         placeholder='Your Password'
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         />
-
+                        <div className="wpassword-eye"
+                            onClick={(e) => handleShowPassword(e)}
+                        ></div>
                         <div className='welcome-error-container'>
                             {errors.length > 0 && (
                                 <div className='signup-errors'>

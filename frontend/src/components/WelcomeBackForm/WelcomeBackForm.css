@@ -131,3 +131,13 @@
     font-size: 14px;
 }
 
+.wpassword-eye {
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    top: 247px;
+    right: 40px;
+    background-image: url(../../assets/icons/eye-slash-regular.svg);
+    background-repeat: no-repeat;
+    cursor: pointer;
+}

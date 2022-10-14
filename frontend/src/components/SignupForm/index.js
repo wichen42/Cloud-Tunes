@@ -14,6 +14,8 @@ const SignupForm = ({signupOpen, signupClose, username}) => {
     const [password, setPassword] = useState("");
     const [submitClicked, setSubmitClicked] = useState(false);
     const [users, setUsers] = useState({});
+    const [showPassword, setShowPassword] = useState(false);
+
 
     useEffect(() => {
         dispatch(usersActions.fetchUsers());
@@ -59,6 +61,15 @@ const SignupForm = ({signupOpen, signupClose, username}) => {
     function onChange(value) {
     }
 
+    const handleShowPassword = (e) => {
+        e.preventDefault();
+        if (showPassword) {
+            setShowPassword(false);
+        } else {
+            setShowPassword(true);
+        }   
+    }
+
     return (
         <div className="smodal-overlay" onClick={(e) => handleOverlayClick(e)} 
         >
@@ -81,11 +92,14 @@ const SignupForm = ({signupOpen, signupClose, username}) => {
                     Choose a password
                     <br />
                     <input className='password-input' 
-                    type="password" 
+                    type={showPassword ? 'password' : 'text'}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     />
                     </label>
+                    <div className="password-eye"
+                    onClick={(e) => handleShowPassword(e)}
+                    ></div>
 
                     <div className='signup-error-container'>
                         {errors.length > 0 && (

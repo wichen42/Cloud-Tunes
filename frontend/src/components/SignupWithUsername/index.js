@@ -1,16 +1,20 @@
 import ReCAPTCHA from "react-google-recaptcha";
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import * as usersActions from '../../store/users';
 import * as sessionActions from '../../store/session';
-import { Link} from "react-router-dom";
+import eyeClose from '../../assets/icons/eye-slash-regular.svg';
+import eyeOpen from '../../assets/icons/eye-regular.svg'
 
 const SignupWithUsername = ({swuOpen, swuClose}) => {
 
     const dispatch = useDispatch();
+    
     const [username, setUsername] = useState("");
     const [errors, setErrors] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+    // const [eye, setEye] = useState(`url(${eyeOpen})`);
+
 
     if (!swuOpen) return null;
 
@@ -47,6 +51,36 @@ const SignupWithUsername = ({swuOpen, swuClose}) => {
     function onChange(value) {
     }
 
+    // const eyeStyle = {
+    //     height: '20px',
+    //     width: '20px',
+    //     position: 'absolute',
+    //     top: '238px',
+    //     right: '40px',
+    //     backgroundImage: {eye},
+    //     backgroundRepeat: 'no-repeat',
+    //     cursor: 'pointer'
+    // }
+
+    const handleShowPassword = (e) => {
+
+        if (showPassword) {
+            setShowPassword(false);
+        } else {
+            setShowPassword(true);
+        }   
+    }
+
+    // const changeEye = () => {
+    //     showPassword ? setEye(`url(${eyeOpen})`) : setEye(`url(${eyeClose})`);
+    // }
+
+    // const eyeDiv = document.getElementsByClassName('password-eye');
+
+    // eyeDiv.onClick = () => {
+    //     eyeDiv.style.backgroundColor = 'red';
+    // }
+
     return (
         <div className="smodal-overlay" onClick={(e) => handleOverlayClick(e)} 
         >
@@ -70,12 +104,14 @@ const SignupWithUsername = ({swuOpen, swuClose}) => {
                     Choose a password
                     <br />
                     <input className='password-input' 
-                    type="password" 
+                    type={showPassword ? 'password' : 'text'}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     />
                     </label>
-
+                    <div className="password-eye"
+                    onClick={(e) => handleShowPassword(e)}
+                    ></div>
                     <div className='signup-error-container'>
                         {errors.length > 0 && (
                             <div className='signup-errors'>
