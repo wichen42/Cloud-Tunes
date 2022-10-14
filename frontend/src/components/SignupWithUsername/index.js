@@ -98,7 +98,7 @@ const SignupWithUsername = ({swuOpen, swuClose}) => {
                 <div className='signup-button-container'>
                     <div className='signup-form-button'
                     onClick={(e) => handleClick(e)}
-                    ><Link to='/discover'>Create Account</Link></div>
+                    >Create Account</div>
                 </div>
                 <div className='signup-filler-text'>
                     Are you trying to sign in?

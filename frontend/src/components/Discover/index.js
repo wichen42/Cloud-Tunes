@@ -5,15 +5,10 @@ import * as sessionActions from '../../store/session';
 
 const DiscoverPage = () => {
     
-    
     const dispatch = useDispatch();
-    console.log(sessionUser.username);
-
-    useEffect(() => {
-        // dispatch(sessionActions.)
-    }, [])
+    let sessionUser = useSelector(sessionActions.getSession);
     
-    if (!sessionUser) return <Redirect to='/' />
+    if(!sessionUser) return <Redirect to='/' />;
     
     return (
         <div>

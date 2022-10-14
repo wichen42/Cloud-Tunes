@@ -2,6 +2,10 @@ import ImageSlider from "../ImageSlider"
 import './Splash.css'
 import concert from '../../assets/temp_images/concert.jpg';
 import musicians from '../../assets/temp_images/musicians.jpg';
+import { useSelector } from "react-redux";
+import * as sessionActions from '../../store/session';
+import { Redirect } from "react-router-dom";
+import { useEffect } from "react";
 
 
 const slides = [
@@ -9,8 +13,13 @@ const slides = [
     {url: `${concert}`, title: 'concert-image'}
 ];
 
-const SplashPage = () => {
 
+
+const SplashPage = () => {
+    
+    const sessionUser = useSelector(sessionActions.getSession);
+
+    if (sessionUser) return <Redirect to='/discover' />
 
     return (
         <>
