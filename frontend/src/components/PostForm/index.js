@@ -4,13 +4,19 @@ import csrfFetch from '../../store/csrf';
 function PostForm () {
   const [title, setTitle] = useState ("");
   const [photoFile, setPhotoFile] = useState(null);
-  const [photoURL, setPhotoUrl] = useState(null);
+  const [photoUrl, setPhotoUrl] = useState(null);
 
-  const handleFile = e => {
+  const handleFile = (e) => {
     const file = e.currentTarget.files[0];
-    setPhotoFile(file);
+    if (file) {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        setPhotoFile(file);
+        setPhotoUrl(fileReader.result);
+      };
+    }
   }
-
   const handleInput = e => {
     setTitle(e.currentTarget.value);
   }
@@ -19,14 +25,19 @@ function PostForm () {
     e.preventDefault();
     const formData = new FormData();
     formData.append('post[title]', title);
+    console.log(photoFile);
     if (photoFile) {
         formData.append('post[photo]', photoFile);
+        console.log(formData);
     }
     const response = await csrfFetch('/api/posts', {
         method: 'POST',
         body: formData
       });
     if (response.ok) {
+        console.log("photoFile" + photoFile);
+        console.log("title " + title);
+        console.log("photoUrl " + photoUrl);
         const message = await response.json();
         console.log(message.message);
         setTitle("");
@@ -35,6 +46,7 @@ function PostForm () {
     }
   }
 
+  const preview = photoUrl ? <img src={photoUrl} alt="" /> : null;
 
   return (
     <form onSubmit={handleSubmit}>
@@ -44,6 +56,8 @@ function PostForm () {
         value={title}
         onChange={handleInput}/>
       <input type="file" onChange={handleFile}/> 
+      {preview}
+      <br />
       <button>Make a new Post!</button>
     </form>
   );
