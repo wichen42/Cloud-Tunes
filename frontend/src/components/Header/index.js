@@ -7,7 +7,7 @@ import * as sessionActions from '../../store/session';
 import { useDispatch } from 'react-redux';
 import WelcomeBack from '../WelcomeBackForm';
 import * as usersActions from '../../store/users';
-import { Redirect } from 'react-router-dom';
+import  { useHistory } from 'react-router-dom';
 
 const Header = () => {
 
@@ -18,6 +18,7 @@ const Header = () => {
     const [welcomeModal, setWelcomeModal] = useState(false);
     const [buttonName, setButtonName] = useState("");
     const buttonRef = useRef();
+    const history = useHistory();
     
 
     const handleClick = (e) => {
@@ -31,12 +32,17 @@ const Header = () => {
 
     const handleHome = (e) => {
         e.preventDefault();
-        console.log(user);
-        if(user.username) {
-            console.log("Logged In....cannot go to splash");
-            <Redirect to='/discover' /> 
-        }
-        
+        history.push('/')
+    }
+
+    const handleDiscover = (e) => {
+        e.preventDefault();
+        history.push('/discover')
+    }
+
+    const handleUpload = (e) => {
+        e.preventDefault();
+        history.push('/upload');
     }
 
     return (
@@ -69,9 +75,16 @@ const Header = () => {
             </div>
 
             <div>
-                <button className='upload'>Upload</button>
+                <button onClick={(e) => handleUpload(e)}>Upload</button>
             </div>
 
+            <div>
+                <button onClick={(e) => handleDiscover(e)}>Discover</button>
+            </div>
+            <br />
+            <div>
+                <h1>TEMP NAVABR FOR TESTING</h1>
+            </div>
         </div>
     )
 }
