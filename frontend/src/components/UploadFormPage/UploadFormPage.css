@@ -1,0 +1,13 @@
+.upload-container {
+    width: 1275px;
+    margin: auto;
+    background-color: bisque;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.upload-area {
+    position: relative;
+}

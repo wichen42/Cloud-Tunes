@@ -17,6 +17,7 @@ import ProfileDropdown from "./components/ProfileDropdown";
 import csrfFetch from "./store/csrf";
 import PostIndex from "./components/PostIndex";
 import PostForm from "./components/PostForm";
+import UploadFormPage from "./components/UploadFormPage";
 
 function App() {
 
@@ -53,6 +54,12 @@ function App() {
             <PostForm />
             <PostIndex posts={posts} />
           </Route>
+
+          <Route path={"/upload"}>
+            <Header />
+            <UploadFormPage />
+          </Route>
+
           <Route path={"/"}>
             <SplashPage />
           </Route>

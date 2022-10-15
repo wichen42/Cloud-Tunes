@@ -68,6 +68,10 @@ const Header = () => {
                 <button className='home' onClick={(e) => handleHome(e)}>HOME</button>
             </div>
 
+            <div>
+                <button className='upload'>Upload</button>
+            </div>
+
         </div>
     )
 }

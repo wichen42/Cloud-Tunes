@@ -11,5 +11,10 @@ class Post < ApplicationRecord
     validates :title, presence: true
 
     has_one_attached :photo
-    
+
+    def ensure_photo
+        unless self.photo.attached?
+            errors.add(:photo, "must be attached");
+        end
+    end
 end

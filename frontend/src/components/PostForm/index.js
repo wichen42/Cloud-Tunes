@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import csrfFetch from '../../store/csrf';
 
 function PostForm () {
   const [title, setTitle] = useState ("");
   const [photoFile, setPhotoFile] = useState(null);
   const [photoUrl, setPhotoUrl] = useState(null);
+  const fileRef = useRef(null);
 
   const handleFile = (e) => {
     const file = e.currentTarget.files[0];
@@ -43,6 +44,7 @@ function PostForm () {
         setTitle("");
         setPhotoFile(null);
         setPhotoUrl(null);
+        fileRef.current.value = null;
     }
   }
 
@@ -55,7 +57,9 @@ function PostForm () {
         id="post-title"
         value={title}
         onChange={handleInput}/>
-      <input type="file" onChange={handleFile}/> 
+      <input type="file" 
+      ref={fileRef}
+      onChange={handleFile}/> 
       {preview}
       <br />
       <button>Make a new Post!</button>
