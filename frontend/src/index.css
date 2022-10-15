@@ -57,6 +57,12 @@ a {
 	text-decoration: none;
 }
 
+@font-face {
+	font-family: overpass-light;
+	src: url('./assets/fonts/overpass/Overpass-Light.ttf');
+}
+
 :root {
 	--nav-size: 50px;
+	font-family: overpass-light;
 }

@@ -36,7 +36,7 @@ const UploadFormPage = () => {
                 <input {...getInputProps()} />
                     {
                         isDragActive ? 
-                        <div className='test-div'>DROP HERE</div> :
+                        <div className='drop-here'>Drop here</div> :
                         <div className='upload-splash'>
                             <div>Drag and drop your tracks and albums here</div>
                             <div className='upload-splash-button'>or choose files to upload</div>

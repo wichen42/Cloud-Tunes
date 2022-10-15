@@ -23,13 +23,21 @@ function App() {
 
   const sessionUser = useSelector(state => state.session.user);
   const [posts, setPost] = useState([]);
+  const [tracks, setTracks] = useState([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
       const res = await csrfFetch('/api/posts');
       setPost(await res.json());
     }
+
+    const fetchTracks = async () => {
+      const trackList = await csrfFetch('/api/tracks');
+      setTracks(await trackList.json())
+    }
+
     fetchPosts();
+    fetchTracks();
   }, [])
 
   return (
