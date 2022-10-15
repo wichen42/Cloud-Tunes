@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import {useSelector} from 'react-redux';
 import Header from "./components/Header";
@@ -14,11 +14,22 @@ import { SessionContext } from './Context/SessionContext';
 import NavSearch from "./components/NavSearch";
 import ProfileNavItem from "./components/ProfileNavItem";
 import ProfileDropdown from "./components/ProfileDropdown";
+import csrfFetch from "./store/csrf";
+import PostIndex from "./components/PostIndex";
+import PostForm from "./components/PostForm";
 
 function App() {
 
   const sessionUser = useSelector(state => state.session.user);
-  console.log(sessionUser);
+  const [posts, setPost] = useState([]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const res = await csrfFetch('/api/posts');
+      setPost(await res.json());
+    }
+    fetchPosts();
+  }, [])
 
   return (
     <>
@@ -39,6 +50,8 @@ function App() {
               </NavItem>
             </Navbar>
             <DiscoverPage />
+            <PostForm />
+            <PostIndex posts={posts} />
           </Route>
           <Route path={"/"}>
             <SplashPage />
