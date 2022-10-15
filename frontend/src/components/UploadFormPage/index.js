@@ -1,12 +1,17 @@
 import './UploadFormPage.css';
 import {useDropzone } from 'react-dropzone';
-import { useCallback } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 const UploadFormPage = () => {
 
+    const [title, setTitle] = useState("");
+    const [track, setTrack] = useState(null);
+    const [trackUrl, setTrackUrl] = useState(null);
+    const fileRef = useRef(null);
+
     const onDrop = useCallback(accpetedFiles => {
         // Do something here with dropped files
-        console.log("Drop it like its hot")
+        console.log(accpetedFiles);
         accpetedFiles.forEach((file) => {
             const reader = new FileReader();
             
@@ -16,6 +21,8 @@ const UploadFormPage = () => {
             reader.onload = () => {
                 const res = reader.result;
                 console.log(res);
+                setTrack(file);
+                console.log(track);
             }
             reader.readAsDataURL(file);
         })
