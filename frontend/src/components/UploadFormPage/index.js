@@ -59,7 +59,7 @@ const UploadFormPage = () => {
                     }
             </div>
             
-            {files.length > 0 && <UploadInputForm />}
+            {files.length > 0 && <UploadInputForm track={track}/>}
 
         </div>
     )

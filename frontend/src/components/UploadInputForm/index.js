@@ -1,31 +1,58 @@
+import { useState } from 'react';
 import './UploadInputForm.css';
 
-const UploadInputForm = () => {
+const UploadInputForm = ({track}) => {
+
+    const [title, setTitle] = useState("");
+    const [genre, setGenre] = useState("");
+    const [desc, setDesc] = useState("");
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const trackObj = {title, genre, desc}
+        console.log(track);
+    }
+
+    console.log(track);
+
     return ( 
-        <form>
-            <label>
-                Title:
-                <input type="text" placeholder='Title' />
-            </label>
-            
-            <p>Permalink*
-                <br />
-                localhost.com/username/song-name
-            </p>
+        <div className='upload-input-form-container'>
+            <div className='upload-form-header'>Track Details</div>
+            <form 
+            className='upload-input-form'
+            onSubmit={(e) => handleSubmit(e)}
+            >
+                <label>Title:</label>
+                <input type="text" 
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                />
+                
+                <label>Genre:</label>
+                <input type="text"
+                value={genre}
+                onChange={(e) => setGenre(e.target.value)}
+                />
+    
+                <label>Description:</label>
+                <textarea 
+                className='upload-description'
+                value={desc}
+                onChange={(e) => setDesc(e.target.value)}
+                ></textarea>
 
-            <label>
-                Genre:
-                <input type="text" placeholder='Genre' />
-            </label>
+                <div className='upload-buttons'>
+                    <button
+                    className='upload-cancel'
+                    >Cancel</button>
+                    <button 
+                    type='submit'
+                    className='upload-submit'
+                    >Save</button>
+                </div>
+            </form>
+        </div>
 
-            <label>
-                Description:
-                <textarea placeholder='Describe your track'></textarea>
-            </label>
-
-            <button>Cancel</button>
-            <button>Save</button>
-        </form>
      );
 }
  

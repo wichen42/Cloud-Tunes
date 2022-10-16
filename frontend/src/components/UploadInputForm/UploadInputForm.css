@@ -1,0 +1,79 @@
+@font-face {
+    font-family: overpass-light;
+    src: url('../../assets/fonts/overpass/Overpass-Light.ttf');
+}
+
+.upload-input-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background: white;
+    width: 72%;
+    height: 550px;
+    border: 1px solid #e9e9e9;
+    flex-direction: column;
+}
+
+.upload-form-header {
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.upload-input-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.upload-input-form > * {
+    margin: 2px 0 2px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 40%;
+    height: 24px;
+    border-radius: 4px;
+    border: 1px solid #cccccc;
+}
+
+.upload-input-form input {
+    margin-bottom: 10px;
+}
+
+.upload-input-form label {
+    border: none;
+}
+
+.upload-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: end;
+    border: none;
+    margin-top: 10px;
+}
+
+.upload-buttons button {
+    font-family: overpass-light;
+    border: none;
+    cursor: pointer;
+    height: 25px;
+}
+
+.upload-cancel {
+    background-color: transparent;
+}
+
+.upload-submit {
+    background-color: #ff5500;
+    color: white;
+    border-radius: 4px;
+}
+
+.upload-description {
+    height: 75px;
+    width: 400px;
+}
