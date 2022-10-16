@@ -8,53 +8,30 @@ const UploadFormPage = () => {
     const [trackUrl, setTrackUrl] = useState(null);
     const [files, setFiles] = useState([]);
     
-    // const onDrop = useCallback(accpetedFiles => {
-    //     // Do something here with dropped files
-    //     // console.log(accpetedFiles);
-
-    //     accpetedFiles.forEach((file) => {
-    //         const reader = new FileReader();
-            
-    //         reader.onabort = () => console.log('file reading was aborted');
-    //         reader.onerror = () => console.log('file reading has failed');
-            
-    //         reader.onload = () => {
-    //             const res = reader.result;
-    //             // console.log(res);
-    //             setTrack(file);
-    //             setTrackUrl(res.result);
-    //             console.log(file);
-    //             console.log(res);
-    //             console.log(track);
-    //             console.log(trackUrl);
-    //         }
-    //         reader.readAsDataURL(file);
-    //     })
-    // }, [])
     const onDrop = useCallback(acceptedFiles => {
+
+        setFiles(prev => ([...prev, ...acceptedFiles]));
+
         console.log("---------");
-        console.log(acceptedFiles[0]);
+        console.log(acceptedFiles[0]); // file object
         console.log("---------");
 
         // setFiles(prev => [...prev, ...acceptedFiles]);
         setFiles(acceptedFiles);
         acceptedFiles.forEach((file) => {
             const fileReader = new FileReader();
-        
+            console.log(file);
             fileReader.onabort = () => console.log('file reading was aborted');
             fileReader.onerror = () => console.log('file reading has failed');
     
             fileReader.onload = () => {
                 const res = fileReader.result; // url
-                console.log(file.path); // file object
+                console.log(file); // file object
                 setTrack(file);
                 setTrackUrl(res);
-                // console.log(typeof res);
-                // const blob = new Blob([res]);
             }
             fileReader.readAsDataURL(file);
         })
-        // console.log(files);
     }, []);
     
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
@@ -64,6 +41,9 @@ const UploadFormPage = () => {
         const formData = new FormData();
         formData.append('post[title]', track.path);
     }
+
+    console.log(files); // [file]
+    //TODO: when file is dropped or uploaded render input form for user to fill out track params
 
     return (
         <div className='upload-container' >
