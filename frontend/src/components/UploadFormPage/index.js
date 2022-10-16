@@ -38,12 +38,6 @@ const UploadFormPage = () => {
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
     
     console.log(files); // [file]
-    //TODO: when file is dropped or uploaded render input form for user to fill out track params
-
-    useEffect(() => {
-        console.log("input form change initiate...");
-
-    }, [files])
 
     return (
         <div className='upload-container' >
@@ -59,7 +53,7 @@ const UploadFormPage = () => {
                     }
             </div>
             
-            {files.length > 0 && <UploadInputForm track={track}/>}
+            {files.length > 0 && <UploadInputForm track={track} close={() => setFiles([])}/>}
 
         </div>
     )
