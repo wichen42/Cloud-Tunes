@@ -13,8 +13,15 @@ function PostForm () {
       const fileReader = new FileReader();
       fileReader.readAsDataURL(file);
       fileReader.onload = () => {
+        console.log("--------");
+        console.log(file); // file object {name: meme.jpg, lalstModified...}
+        console.log("--------");
+
         setPhotoFile(file);
         setPhotoUrl(fileReader.result);
+
+        console.log(photoFile);
+        console.log(photoUrl);
       };
     }
   }
@@ -26,7 +33,7 @@ function PostForm () {
     e.preventDefault();
     const formData = new FormData();
     formData.append('post[title]', title);
-    console.log(photoFile);
+    console.log(photoFile); // formData
     if (photoFile) {
         formData.append('post[photo]', photoFile);
         console.log(formData);
@@ -36,9 +43,9 @@ function PostForm () {
         body: formData
       });
     if (response.ok) {
-        console.log("photoFile" + photoFile);
-        console.log("title " + title);
-        console.log("photoUrl " + photoUrl);
+        // console.log("photoFile" + photoFile);
+        // console.log("title " + title);
+        // console.log("photoUrl " + photoUrl);
         const message = await response.json();
         console.log(message.message);
         setTitle("");
