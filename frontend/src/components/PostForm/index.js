@@ -33,10 +33,10 @@ function PostForm () {
     e.preventDefault();
     const formData = new FormData();
     formData.append('post[title]', title);
-    console.log(photoFile); // formData
+    // console.log(photoFile); // formData
     if (photoFile) {
         formData.append('post[photo]', photoFile);
-        console.log(formData);
+        // console.log(formData);
     }
     const response = await csrfFetch('/api/posts', {
         method: 'POST',

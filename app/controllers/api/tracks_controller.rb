@@ -1,4 +1,5 @@
 class Api::TracksController < ApplicationController
+    wrap_parameters include: Track.attribute_names + [:track]
 
     def index
         @tracks = Track.all
@@ -6,7 +7,7 @@ class Api::TracksController < ApplicationController
     end
 
     def create
-        track = Track.new(post_params)
+        track = Track.new(track_params)
         if track.save
             render json: {message: "Track created..."}
         else
@@ -18,6 +19,6 @@ class Api::TracksController < ApplicationController
     private
 
     def track_params
-        params.rerquire(:track).permit(:title, :username, :genre, :description)
+        params.require(:track).permit(:title, :username, :genre, :description, :track)
     end
 end
