@@ -9,7 +9,7 @@
     align-items: center;
     position: absolute;
     background: white;
-    width: 72%;
+    width: 60%;
     height: 550px;
     border: 1px solid #e9e9e9;
     flex-direction: column;
@@ -53,14 +53,16 @@
     align-items: flex-end;
     justify-content: end;
     border: none;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .upload-buttons button {
     font-family: overpass-light;
     border: none;
     cursor: pointer;
-    height: 25px;
+    height: 30px;
+    width: 50px;
+    margin-left: 5px;
 }
 
 .upload-cancel {
@@ -75,5 +77,5 @@
 
 .upload-description {
     height: 75px;
-    width: 400px;
+    width: 450px;
 }
