@@ -13,7 +13,7 @@
 class Track < ApplicationRecord
     validates :title, :username, :genre, :description, presence: true
 
-    has_one_attached :audio
+    has_one_attached :track
 
     # validates_attachment_content_type :audio, :content_type => ['audio/mp3']
 
