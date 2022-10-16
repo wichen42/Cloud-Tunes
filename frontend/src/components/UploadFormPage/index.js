@@ -1,6 +1,7 @@
 import './UploadFormPage.css';
 import {useDropzone } from 'react-dropzone';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import UploadInputForm from '../UploadInputForm';
 
 const UploadFormPage = () => {
 
@@ -36,14 +37,13 @@ const UploadFormPage = () => {
     
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
     
-    const handleClick = (e) => {
-        e.preventDefault();
-        const formData = new FormData();
-        formData.append('post[title]', track.path);
-    }
-
     console.log(files); // [file]
     //TODO: when file is dropped or uploaded render input form for user to fill out track params
+
+    useEffect(() => {
+        console.log("input form change initiate...");
+
+    }, [files])
 
     return (
         <div className='upload-container' >
@@ -59,9 +59,8 @@ const UploadFormPage = () => {
                     }
             </div>
             
-            <div>
-                <button onClick={(e) => handleClick(e)}>TEST UPLOAD</button>
-            </div>
+            {files.length > 0 && <UploadInputForm />}
+
         </div>
     )
 }
