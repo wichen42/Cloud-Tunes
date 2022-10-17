@@ -37,9 +37,13 @@ const AudioPlayerBar = () => {
             <button className='repeat-track'></button>
 
             <div className='track-timeline'>
-                <div className='track-start'></div>
-                <div className='track-progress'></div>
-                <div className='track-end'></div>
+                <div className='track-start'>0:00</div>
+                <div className='track-progress'>
+                    <input type="range"
+                    className='progress-bar'
+                    />
+                </div>
+                <div className='track-end'>3:23</div>
             </div>
             
             <div className='track-volume'></div>
