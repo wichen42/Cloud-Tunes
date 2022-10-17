@@ -24,7 +24,6 @@
 }
 
 .play-pause {
-    background-image: url('../../assets/icons/play-solid.svg');
 }
 
 .next-track {
@@ -33,4 +32,10 @@
 
 .repeat-track {
     background-image: url('../../assets/icons/repeat-solid.svg');
+}
+
+.track-details {
+    display: flex;
+    flex-direction: column;
+
 }
