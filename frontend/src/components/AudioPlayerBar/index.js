@@ -24,10 +24,6 @@ const AudioPlayerBar = ({tracks}) => {
 
     const trackList = tracks.map(track => track.trackUrl);
 
-    console.log(trackList);
-    console.log(volLowUrl);
-    console.log(playUrl);
-
     useEffect(() => {
         const seconds = Math.floor(audioPlayer.current.duration)
         setDuration(seconds);
@@ -69,7 +65,7 @@ const AudioPlayerBar = ({tracks}) => {
         const minutes = Math.floor(seconds / 60);
         const min = minutes < 10 ? `0${minutes}` : `${minutes}`;
         const second = Math.floor(seconds % 60);
-        const sec = seconds < 10 ? `0${second}` : `${second}`;
+        const sec = second < 10 ? `0${second}` : `${second}`;
         return `${min}:${sec}`;
     }
 
@@ -83,14 +79,17 @@ const AudioPlayerBar = ({tracks}) => {
     return ( 
         <div className='audio-bar'>
             <audio src={trackList[0]} ref={audioPlayer}></audio>
-            <button className='prev-track'></button>
-            <button className='play-pause'
-            style={buttonBackground}
-            onClick={(e) => handlePlay(e)}
-            ></button>
-            <button className='next-track'></button>
-            <button className='shuffle-track'></button>
-            <button className='repeat-track'></button>
+            <div className='button-container'>
+                <button className='prev-track'></button>
+                <button className='play-pause'
+                style={buttonBackground}
+                onClick={(e) => handlePlay(e)}
+                ></button>
+                <button className='next-track'></button>
+                <button className='shuffle-track'></button>
+                <button className='repeat-track'></button>
+            </div>
+
 
             <div className='track-timeline'>
                 <div className='track-start'>{convertTime(currentTime)}</div>
@@ -113,7 +112,11 @@ const AudioPlayerBar = ({tracks}) => {
                     <span>Track Title</span>
                 </div>
 
-                <div className='track-socials'></div>
+                <div className='track-socials'>
+                    <button className='track-like'></button>
+                    <button className='artist-follow'></button>
+                    <button className='playlist-tab'></button>
+                </div>
             </div>
         </div>
     );

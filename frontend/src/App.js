@@ -44,7 +44,7 @@ function App() {
   return (
     <>
       <SessionContext.Provider value={sessionUser}>
-
+        <Header />
         <Switch>
           <Route path="/discover">
             <DiscoverPage tracks={tracks}/>

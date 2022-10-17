@@ -3,6 +3,7 @@
     height: 35px;
     background-color: darkorange;
     width: 1275px;
-    position: static;
+    position: sticky;
+    top: 0;
 }
  

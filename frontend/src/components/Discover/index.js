@@ -15,7 +15,6 @@ const DiscoverPage = ({tracks}) => {
     
     return (
         <div className="discover-container">
-            <Header />
             <div>
                 <h1>Discover Page</h1>
                 <ul>

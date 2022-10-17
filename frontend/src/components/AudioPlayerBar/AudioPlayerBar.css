@@ -1,8 +1,10 @@
+
 .audio-bar {
     width: 100%;
     height: 48px;
     display: flex;
-    background-color: aqua;
+    background-color: #F2F2F2;
+    border-top: 1px solid lightgray;
     position: sticky;
     bottom: 0;
 }
@@ -14,7 +16,23 @@
     background-repeat: no-repeat;
     background-position: center;
     margin-right: 12px;
-    margin-left: 12px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+}
+
+.button-container {
+    display: flex;
+    margin-right: 15px;
+}
+
+.button-container button {
+    height: fit-content;
+    width: 24px;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 12px;
     cursor: pointer;
     background-color: transparent;
     border: none;
@@ -22,30 +40,36 @@
 
 .prev-track {
     background-image: url('../../assets/icons/backward-step-solid.svg');
+    margin-left: 12px;
     background-size: 16px;
 }
 
 .play-pause {
+    margin-left: 12px;
     background-size: 16px;
 }
 
 .next-track {
+    margin-left: 12px;
     background-image: url('../../assets/icons/forward-step-solid.svg');
     background-size: 16px;
 }
 
 .shuffle-track {
     background-image: url('../../assets/icons/shuffle-solid.svg');
-    background-size: 16px;
+    margin-left: 12px;
+    background-size: 20px;
 }
 
 .repeat-track {
     background-image: url('../../assets/icons/repeat-solid.svg');
+    margin-left: 12px;
     background-size: 20px;
 }
 
 .track-volume {
     background-size: 18px;
+    margin-left: 12px;
 }
 
 .track-info {
@@ -59,13 +83,14 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    flex-grow: 3;
 }
 
 .track-timeline {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 500px;
+    width: 100%;
 }
 
 .track-progress {
@@ -115,3 +140,38 @@
     z-index: 3;
 }
 
+.track-info {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.track-socials {
+    height: 100%;
+    flex-grow: 1;
+}
+
+.track-socials button{
+    height: fit-content;
+    width: 24px;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 12px;
+    margin-left: 12px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+}
+
+.track-like {
+    background-image: url('../../assets/icons/heart-solid.svg');
+}
+
+.artist-follow {
+    background-image: url('../../assets/icons/user-plus-solid.svg');
+}
+
+.playlist-tab {
+    background-image: url('../../assets/icons/table-list-solid.svg');
+}
