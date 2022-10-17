@@ -2,19 +2,29 @@ import './AudioPlayerBar.css';
 import sample from '../../assets/temp_music/sample.mp3';
 import play from '../../assets/icons/play-solid.svg';
 import pause from '../../assets/icons/pause-solid.svg';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-const AudioPlayerBar = () => {
+const AudioPlayerBar = ({tracks}) => {
     
     const playUrl = `url(${play})`;
     const pauseUrl = `url(${pause})`;
     const [isPlaying, setIsPlaying] = useState(false);
     const [playPause, setPlayPause] = useState(playUrl);
-
+    const audioPlayer = useRef();
+    const [currentSong, setCurrentSong] = useState(sample);
 
     const handlePlay = (e) => {
-        setIsPlaying(!isPlaying);
-        isPlaying ? setPlayPause(pauseUrl) : setPlayPause(playUrl);
+        const prevState = isPlaying;
+
+        playPause === playUrl ? setPlayPause(pauseUrl) : setPlayPause(playUrl);
+
+        setIsPlaying(!prevState);
+
+        if (!prevState) {
+            audioPlayer.current.play();
+        } else {
+            audioPlayer.current.pause();
+        }
     }
 
     
@@ -24,9 +34,7 @@ const AudioPlayerBar = () => {
 
     return ( 
         <div className='audio-bar'>
-            <audio className='track'>
-                <source src={sample} type='audio/mpeg'/>
-            </audio>
+            <audio src={currentSong} ref={audioPlayer}></audio>
             <button className='prev-track'></button>
             <button className='play-pause'
             style={buttonBackground}

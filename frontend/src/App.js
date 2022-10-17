@@ -61,7 +61,7 @@ function App() {
             <SplashPage />
           </Route>
         </Switch>
-        <AudioPlayerBar />
+        <AudioPlayerBar tracks={tracks}/>
       </SessionContext.Provider>
 
     </>
