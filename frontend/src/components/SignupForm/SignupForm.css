@@ -33,7 +33,28 @@
     padding: 20px;
     gap: 2px;
     z-index: 101;
+    animation: fadeIn 1.5s, slideIn .6s linear;
 }
+
+@keyframes slideIn {
+    from {
+        margin-top: -100%;
+    }
+
+    to {
+        margin-bottom: 0%;
+    }
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
 
 .sclose-btn-container {
     padding: 5px;
