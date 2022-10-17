@@ -15,9 +15,12 @@ const AudioPlayerBar = ({tracks}) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [playPause, setPlayPause] = useState(playUrl);
     const audioPlayer = useRef();
+    const progressBar = useRef();
+    const sliderRef = useRef();
     const [currentSong, setCurrentSong] = useState(sample);
     const [volBackground, setVolbackground] = useState(volLowUrl);
     const [duration, setDuration] = useState(0);
+    const [currentTime, setCurrentTime] = useState(0);
 
     const trackList = tracks.map(track => track.trackUrl);
 
@@ -26,7 +29,9 @@ const AudioPlayerBar = ({tracks}) => {
     console.log(playUrl);
 
     useEffect(() => {
-        setDuration(Math.floor(audioPlayer.current.duration));
+        const seconds = Math.floor(audioPlayer.current.duration)
+        setDuration(seconds);
+        progressBar.current.max = seconds;
     }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
 
     const handlePlay = (e) => {
@@ -38,9 +43,18 @@ const AudioPlayerBar = ({tracks}) => {
 
         if (!prevState) {
             audioPlayer.current.play();
+            sliderRef.current = requestAnimationFrame(whilePlay);
         } else {
             audioPlayer.current.pause();
+            cancelAnimationFrame(sliderRef.current);
         }
+    }
+
+    const whilePlay = () => {
+        progressBar.current.value = audioPlayer.current.currentTime;
+        progressBar.current.style.setProperty('--bar-before', `${progressBar.current.value / duration * 100}%`)
+        setCurrentTime(progressBar.current.value);
+        sliderRef.current = requestAnimationFrame(whilePlay);
     }
 
     const volumeBackground = {
@@ -59,6 +73,13 @@ const AudioPlayerBar = ({tracks}) => {
         return `${min}:${sec}`;
     }
 
+    const handleChange = () => {
+
+        audioPlayer.current.currentTime = progressBar.current.value;
+        progressBar.current.style.setProperty('--bar-before', `${progressBar.current.value / duration * 100}%`)
+        setCurrentTime(progressBar.current.value);
+    }
+
     return ( 
         <div className='audio-bar'>
             <audio src={trackList[0]} ref={audioPlayer}></audio>
@@ -72,10 +93,13 @@ const AudioPlayerBar = ({tracks}) => {
             <button className='repeat-track'></button>
 
             <div className='track-timeline'>
-                <div className='track-start'>0:00</div>
+                <div className='track-start'>{convertTime(currentTime)}</div>
                 <div className='track-progress'>
                     <input type="range"
                     className='progress-bar'
+                    ref={progressBar}
+                    onChange={handleChange}
+                    defaultValue="0"
                     />
                 </div>
                 <div className='track-end'>{(duration && !isNaN(duration)) && convertTime(duration)}</div>
