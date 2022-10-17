@@ -10,7 +10,6 @@
     width: 24px;
     height: 100%;
     background-repeat: no-repeat;
-    background-size: 12px;
     background-position: center;
     margin-right: 12px;
     margin-left: 12px;
@@ -21,21 +20,32 @@
 
 .prev-track {
     background-image: url('../../assets/icons/backward-step-solid.svg');
+    background-size: 16px;
 }
 
 .play-pause {
+    background-size: 16px;
 }
 
 .next-track {
     background-image: url('../../assets/icons/forward-step-solid.svg');
+    background-size: 16px;
 }
 
 .repeat-track {
     background-image: url('../../assets/icons/repeat-solid.svg');
+    background-size: 20px;
+}
+
+.track-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .track-details {
     display: flex;
     flex-direction: column;
-
+    align-items: center;
+    justify-content: center;
 }

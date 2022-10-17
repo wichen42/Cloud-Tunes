@@ -13,9 +13,7 @@ const AudioPlayerBar = () => {
 
 
     const handlePlay = (e) => {
-        console.log(isPlaying);
         setIsPlaying(!isPlaying);
-
         isPlaying ? setPlayPause(pauseUrl) : setPlayPause(playUrl);
     }
 
