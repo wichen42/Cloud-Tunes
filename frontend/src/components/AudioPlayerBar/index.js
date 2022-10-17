@@ -1,4 +1,5 @@
 import './AudioPlayerBar.css';
+import sample from '../../assets/temp_music/sample.mp3';
 
 const AudioPlayerBar = () => {
     return ( 
@@ -32,13 +33,16 @@ const AudioPlayerBar = () => {
                     </div>
     
                     <div className='track-progress'>
-    
+                        <audio controls>
+                            <source src={sample}
+                            type='audio/mpeg'
+                            />
+                        </audio>
                     </div>
     
                     <div className='track-end'>
     
                     </div>
-                    <button className='track-mute'></button>
                 </div>
     
     
