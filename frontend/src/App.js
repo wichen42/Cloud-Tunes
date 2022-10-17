@@ -18,6 +18,7 @@ import csrfFetch from "./store/csrf";
 import PostIndex from "./components/PostIndex";
 import PostForm from "./components/PostForm";
 import UploadFormPage from "./components/UploadFormPage";
+import AudioPlayerBar from "./components/AudioPlayerBar";
 
 function App() {
 
@@ -72,6 +73,7 @@ function App() {
             <SplashPage />
           </Route>
         </Switch>
+        <AudioPlayerBar />
       </SessionContext.Provider>
 
     </>

@@ -65,4 +65,7 @@ a {
 :root {
 	--nav-size: 50px;
 	font-family: overpass-light;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }

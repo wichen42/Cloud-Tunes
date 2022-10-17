@@ -1,0 +1,83 @@
+.audio-bar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(0%);
+    width: auto;
+}
+
+.audio-bar {
+    background-color: lightblue;
+    height: 40px;
+    width: 100%;
+    display: flex;
+}
+
+.playback-buttons {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    background-color: blueviolet;
+    flex-grow: 2;
+}
+
+.playback-buttons button {
+    background-color: green;
+    background-repeat: no-repeat;
+    height: 75%;
+    margin-left: 5px;
+    
+    background-size: contain;
+}
+
+.prev-track {
+    background-image: url('../../assets/icons/backward-step-solid.svg');
+}
+
+.play-track {
+    background-image: url('../../assets/icons/play-solid.svg');
+}
+
+.next-track {
+    background-image: url('../../assets/icons/forward-step-solid.svg');
+}
+
+.shuffle-track {
+    background-image: url('../../assets/icons/shuffle-solid.svg');
+}
+
+.repeat-track {
+    background-image: url('../../assets/icons/repeat-solid.svg');
+}
+
+.track-mute {
+    background-image: url('../../assets/icons/volume-xmark-solid.svg');
+    background-repeat: no-repeat;
+    height: 70%;
+}
+
+.track-progress-bar {
+    background-color: green;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 4;
+}
+
+.track-info {
+    background-color: chartreuse;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+.track-socials {
+    background-color: darkcyan;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+}
