@@ -58,19 +58,24 @@ function PostForm () {
   const preview = photoUrl ? <img src={photoUrl} alt="" /> : null;
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="post-title">Title of Post</label>
-      <input type="text"
-        id="post-title"
-        value={title}
-        onChange={handleInput}/>
-      <input type="file" 
-      ref={fileRef}
-      onChange={handleFile}/> 
-      {preview}
-      <br />
-      <button>Make a new Post!</button>
-    </form>
+    <div className='postform-container'>
+      <form onSubmit={handleSubmit}
+      className='post-form'
+      >
+        <label htmlFor="post-title">Title of Post</label>
+        <input type="text"
+          id="post-title"
+          value={title}
+          onChange={handleInput}/>
+        <input type="file" 
+        ref={fileRef}
+        onChange={handleFile}/> 
+        {preview}
+        <br />
+        <button>Make a new Post!</button>
+      </form>
+    </div>
+
   );
 }
 

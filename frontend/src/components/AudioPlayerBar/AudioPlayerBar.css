@@ -3,6 +3,8 @@
     height: 48px;
     display: flex;
     background-color: aqua;
+    position: sticky;
+    bottom: 0;
 }
 
 .audio-bar button {
@@ -29,6 +31,11 @@
 
 .next-track {
     background-image: url('../../assets/icons/forward-step-solid.svg');
+    background-size: 16px;
+}
+
+.shuffle-track {
+    background-image: url('../../assets/icons/shuffle-solid.svg');
     background-size: 16px;
 }
 

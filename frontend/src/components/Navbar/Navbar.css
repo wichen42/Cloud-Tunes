@@ -2,6 +2,7 @@
     height: var(--nav-size);
     background-color: dodgerblue;
     padding: 0 1rem;
+    position: fixed;
 }
 
 .navbar-nav {

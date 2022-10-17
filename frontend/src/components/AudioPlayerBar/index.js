@@ -33,6 +33,7 @@ const AudioPlayerBar = () => {
             onClick={(e) => handlePlay(e)}
             ></button>
             <button className='next-track'></button>
+            <button className='shuffle-track'></button>
             <button className='repeat-track'></button>
 
             <div className='track-timeline'>

@@ -44,22 +44,10 @@ function App() {
   return (
     <>
       <SessionContext.Provider value={sessionUser}>
+
         <Switch>
           <Route path="/discover">
-            <Header />
-            <Navbar>
-              <ProfileNavItem>
-                <ProfileDropdown />
-              </ProfileNavItem>
-              <NavSearch />
-
-              <NavItem icon={<BellIcon />} />
-              <NavItem icon={<MailIcon />} />
-              <NavItem icon={<DotsIcon />}>
-                <SessionDropdown />
-              </NavItem>
-            </Navbar>
-            <DiscoverPage />
+            <DiscoverPage tracks={tracks}/>
             <PostForm />
             <PostIndex posts={posts} />
           </Route>
