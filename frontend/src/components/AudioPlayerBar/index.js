@@ -16,13 +16,18 @@ const AudioPlayerBar = ({tracks}) => {
     const [playPause, setPlayPause] = useState(playUrl);
     const audioPlayer = useRef();
     const [currentSong, setCurrentSong] = useState(sample);
-    const trackList = tracks.map(track => track.trackUrl);
     const [volBackground, setVolbackground] = useState(volLowUrl);
+    const [duration, setDuration] = useState(0);
 
+    const trackList = tracks.map(track => track.trackUrl);
 
     console.log(trackList);
     console.log(volLowUrl);
     console.log(playUrl);
+
+    useEffect(() => {
+        setDuration(Math.floor(audioPlayer.current.duration));
+    }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
 
     const handlePlay = (e) => {
         const prevState = isPlaying;
@@ -46,6 +51,13 @@ const AudioPlayerBar = ({tracks}) => {
         backgroundImage: playPause
     }
 
+    const convertTime = (seconds) => {
+        const minutes = Math.floor(seconds / 60);
+        const min = minutes < 10 ? `0${minutes}` : `${minutes}`;
+        const second = Math.floor(seconds % 60);
+        const sec = seconds < 10 ? `0${second}` : `${second}`;
+        return `${min}:${sec}`;
+    }
 
     return ( 
         <div className='audio-bar'>
@@ -66,7 +78,7 @@ const AudioPlayerBar = ({tracks}) => {
                     className='progress-bar'
                     />
                 </div>
-                <div className='track-end'>3:23</div>
+                <div className='track-end'>{(duration && !isNaN(duration)) && convertTime(duration)}</div>
             </div>
             
             <button className='track-volume' style={volumeBackground}></button>
