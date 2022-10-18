@@ -51,7 +51,7 @@ const UserProfilePage = () => {
     
     const [fStyle, setFstyle] = useState(followStyle)
     
-    return(
+    if (user) return(
         <div className="user-profile-container">
             <div className="profile-page">
                 <div className="profile-banner">
@@ -71,9 +71,9 @@ const UserProfilePage = () => {
 
                     <div className='track-banner'>
                         <div className='banner-tabs'>
-                            <div className='track-tab'>Tracks</div>
-                            <div className='profile-playlist'>Playlist</div>
-                            <div className='profile-edit'>Edit Profile</div>
+                            <button className='track-tab'>Tracks</button>
+                            <button className='profile-playlist'>Playlist</button>
+                            <button className='profile-edit'>Edit Profile</button>
                         </div>
 
                         <div className='banner-buttons'>

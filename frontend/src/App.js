@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom";
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import Header from "./components/Header";
 import SplashPage from "./components/SplashPage";
 import DiscoverPage from "./components/Discover";
@@ -20,9 +20,11 @@ import PostForm from "./components/PostForm";
 import UploadFormPage from "./components/UploadFormPage";
 import AudioPlayerBar from "./components/AudioPlayerBar";
 import UserProfilePage from "./components/UserProfilePage";
+import { fetchUsers } from "./store/users";
 
 function App() {
 
+  const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
   const [posts, setPost] = useState([]);
   const [tracks, setTracks] = useState([]);
@@ -37,6 +39,8 @@ function App() {
       const trackList = await csrfFetch('/api/tracks');
       setTracks(await trackList.json())
     }
+
+    dispatch(fetchUsers());
 
     fetchPosts();
     fetchTracks();
