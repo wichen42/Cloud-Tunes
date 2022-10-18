@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { fetchUsers, getUser, getUsers } from '../../store/users';
-import AudioPlayerBar from '../AudioPlayerBar';
+import { fetchUsers, getUser } from '../../store/users';
 import UserProfileEdit from '../UserProfileEdit';
+import { SessionContext } from '../../Context/SessionContext';
 import './UserProfilePage.css';
 
 const UserProfilePage = () => {
@@ -11,16 +11,28 @@ const UserProfilePage = () => {
     const dispatch = useDispatch();
     const {id} = useParams();
     const user = useSelector(getUser(id));
+    const sessionUser = useContext(SessionContext)
     const [follow, setFollow] = useState('Follow');
     const [profileUrl, setPhotoUrl] = useState('');
     const [bannerUrl, setBannerUrl] = useState('');
     const [profileAbout, setProfileAbout] = useState('');
+    const [edit, setEdit] = useState(false);
+    const [track, setTrack] = useState(true);
+    const [playlist, setPlaylist] = useState(false);
     
     useEffect(() => {
         if (user) {
             setBannerUrl(user.bannerUrl);
-            if (!user.imageUrl) setPhotoUrl('https://cloud-tunes-dev.s3.amazonaws.com/user-regular.svg');
-            if (!user.about) setProfileAbout("Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum!");
+            if (!user.imageUrl) {
+                setPhotoUrl('https://cloud-tunes-dev.s3.amazonaws.com/user-regular.svg');
+            } else {
+                setPhotoUrl(user.imageUrl);
+            }
+            if (!user.about) {
+                setProfileAbout("Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum!");
+            } else {
+                setProfileAbout(user.about);
+            }
         }
     }, [user])
 
@@ -38,9 +50,10 @@ const UserProfilePage = () => {
             setFstyle(followStyle);
         }
     }
-    
-    console.log(user);
 
+    // console.log(sessionUser);
+    // console.log(user);
+    
     const followStyle = {
         height: "24px",
         width: "100px",
@@ -69,6 +82,33 @@ const UserProfilePage = () => {
     const profileImage = {
         backgroundImage: `url(${profileUrl})`
     }
+
+    const handleProfileEdit = (e) => {
+        e.preventDefault();
+        if (user.id === sessionUser.id) {
+            console.log("id match");
+            setTrack(false);
+            setPlaylist(false);
+            setEdit(true);
+        } else {
+            console.log("id does not match");
+        }
+
+    }
+
+    const handlePlaylist = (e) => {
+        e.preventDefault();
+        setTrack(false);
+        setEdit(false);
+        setPlaylist(true);
+    }
+
+    const handleTrack = (e) => {
+        e.preventDefault(); 
+        setEdit(false);
+        setPlaylist(false);
+        setTrack(true);
+    }
     
     const [fStyle, setFstyle] = useState(followStyle)
     
@@ -92,9 +132,21 @@ const UserProfilePage = () => {
 
                     <div className='track-banner'>
                         <div className='banner-tabs'>
-                            <button className='track-tab'>Tracks</button>
-                            <button className='profile-playlist'>Playlist</button>
-                            <button className='profile-edit'>Edit Profile</button>
+                            <button className='track-tab'
+                            onClick={(e) => handleTrack(e)}
+                            >Tracks</button>
+                            <button className='profile-playlist'
+                            onClick={(e) => handlePlaylist(e)}
+                            >Playlist</button>
+
+                            <button className='reposts-tab'>Reposts</button>
+
+                            {(user.id === sessionUser.id) && 
+                            <button className='profile-edit'
+                            onClick={(e) => handleProfileEdit(e)}
+                            >Edit Profile</button>
+                            }
+
                         </div>
 
                         <div className='banner-buttons'>
@@ -110,7 +162,7 @@ const UserProfilePage = () => {
                     <div className='content-container'>
 
                         <div className='profile-content'>
-                            <UserProfileEdit />
+                            { (edit && (user.id === sessionUser.id)) && <UserProfileEdit />}
                         </div>
 
                         <div className='profile-about-container'>

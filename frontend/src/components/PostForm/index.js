@@ -25,11 +25,11 @@ function PostForm () {
       };
     }
   }
-  const handleInput = e => {
+  const handleInput = (e) => {
     setTitle(e.currentTarget.value);
   }
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append('post[title]', title);

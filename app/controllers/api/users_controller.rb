@@ -21,6 +21,26 @@ class Api::UsersController < ApplicationController
     render :show
   end
 
+  def update
+    @user = User.find(params[:id])
+    if @user
+      @user.update(user_params)
+      render :show
+    else
+      render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
+  def destroy 
+    @user = User.find(params[:id])
+    if @user 
+      @user.destroy
+      render :index
+    else
+      render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def user_params
