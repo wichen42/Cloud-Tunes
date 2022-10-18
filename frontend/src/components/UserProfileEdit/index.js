@@ -15,6 +15,12 @@ const UserProfileEdit = () => {
                 value={about}
                 onChange={(e) => setAbout(e.target.value)}
                 />
+
+                <label>Location:</label>
+                <input type="text"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                />
             </form>
         </div>
      );

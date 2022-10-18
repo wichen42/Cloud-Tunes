@@ -4,7 +4,7 @@
 }
 
 .user-profile-container {
-    width: 1275;
+    width: 1275px;
     background-color: white;
     min-height: 100vh;
     margin-bottom: -48px;
@@ -101,7 +101,7 @@
     display: flex;
     background-color: transparent;
     height: 200px;
-    width: 40%;
+    width: 30%;
     position: absolute;
     top: 10%;
     justify-content: center;
@@ -109,7 +109,7 @@
 }
 
 .banner-info div {
-    margin: 15px;
+    margin: 10px;
 }
 
 .bio-image {
@@ -129,4 +129,57 @@
     color: white;
     text-align: center;
     padding: 10px;
+}
+
+.content-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.profile-content {
+    width: 1275px;
+
+}
+
+.profile-about-container {
+    width: 30%;
+    height: 100vh;
+    border-left: 1px solid lightgray;
+    padding-left: 10px;
+}
+
+.profile-about-socials {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.profile-about-socials > div {
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-left: 10px;
+    margin-right: 35px;
+    border-left: 1px solid lightgray;
+    padding-left: 10px;
+}
+
+.profile-likes {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.profile-follows {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.profile-tracks {
+    margin-top: 10px;
+    margin-bottom: 5px;
 }

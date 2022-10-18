@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchUsers, getUser, getUsers } from '../../store/users';
 import AudioPlayerBar from '../AudioPlayerBar';
+import UserProfileEdit from '../UserProfileEdit';
 import './UserProfilePage.css';
 
 const UserProfilePage = () => {
@@ -13,11 +14,13 @@ const UserProfilePage = () => {
     const [follow, setFollow] = useState('Follow');
     const [profileUrl, setPhotoUrl] = useState('');
     const [bannerUrl, setBannerUrl] = useState('');
+    const [profileAbout, setProfileAbout] = useState('');
     
     useEffect(() => {
         if (user) {
             setBannerUrl(user.bannerUrl);
             if (!user.imageUrl) setPhotoUrl('https://cloud-tunes-dev.s3.amazonaws.com/user-regular.svg');
+            if (!user.about) setProfileAbout("Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum!");
         }
     }, [user])
 
@@ -36,6 +39,8 @@ const UserProfilePage = () => {
         }
     }
     
+    console.log(user);
+
     const followStyle = {
         height: "24px",
         width: "100px",
@@ -105,11 +110,27 @@ const UserProfilePage = () => {
                     <div className='content-container'>
 
                         <div className='profile-content'>
-                            
+                            <UserProfileEdit />
                         </div>
 
-                        <div className='profile-about'>
-
+                        <div className='profile-about-container'>
+                            <div className='profile-about-socials'>
+                                <div className='profile-likes'>
+                                    <div>Likes</div>
+                                    <div>42</div>
+                                </div>
+                                <div className='profile-follows'>
+                                    <div>Followers</div>
+                                    <div>2</div>
+                                </div>
+                                <div className='profile-tracks'>
+                                    <div>Tracks</div>
+                                    <div>80</div>
+                                </div>
+                            </div>
+                            <div className='profile-about'>
+                                {profileAbout}
+                            </div>
                         </div>
 
                     </div>
