@@ -149,7 +149,8 @@
     width: 30%;
     height: 100vh;
     border-left: 1px solid lightgray;
-    padding-left: 10px;
+    margin-right: 20px;
+    padding-left: 40px;
 }
 
 .profile-about-socials {

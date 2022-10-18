@@ -35,7 +35,9 @@ const UserProfileEdit = () => {
                     <input type="file" />
                 </div>
 
-                <div>
+                <div id='profile-edit-buttons-container'>
+                    <button className='profile-edit-cancel'>Cancel</button>
+
                     <button className='profile-edit-submit'
                     type='submit'
                     >Save</button>
