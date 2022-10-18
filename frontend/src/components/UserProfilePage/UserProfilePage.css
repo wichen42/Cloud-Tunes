@@ -21,6 +21,7 @@
     width: 100%;
     height: 300px;
     background-color: aqua;
+    background-size: contain;
 }
 
 .track-banner {
@@ -43,14 +44,15 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     background-color: transparent;
-    border: 3px solid transparent;
-    margin: 32px 15px 15px 15px;
+    border: 2px solid transparent;
+    margin: 25px 15px 15px 15px;
     font-size: 20px;
     cursor: pointer;
+    padding-bottom: 10px;
 }
 
 .banner-tabs button:hover {
-    border-bottom: 3px solid black;
+    border-bottom: 2px solid black;
     border-bottom-left-radius: 8%;
     border-bottom-right-radius: 8%;
 }
@@ -95,4 +97,36 @@
     align-items: center;
 }
 
+.banner-info {
+    display: flex;
+    background-color: transparent;
+    height: 200px;
+    width: 40%;
+    position: absolute;
+    top: 10%;
+    justify-content: center;
+    align-items: center;
+}
 
+.banner-info div {
+    margin: 15px;
+}
+
+.bio-image {
+    display: inline-block;
+    background-color: white;
+    border: 1px solid black;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 120px 120px;
+}
+
+.bio-details div {
+    background-color: rgb(39, 39, 39);
+    color: white;
+    text-align: center;
+    padding: 10px;
+}

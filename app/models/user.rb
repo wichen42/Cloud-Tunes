@@ -11,6 +11,7 @@
 #  about           :text
 #  image_url       :string
 #  location        :string
+#  banner_url      :string           default("https://cloud-tunes-dev.s3.amazonaws.com/default-banner.jpg")
 #
 class User < ApplicationRecord
   before_validation :ensure_session_token
@@ -19,6 +20,14 @@ class User < ApplicationRecord
   validates :username, :session_token, presence: true, uniqueness: true
   validates :username, length: { in: 3..30 }, format: {without: URI::MailTo::EMAIL_REGEXP, message: 'Username cannot be an email.' }
   validates :password, length: { in: 6..255}, allow_nil: true
+
+  has_one_attached :image
+
+  def ensure_photo
+    unless self.photo.attached?
+        errors.add(:photo, "must be attached");
+    end
+  end
 
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)

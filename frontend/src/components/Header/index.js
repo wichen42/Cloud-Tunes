@@ -45,6 +45,11 @@ const Header = () => {
         history.push('/upload');
     }
 
+    const handleUser = (e) => {
+        e.preventDefault();
+        history.push('/users/12');
+    }
+
     return (
         <div className='header'>
             <div>
@@ -80,6 +85,10 @@ const Header = () => {
 
             <div>
                 <button onClick={(e) => handleDiscover(e)}>Discover</button>
+            </div>
+
+            <div>
+                <button onClick={(e) => handleUser(e)}>User Page</button>
             </div>
             <br />
             <div>

@@ -11,8 +11,16 @@ const UserProfilePage = () => {
     const {id} = useParams();
     const user = useSelector(getUser(id));
     const [follow, setFollow] = useState('Follow');
-    console.log(user);
+    const [profileUrl, setPhotoUrl] = useState('');
+    const [bannerUrl, setBannerUrl] = useState('');
     
+    useEffect(() => {
+        if (user) {
+            setBannerUrl(user.bannerUrl);
+            if (!user.imageUrl) setPhotoUrl('https://cloud-tunes-dev.s3.amazonaws.com/user-regular.svg');
+        }
+    }, [user])
+
     useEffect(() => {
         dispatch(fetchUsers);
     }, [id])
@@ -48,21 +56,29 @@ const UserProfilePage = () => {
         alignItems: "center",
         border: "1px solid lightgray"
     }
+
+    const profileBanner = {
+        backgroundImage: `url(${bannerUrl})`
+    }
+
+    const profileImage = {
+        backgroundImage: `url(${profileUrl})`
+    }
     
     const [fStyle, setFstyle] = useState(followStyle)
     
-    if (user) return(
+    if (user) {return(
         <div className="user-profile-container">
             <div className="profile-page">
-                <div className="profile-banner">
+                <div className="profile-banner" style={profileBanner}>
                     <div className='banner-info'>
-                        <div className='bio-image'></div>
+                        <div className='bio-image' style={profileImage}></div>
                         <div className='bio-details'>
                             <div className='profile-username'>
                                 {user.username}
                             </div>
                             <div className='profile-location'>
-                                {user.location? user.location : null}
+                                {user.location? user.location : "No Set Location"}
                             </div>
                         </div>
                     </div>
@@ -86,9 +102,11 @@ const UserProfilePage = () => {
                         </div>
                     </div>
 
-                    <div className='tracks-container'>
+                    <div className='content-container'>
 
-                        <div className='tracks'></div>
+                        <div className='profile-content'>
+                            
+                        </div>
 
                         <div className='profile-about'>
 
@@ -100,7 +118,7 @@ const UserProfilePage = () => {
             </div>
             <div className='push'></div>
         </div>
-    )
+    )} 
     }
     
     export default UserProfilePage;
