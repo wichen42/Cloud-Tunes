@@ -58,7 +58,6 @@ function App() {
           </Route>
 
           <Route path={"/upload"}>
-            <Header />
             <UploadFormPage />
           </Route>
 

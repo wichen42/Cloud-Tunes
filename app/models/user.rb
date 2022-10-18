@@ -22,6 +22,7 @@ class User < ApplicationRecord
   validates :password, length: { in: 6..255}, allow_nil: true
 
   has_one_attached :image
+  has_one_attached :banner
 
   def ensure_photo
     unless self.photo.attached?

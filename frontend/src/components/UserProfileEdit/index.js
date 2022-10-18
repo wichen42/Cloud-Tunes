@@ -8,19 +8,39 @@ const UserProfileEdit = () => {
 
 
     return ( 
-        <div className='profile-edit-form'>
-            <form>
-                <label>About:</label>
-                <input type="text"
-                value={about}
-                onChange={(e) => setAbout(e.target.value)}
-                />
+        <div className='profile-edit-form-container'>
+            <form
+            className='profile-edit-form'
+            >
+                <div className='about-container'>
+                    <label>About:</label>
+                    <textarea className='about-text'></textarea>
+                </div>
 
-                <label>Location:</label>
-                <input type="text"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-                />
+                <div className='location-container'>
+                    <label>Location:</label>
+                    <input type="text"
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                    />
+                </div>
+
+                <div className='profile-image-container'>
+                    <label>Profile Image:</label>
+                    <input type="file" />
+                </div>
+
+                <div className='profile-banner-container'>
+                    <label>Profile Banner:</label>
+                    <input type="file" />
+                </div>
+
+                <div>
+                    <button className='profile-edit-submit'
+                    type='submit'
+                    >Save</button>
+                </div>
+
             </form>
         </div>
      );
