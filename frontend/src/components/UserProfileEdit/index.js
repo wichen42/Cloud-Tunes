@@ -45,6 +45,35 @@ const UserProfileEdit = () => {
         const profileData = new FormData();
         const bannerData = new FormData();
 
+        if (profileImage) {
+            profileData.append('user[image]', profileImage);
+        }
+
+        if (bannerImage) {
+            bannerData.append('user[banner]', bannerImage);
+        }
+
+        const profileRes = await csrfFetch(`/api/users/${sessionUser.id}`, {
+            method: "PATCH",
+            body: profileData
+        })
+        if (profileRes.ok) {
+            const profileResData = await profileRes.json();
+            console.log(profileResData.message);
+            setProfileImage(null);
+            setProfileUrl(null);
+        }
+
+        const bannerRes = await csrfFetch(`/api/users/${sessionUser.id}`, {
+            method: "PATCH",
+            body: bannerData
+        })
+        if (bannerRes.ok) {
+            const bannerResData = await profileRes.json();
+            console.log(bannerResData.message);
+            setBannerImage(null);
+            setProfileUrl(null);
+        }
 
     }
 

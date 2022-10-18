@@ -22,11 +22,15 @@ const UserProfilePage = () => {
     
     useEffect(() => {
         if (user) {
-            setBannerUrl(user.bannerUrl);
-            if (!user.imageUrl) {
+            if (!user.bannerURL) {
+                setBannerUrl('https://cloud-tunes-dev.s3.amazonaws.com/default-banner.jpg')
+            } else {
+                setBannerUrl(user.bannerURL);
+            }
+            if (!user.profileUrl) {
                 setPhotoUrl('https://cloud-tunes-dev.s3.amazonaws.com/user-regular.svg');
             } else {
-                setPhotoUrl(user.imageUrl);
+                setPhotoUrl(user.profileUrl);
             }
             if (!user.about) {
                 setProfileAbout("Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum!");
@@ -52,7 +56,7 @@ const UserProfilePage = () => {
     }
 
     // console.log(sessionUser);
-    // console.log(user);
+    console.log(user);
     
     const followStyle = {
         height: "24px",
