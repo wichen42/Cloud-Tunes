@@ -8,6 +8,9 @@
 #  session_token   :string           not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  about           :text
+#  image_url       :string
+#  location        :string
 #
 class User < ApplicationRecord
   before_validation :ensure_session_token

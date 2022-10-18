@@ -19,6 +19,7 @@ import PostIndex from "./components/PostIndex";
 import PostForm from "./components/PostForm";
 import UploadFormPage from "./components/UploadFormPage";
 import AudioPlayerBar from "./components/AudioPlayerBar";
+import UserProfilePage from "./components/UserProfilePage";
 
 function App() {
 
@@ -55,6 +56,10 @@ function App() {
           <Route path={"/upload"}>
             <Header />
             <UploadFormPage />
+          </Route>
+
+          <Route path={"/users/:id"}>
+            <UserProfilePage />
           </Route>
 
           <Route path={"/"}>

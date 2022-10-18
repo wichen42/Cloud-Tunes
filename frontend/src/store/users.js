@@ -13,6 +13,7 @@ export const receiveUsers = (users) => ({
     users
 })
 
+export const getUser = userId => ({users}) => users ? users[userId] : null;
 export const getUsers = ({users}) => users ? Object.values(users) : [];
 
 export const fetchUsers = () => async dispatch => {
@@ -21,6 +22,7 @@ export const fetchUsers = () => async dispatch => {
     dispatch(receiveUsers(data));
     return data;
 }
+
 
 export const createUser = (user) => async dispatch => {
     const res = await csrfFetch('/api/users', {

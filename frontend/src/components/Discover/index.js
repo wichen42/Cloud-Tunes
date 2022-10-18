@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 import * as sessionActions from '../../store/session';
 import Header from "../Header";
 import Navbar from "../Navbar";
+import './Discover.css'
 
 const DiscoverPage = ({tracks}) => {
     
