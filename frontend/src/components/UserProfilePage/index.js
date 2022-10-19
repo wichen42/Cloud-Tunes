@@ -145,7 +145,7 @@ const UserProfilePage = () => {
 
                             <button className='reposts-tab'>Reposts</button>
 
-                            {(user.id === sessionUser.id) && 
+                            {(sessionUser && (user.id === sessionUser.id)) && 
                             <button className='profile-edit'
                             onClick={(e) => handleProfileEdit(e)}
                             >Edit Profile</button>
