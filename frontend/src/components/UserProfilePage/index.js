@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { fetchUsers, getUser } from '../../store/users';
 import UserProfileEdit from '../UserProfileEdit';
 import { SessionContext } from '../../Context/SessionContext';
+import * as trackActions from '../../store/track';
 import './UserProfilePage.css';
 
 const UserProfilePage = () => {
@@ -18,7 +19,16 @@ const UserProfilePage = () => {
     const [profileAbout, setProfileAbout] = useState('');
     const [edit, setEdit] = useState(false);
     const [track, setTrack] = useState(true);
+    const allTracks = useSelector(trackActions.getTracks);
     const [playlist, setPlaylist] = useState(false);
+
+
+    const userTracks = allTracks.filter((track) => track.userId === parseInt(id));
+
+    console.log(userTracks);
+
+
+    console.log(userTracks);
     
     useEffect(() => {
         if (user) {
@@ -54,10 +64,8 @@ const UserProfilePage = () => {
             setFstyle(followStyle);
         }
     }
+    // Styles
 
-    // console.log(sessionUser);
-    console.log(user);
-    
     const followStyle = {
         height: "24px",
         width: "100px",
@@ -86,6 +94,10 @@ const UserProfilePage = () => {
     const profileImage = {
         backgroundImage: `url(${profileUrl})`
     }
+    
+    const [fStyle, setFstyle] = useState(followStyle)
+
+    // onClick Functions
 
     const handleProfileEdit = (e) => {
         e.preventDefault();
@@ -97,7 +109,6 @@ const UserProfilePage = () => {
         } else {
             console.log("id does not match");
         }
-
     }
 
     const handlePlaylist = (e) => {
@@ -114,7 +125,6 @@ const UserProfilePage = () => {
         setTrack(true);
     }
     
-    const [fStyle, setFstyle] = useState(followStyle)
     
     if (user) {return(
         <div id="user-profile-container">

@@ -5,17 +5,14 @@ import Header from "./components/Header";
 import SplashPage from "./components/SplashPage";
 import DiscoverPage from "./components/Discover";
 import { SessionContext } from './Context/SessionContext';
-import csrfFetch from "./store/csrf";
 import UploadFormPage from "./components/UploadFormPage";
 import AudioPlayerBar from "./components/AudioPlayerBar";
 import UserProfilePage from "./components/UserProfilePage";
 import { fetchUsers } from "./store/users";
-import { withRoute } from "react-router";
 import Library from "./components/Library";
 import * as trackActions from "./store/track";
 
 function App({location}) {
-  // {location.pathname !== '/exclusion-path' && <Header/>}
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
   

@@ -1,10 +1,13 @@
 import { useContext, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { SessionContext } from '../../Context/SessionContext';
 import csrfFetch from '../../store/csrf';
+import * as trackActions from '../../store/track';
 import './UploadInputForm.css';
 
 const UploadInputForm = ({track, close}) => {
 
+    const dispatch = useDispatch();
     const [title, setTitle] = useState("");
     const [genre, setGenre] = useState("");
     const [desc, setDesc] = useState("");
@@ -35,10 +38,11 @@ const UploadInputForm = ({track, close}) => {
         if (res.ok) {
             const message = await res.json();
             console.log(message.message);
-            console.log(message);
+            dispatch(trackActions.fetchTracks());
             setTitle("");
             setGenre("");
             setDesc("");
+            close();
         }
         
     }

@@ -11,9 +11,7 @@ const WelcomeBack = ({welcomeOpen, welcomeClose, username}) => {
     const [errors, setErrors] = useState([]);
     const [showPassword, setShowPassword] = useState(false);
 
-
     if (!welcomeOpen) return null;
-
 
     const handleShowPassword = (e) => {
 
@@ -44,7 +42,7 @@ const WelcomeBack = ({welcomeOpen, welcomeClose, username}) => {
             else if (data) setErrors([data]);
             else setErrors([res.statusText]);
           });
-
+          dispatch(sessionActions.getSession());
           <Redirect to="/discover" />
     }
 

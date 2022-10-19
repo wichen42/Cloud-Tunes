@@ -1,14 +1,17 @@
 import './OptionsDropdown.css';
 import * as sessionActions from '../../store/session'
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 const OptionsDropdown = () => {
 
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const handleSignout = (e) => {
         e.preventDefault();
         dispatch(sessionActions.logout());
+        history.push('/');
     }
 
     //TODO: Implement link to external urls
