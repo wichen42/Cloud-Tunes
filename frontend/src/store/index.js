@@ -1,11 +1,13 @@
 import { createStore, combineReducers, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
 import sessionReducer from './session';
+import trackReducer from './track';
 import userReducer from './users';
 
 const rootReducer = combineReducers({
     session: sessionReducer,
-    users: userReducer
+    users: userReducer,
+    tracks: trackReducer
 });
 
 let enhancer;

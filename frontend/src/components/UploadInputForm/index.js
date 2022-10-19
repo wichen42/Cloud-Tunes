@@ -8,8 +8,7 @@ const UploadInputForm = ({track, close}) => {
     const [title, setTitle] = useState("");
     const [genre, setGenre] = useState("");
     const [desc, setDesc] = useState("");
-    const sessionUser = useContext(SessionContext)
-    const username = sessionUser.username;
+    const {username, id} = useContext(SessionContext)
 
     
     const handleSubmit = async (e) => {
@@ -23,6 +22,7 @@ const UploadInputForm = ({track, close}) => {
         formData.append('track[username]', username);
         formData.append('track[genre]', genre);
         formData.append('track[description]', desc);
+        formData.append('track[user_id]', id);
         if (track) {
             formData.append('track[track]', track);
         }
@@ -35,6 +35,7 @@ const UploadInputForm = ({track, close}) => {
         if (res.ok) {
             const message = await res.json();
             console.log(message.message);
+            console.log(message);
             setTitle("");
             setGenre("");
             setDesc("");
@@ -48,7 +49,7 @@ const UploadInputForm = ({track, close}) => {
     }
     
     console.log(track);
-    console.log(sessionUser.username);
+    console.log(username, id);
 
     return ( 
         <div className='upload-input-form-container'>

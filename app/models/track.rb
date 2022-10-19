@@ -9,13 +9,16 @@
 #  description :string           not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  user_id     :bigint
 #
 class Track < ApplicationRecord
     validates :title, :username, :genre, :description, presence: true
 
     has_one_attached :track
+    has_one_attached :image
+
+    belongs_to :user
 
     # validates_attachment_content_type :audio, :content_type => ['audio/mp3']
-
     # belongs_to :user
 end

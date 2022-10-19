@@ -20,7 +20,7 @@ const Header = () => {
 
     if (!sessionUser) return null;
 
-    console.log(sessionUser.user.id);
+    console.log(sessionUser);
 
     const handleHome = (e) => {
         e.preventDefault();
@@ -35,7 +35,7 @@ const Header = () => {
     const handleFeed = (e) => {
         e.preventDefault();
         if (sessionUser) {
-            history.push(`/users/${sessionUser.user.id}`);
+            history.push(`/users/${sessionUser.id}`);
         } else {
             history.push('/');
         }
@@ -51,6 +51,11 @@ const Header = () => {
         setOptionsClicked(!optionsClicked);
     }
 
+    const handleLibrary = (e) => {
+        e.preventDefault();
+        history.push('/library');
+    }
+
     return (
         <div className='header-container'>
             <div className='header'>
@@ -64,18 +69,22 @@ const Header = () => {
                     <div className='header-feed'
                     onClick={(e) => handleFeed(e)}
                     >Feed</div>
-                    <div className='header-library'>Library</div>
+                    <div className='header-library'
+                    onClick={(e) => handleLibrary(e)}
+                    >Library</div>
                 </div>
 
                 <div className='header-search'>
                     <input type="search"
                     className='search'
-                    placeholder='Search'
+                    placeholder='Search functionality coming soon'
                     />
                 </div>
 
                 <div className='header-end'>
-                    <div className='go-plus'>Try Go+</div>
+                    <div className='go-plus'
+                    onClick={() => window.open('https://www.appacademy.io/', '_blank')}
+                    >Try App Academy</div>
                     <div className='next-pro'>Try Next Pro</div>
                     <div className='header-upload'
                     onClick={(e) => handleUpload(e)}
@@ -90,8 +99,8 @@ const Header = () => {
                         {profileClicked && <ProfileDropdown />}
                     </div>
                     <div className='header-icons'>
-                        <div className='header-bell'></div>
-                        <div className='header-mail'></div>
+                        {/* <div className='header-bell'></div>
+                        <div className='header-mail'></div> */}
                         <div className='header-options'
                         tabIndex="2"
                         onClick={(e) => {handleOptions(e)}}

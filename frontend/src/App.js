@@ -11,6 +11,8 @@ import AudioPlayerBar from "./components/AudioPlayerBar";
 import UserProfilePage from "./components/UserProfilePage";
 import { fetchUsers } from "./store/users";
 import { withRoute } from "react-router";
+import Library from "./components/Library";
+import * as trackActions from "./store/track";
 
 function App({location}) {
   // {location.pathname !== '/exclusion-path' && <Header/>}
@@ -19,14 +21,13 @@ function App({location}) {
   const [tracks, setTracks] = useState([]);
   
   useEffect(() => {
-    const fetchTracks = async () => {
-      const trackList = await csrfFetch('/api/tracks');
-      setTracks(await trackList.json())
-    }
-    
+    // const fetchTracks = async () => {
+    //   const trackList = await csrfFetch('/api/tracks');
+    //   setTracks(await trackList.json())
+    // }
+    dispatch(trackActions.fetchTracks());
     dispatch(fetchUsers());
-    
-    fetchTracks();
+    // fetchTracks();
   }, [])
   
   return (
@@ -36,6 +37,10 @@ function App({location}) {
         <Switch>
           <Route path="/discover">
             <DiscoverPage tracks={tracks}/>
+          </Route>
+
+          <Route path="/library">
+            <Library />
           </Route>
 
           <Route path={"/upload"}>

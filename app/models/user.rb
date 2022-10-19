@@ -9,9 +9,7 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  about           :text
-#  image_url       :string
 #  location        :string
-#  banner_url      :string           default("https://cloud-tunes-dev.s3.amazonaws.com/default-banner.jpg")
 #
 class User < ApplicationRecord
   before_validation :ensure_session_token
@@ -23,6 +21,8 @@ class User < ApplicationRecord
 
   has_one_attached :image
   has_one_attached :banner
+
+  has_many :tracks
 
   def ensure_photo
     unless self.photo.attached?

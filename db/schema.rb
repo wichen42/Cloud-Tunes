@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_18_213733) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_19_135730) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -65,6 +65,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_18_213733) do
     t.string "description", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_tracks_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -83,4 +85,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_18_213733) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "tracks"
   add_foreign_key "comments", "users"
+  add_foreign_key "tracks", "users"
 end

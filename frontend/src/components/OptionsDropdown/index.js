@@ -11,6 +11,8 @@ const OptionsDropdown = () => {
         dispatch(sessionActions.logout());
     }
 
+    //TODO: Implement link to external urls
+
     return ( 
         <div className='options-dropdown'>
             <a href="#"

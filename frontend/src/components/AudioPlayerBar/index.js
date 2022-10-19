@@ -103,7 +103,7 @@ const AudioPlayerBar = ({tracks}) => {
                     defaultValue="0"
                     />
                 </div>
-                <div className='track-end'>{(duration && !isNaN(duration)) && convertTime(duration)}</div>
+                <div className='track-end'>{(duration && !isNaN(duration)) ? convertTime(duration) : ""}</div>
             </div>
             
             <div>
