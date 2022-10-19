@@ -1,13 +1,19 @@
-
-
-.audio-bar {
+#audio-bar-container {
     width: 100%;
+    bottom: 0; 
     height: 48px;
+    position: sticky;
+    border-top: 1px solid lightgray;
     display: flex;
     background-color: #F2F2F2;
-    border-top: 1px solid lightgray;
-    bottom: 0; 
-    position: sticky;
+    justify-content: center;
+    align-items: center;
+}
+
+.audio-bar {
+    width: 1275px;
+    display: flex;
+    background-color: #F2F2F2;
 }
 
 .audio-bar button {
@@ -28,7 +34,6 @@
 }
 
 .button-container button {
-    height: fit-content;
     width: 24px;
     height: 100%;
     background-repeat: no-repeat;
@@ -41,7 +46,7 @@
 
 .prev-track {
     background-image: url('../../assets/icons/backward-step-solid.svg');
-    margin-left: 12px;
+    margin-left: 35px;
     background-size: 16px;
 }
 
@@ -68,9 +73,18 @@
     background-size: 20px;
 }
 
-.track-volume {
+#track-volume {
     background-size: 18px;
     margin-left: 12px;
+    height: fit-content;
+    width: 24px;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 12px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
 }
 
 .track-info {
@@ -150,12 +164,14 @@
 .track-socials {
     height: 100%;
     flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .track-socials button{
-    height: fit-content;
     width: 24px;
-    height: 100%;
+    height: 24px;
     background-repeat: no-repeat;
     background-position: center;
     margin-right: 12px;

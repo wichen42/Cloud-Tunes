@@ -77,7 +77,9 @@ const AudioPlayerBar = ({tracks}) => {
     }
 
     return ( 
-        <div className='audio-bar'>
+        
+        <div id='audio-bar-container'>
+            <div className='audio-bar'>
             <audio src={trackList[0]} ref={audioPlayer}></audio>
             <div className='button-container'>
                 <button className='prev-track'></button>
@@ -104,7 +106,9 @@ const AudioPlayerBar = ({tracks}) => {
                 <div className='track-end'>{(duration && !isNaN(duration)) && convertTime(duration)}</div>
             </div>
             
-            <button className='track-volume' style={volumeBackground}></button>
+            <div>
+                <button id='track-volume' style={volumeBackground}></button>
+            </div>
 
             <div className='track-info'>
                 <div className='track-details'>
@@ -118,6 +122,7 @@ const AudioPlayerBar = ({tracks}) => {
                     <button className='playlist-tab'></button>
                 </div>
             </div>
+        </div>
         </div>
     );
 }
