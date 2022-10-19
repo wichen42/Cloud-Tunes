@@ -117,7 +117,7 @@ const UserProfilePage = () => {
     const [fStyle, setFstyle] = useState(followStyle)
     
     if (user) {return(
-        <div className="user-profile-container">
+        <div id="user-profile-container">
             <div className="profile-page">
                 <div className="profile-banner" style={profileBanner}>
                     <div className='banner-info'>

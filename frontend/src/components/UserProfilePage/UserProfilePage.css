@@ -3,7 +3,7 @@
     height: 48px;
 }
 
-.user-profile-container {
+#user-profile-container {
     width: 1275px;
     background-color: white;
     min-height: 100vh;
