@@ -1,6 +1,9 @@
 import './ProfileDropdown.css';
 
 const ProfileDropdown = () => {
+
+    //TODO: Implement routing to other pages
+
     return ( 
         <div className="profileDropdown">
             <a href="#"

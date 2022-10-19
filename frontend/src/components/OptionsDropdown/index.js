@@ -1,6 +1,9 @@
 import './OptionsDropdown.css';
 
 const OptionsDropdown = () => {
+
+    // TODO: Link signout functionality
+
     return ( 
         <div className='options-dropdown'>
             <a href="#"
