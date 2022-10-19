@@ -11,36 +11,17 @@ import { SessionContext } from '../../Context/SessionContext';
 
 const Header = () => {
 
-    const dispatch = useDispatch();
-    const [openModal, setOpenModal] = useState(false);
-    const [signupModal, setSignupModal] = useState(false);
-    const [welcomeModal, setWelcomeModal] = useState(false);
-    const [buttonName, setButtonName] = useState("");
-    const buttonRef = useRef();
     const history = useHistory();
     const sessionUser = useContext(SessionContext);
 
     console.log(sessionUser);
-    
 
-    const handleClick = (e) => {
-        e.preventDefault();
-        dispatch(sessionActions.logout())
-    }
-
-    useEffect(() => {
-        dispatch(usersActions.fetchUsers());
-    }, [openModal, signupModal, welcomeModal])
 
     const handleHome = (e) => {
         e.preventDefault();
         history.push('/')
     }
 
-    const handleDiscover = (e) => {
-        e.preventDefault();
-        history.push('/discover')
-    }
 
     const handleUpload = (e) => {
         e.preventDefault();
