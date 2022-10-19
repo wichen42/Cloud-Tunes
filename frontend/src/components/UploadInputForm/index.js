@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { SessionContext } from '../../Context/SessionContext';
 import csrfFetch from '../../store/csrf';
@@ -12,7 +12,15 @@ const UploadInputForm = ({track, close}) => {
     const [genre, setGenre] = useState("");
     const [desc, setDesc] = useState("");
     const {username, id} = useContext(SessionContext)
+    const [image, setImage] = useState(null);
+    const [imageUrl, setImageUrl] = useState(null);
+    const imageRef = useRef();
 
+    const handleInput = (e) => {
+        const file = e.currentTarget.files[0];
+        console.log(file);
+        setImage(file);
+    }
     
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -26,6 +34,7 @@ const UploadInputForm = ({track, close}) => {
         formData.append('track[genre]', genre);
         formData.append('track[description]', desc);
         formData.append('track[user_id]', id);
+        formData.append('track[image]', image)
         if (track) {
             formData.append('track[track]', track);
         }
@@ -42,6 +51,7 @@ const UploadInputForm = ({track, close}) => {
             setTitle("");
             setGenre("");
             setDesc("");
+            setImage(null);
             close();
         }
         
@@ -80,6 +90,13 @@ const UploadInputForm = ({track, close}) => {
                 value={desc}
                 onChange={(e) => setDesc(e.target.value)}
                 ></textarea>
+                
+                <label>Track Image:</label>
+                <input type="file" 
+                className='upload-image'
+                onChange={handleInput}
+                ref={imageRef}
+                />
 
                 <div className='upload-buttons'>
                     <button

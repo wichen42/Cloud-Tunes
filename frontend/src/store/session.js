@@ -14,8 +14,7 @@ export const removeSession = () => ({
 
 export const getSession = ({session}) => session ? session.user : null;
 
-export const login = (user) => async dispatch => {
-    const {username, password } = user;
+export const login = ({username, password}) => async dispatch => {
     const res = await csrfFetch('/api/session', {
         method: 'POST',
         body: JSON.stringify({
@@ -75,7 +74,7 @@ const sessionReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case SET_SESSION:
-            nextState.user = action.user;
+            nextState.user = action.user.user;
             return nextState;
         case REMOVE_SESSION:
             nextState["user"] = null;

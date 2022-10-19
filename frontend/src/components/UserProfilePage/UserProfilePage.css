@@ -147,6 +147,10 @@
     height: 100vh;
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 25px;
+    padding-right: 25px;
 }
 
 .profile-about-container {

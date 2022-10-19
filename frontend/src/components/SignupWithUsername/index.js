@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import eyeClose from '../../assets/icons/eye-slash-regular.svg';
 import eyeOpen from '../../assets/icons/eye-regular.svg'
+import { useHistory } from "react-router-dom";
 
 const SignupWithUsername = ({swuOpen, swuClose}) => {
 
@@ -13,6 +14,7 @@ const SignupWithUsername = ({swuOpen, swuClose}) => {
     const [errors, setErrors] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+    const history = useHistory();
     // const [eye, setEye] = useState(`url(${eyeOpen})`);
 
 
@@ -35,7 +37,8 @@ const SignupWithUsername = ({swuOpen, swuClose}) => {
             else if (data) setErrors([data]);
             else setErrors([res.statusText]);
           });
-
+          
+          history.push('/discover');
     }
 
     const handleOverlayClick = (e) => {

@@ -6,6 +6,7 @@ import UserProfileEdit from '../UserProfileEdit';
 import { SessionContext } from '../../Context/SessionContext';
 import * as trackActions from '../../store/track';
 import './UserProfilePage.css';
+import TrackDisplay from '../TrackDisplayBar';
 
 const UserProfilePage = () => {
 
@@ -21,15 +22,11 @@ const UserProfilePage = () => {
     const [track, setTrack] = useState(true);
     const allTracks = useSelector(trackActions.getTracks);
     const [playlist, setPlaylist] = useState(false);
-
-
     const userTracks = allTracks.filter((track) => track.userId === parseInt(id));
 
     console.log(userTracks);
+    const trackItem = userTracks.map(track => <TrackDisplay track={track}/>)
 
-
-    console.log(userTracks);
-    
     useEffect(() => {
         if (user) {
             if (!user.bannerURL) {
@@ -176,7 +173,8 @@ const UserProfilePage = () => {
                     <div className='content-container'>
 
                         <div className='profile-content'>
-                            { (edit && (user.id === sessionUser.id)) && <UserProfileEdit />}
+                            {(edit && (user.id === sessionUser.id)) && <UserProfileEdit />}
+                            {trackItem}
                         </div>
 
                         <div className='profile-about-container'>

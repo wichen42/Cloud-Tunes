@@ -1,5 +1,5 @@
 class Api::TracksController < ApplicationController
-    wrap_parameters include: Track.attribute_names + [:track]
+    wrap_parameters include: Track.attribute_names + [:track] + [:image]
 
     def index
         @tracks = Track.all
@@ -19,6 +19,6 @@ class Api::TracksController < ApplicationController
     private
 
     def track_params
-        params.require(:track).permit(:title, :username, :genre, :description, :track, :user_id)
+        params.require(:track).permit(:title, :username, :genre, :description, :track, :user_id, :image)
     end
 end

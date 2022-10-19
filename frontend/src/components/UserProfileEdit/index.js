@@ -1,4 +1,5 @@
 import { useContext, useRef, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { SessionContext } from '../../Context/SessionContext';
 import csrfFetch from '../../store/csrf';
 import './UserProfileEdit.css'
@@ -14,8 +15,8 @@ const UserProfileEdit = () => {
     const [bannerUrl, setBannerUrl] = useState(null);
     const imageRef = useRef();
     const bannerRef = useRef();
+    const history = useHistory();
 
-    console.log(sessionUser);
 
     const handleProfileImage = (e) => {
         const iconFile = e.currentTarget.files[0];
@@ -74,7 +75,7 @@ const UserProfileEdit = () => {
             setBannerImage(null);
             setProfileUrl(null);
         }
-
+        history.push(`/users/${sessionUser.id}`);
     }
 
     const profilePreview = profileUrl ? <img src={profileUrl}/> : null;
