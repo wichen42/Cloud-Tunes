@@ -1,10 +1,111 @@
-.header {
+.header-container {
     display: flex;
+    align-items: center;
+    justify-content: center;
     height: 35px;
-    background-color: darkorange;
+    background-color: #333333;
     width: 100vw;
     position: sticky;
+    color: white;
     top: 0;
     z-index: 42;
 }
  
+.header { 
+    width: 1275px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-start {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.header-start div {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.header-feed {
+    flex-grow: 2;
+    border-right: 1px solid black;
+}
+
+.header-library {
+    border-right: 1px solid black;
+    flex-grow: 2;
+    margin-right: 8px;
+}
+
+.header-home {
+    flex-grow: 3;
+    background-color: black;
+    height: 100%;
+    display: flex;
+}
+
+.header-search {
+    flex-grow: 1;
+    margin-right: 15px;
+}
+
+.search {
+    width: 100%;
+}
+
+.header-end {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.header-end div {
+    flex-grow: 1;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.go-plus {
+    color: #FF5500;
+}
+
+.next-pro {
+    color: #FF5500;
+}
+
+.header-bell {
+    height: 20px;
+    width: 20px;
+    background-image: url('../../assets/icons/bell.svg');
+    background-repeat: no-repeat;
+    stroke: white;
+}
+
+.header-mail {
+    height: 20px;
+    width: 20px;
+    background-image: url('../../assets/icons/mail.svg');
+    background-repeat: no-repeat;
+    stroke: white;
+}
+
+.header-options {
+    height: 20px;
+    width: 20px;
+    background-image: url('../../assets/icons/dots.svg');
+    background-repeat: no-repeat;
+    stroke: white;
+}
+
