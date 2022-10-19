@@ -67,6 +67,7 @@
     justify-content: center;
     align-items: center;
     flex-grow: 1;
+    height: 100%;
 }
 
 .header-end div {
@@ -83,6 +84,10 @@
 
 .next-pro {
     color: #FF5500;
+}
+
+.header-icons {
+    margin-left: 10px;
 }
 
 .header-bell {
@@ -107,5 +112,11 @@
     background-image: url('../../assets/icons/dots.svg');
     background-repeat: no-repeat;
     stroke: white;
+}
+
+.header-profile:focus {
+    height: 100%;
+    background-color: black;
+    width: fit-content;
 }
 

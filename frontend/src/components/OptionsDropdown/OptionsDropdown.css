@@ -1,8 +1,8 @@
-.profileDropdown {
+.options-dropdown {
     position: absolute;
     top: 35px;
     width: 95px;
-    transform: translate(-13%);
+    transform: translate(-34%);
     background-color: white;
     border: 1px solid lightgray;
     display: flex;
@@ -11,19 +11,8 @@
     padding-right: 3px;
 }
 
-.profileDropdown a {
+.options-dropdown a {
     width: 100%;
     color: black;
     padding-left: 5px;
-}
-
-.sessionMenuItem {
-    height: 50px;
-    display: flex;
-    align-items: center;
-    transition: background 300ms;
-}
-
-.sessionMenuItem:hover {
-    background-color: rgb(230, 230, 230);
 }

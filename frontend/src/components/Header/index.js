@@ -8,20 +8,21 @@ import WelcomeBack from '../WelcomeBackForm';
 import * as usersActions from '../../store/users';
 import  { useHistory } from 'react-router-dom';
 import { SessionContext } from '../../Context/SessionContext';
+import ProfileDropdown from '../ProfileDropdown';
+import OptionsDropdown from '../OptionsDropdown';
 
 const Header = () => {
 
     const history = useHistory();
     const sessionUser = useContext(SessionContext);
-
-    console.log(sessionUser);
+    const [profileClicked, setProfileClicked] = useState(false);
+    const [optionsClicked, setOptionsClicked] = useState(false);
 
 
     const handleHome = (e) => {
         e.preventDefault();
         history.push('/')
     }
-
 
     const handleUpload = (e) => {
         e.preventDefault();
@@ -35,6 +36,16 @@ const Header = () => {
         } else {
             history.push('/');
         }
+    }
+
+    const handleProfile = (e) => {
+        e.preventDefault();
+        setProfileClicked(!profileClicked);
+    }
+
+    const handleOptions = (e) => {
+        e.preventDefault();
+        setOptionsClicked(!optionsClicked);
     }
 
     return (
@@ -66,11 +77,24 @@ const Header = () => {
                     <div className='header-upload'
                     onClick={(e) => handleUpload(e)}
                     >Upload</div>
-                    <div className='header-profile'>{sessionUser.username}</div>
+                    <div className='header-profile'
+                    onClick={(e) => handleProfile(e)}
+                    tabIndex="1"
+                    >
+                        <div>
+                            {sessionUser.username} ⌄
+                        </div>
+                        {profileClicked && <ProfileDropdown />}
+                    </div>
                     <div className='header-icons'>
                         <div className='header-bell'></div>
                         <div className='header-mail'></div>
-                        <div className='header-options'></div>
+                        <div className='header-options'
+                        tabIndex="2"
+                        onClick={(e) => {handleOptions(e)}}
+                        >
+                            {optionsClicked && <OptionsDropdown />}
+                        </div>
                     </div>
                 </div>
             </div>
