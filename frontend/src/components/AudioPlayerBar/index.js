@@ -22,9 +22,16 @@ const AudioPlayerBar = () => {
     const [volBackground, setVolbackground] = useState(volLowUrl);
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
+    const [trackNum, setTrackNum] = useState(0);
 
     const tracks = useSelector(trackActions.getTracks);
     const trackList = tracks.map(track => track.trackUrl);
+
+    useEffect(() => {
+        audioPlayer.current.play();
+        console.log(trackNum);
+
+    }, [trackNum])
 
     useEffect(() => {
         const seconds = Math.floor(audioPlayer.current.duration)
@@ -78,20 +85,28 @@ const AudioPlayerBar = () => {
         setCurrentTime(progressBar.current.value);
     }
 
-    if (audioPlayer.ended) console.log("END");
+    const handleNext = (e) => {
+        if (trackNum >= trackList.length-1 ) {
+            setTrackNum(0);
+        } else {
+            setTrackNum(trackNum + 1);
+        }
+    }
+
 
     return ( 
         
         <div id='audio-bar-container'>
             <div className='audio-bar'>
-            <audio src={trackList[0]} ref={audioPlayer}></audio>
+            <audio src={trackList[trackNum]} ref={audioPlayer} id='myAudio'></audio>
             <div className='button-container'>
                 <button className='prev-track'></button>
                 <button className='play-pause'
                 style={buttonBackground}
                 onClick={(e) => handlePlay(e)}
                 ></button>
-                <button className='next-track'></button>
+                <button className='next-track'
+                onClick={(e) => handleNext(e)}></button>
                 <button className='shuffle-track'></button>
                 <button className='repeat-track'></button>
             </div>
