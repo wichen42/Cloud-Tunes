@@ -34,7 +34,7 @@ const Library = () => {
                             </div>
                             <div className='track-detail-container'>
                                 <div>URL:</div>
-                                <div>{track.trackUrl}</div>
+                                <div><a href={track.trackUrl} target="_blank">Link</a></div>
                             </div>
                         </li>
                        ) 
