@@ -10,24 +10,25 @@ import UploadFormPage from "./components/UploadFormPage";
 import AudioPlayerBar from "./components/AudioPlayerBar";
 import UserProfilePage from "./components/UserProfilePage";
 import { fetchUsers } from "./store/users";
+import { withRoute } from "react-router";
 
-function App() {
-
+function App({location}) {
+  // {location.pathname !== '/exclusion-path' && <Header/>}
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
   const [tracks, setTracks] = useState([]);
-
+  
   useEffect(() => {
     const fetchTracks = async () => {
       const trackList = await csrfFetch('/api/tracks');
       setTracks(await trackList.json())
     }
-
+    
     dispatch(fetchUsers());
-
+    
     fetchTracks();
   }, [])
-
+  
   return (
     <>
       <SessionContext.Provider value={sessionUser}>

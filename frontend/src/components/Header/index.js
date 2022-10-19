@@ -6,7 +6,7 @@ import * as sessionActions from '../../store/session';
 import { useDispatch } from 'react-redux';
 import WelcomeBack from '../WelcomeBackForm';
 import * as usersActions from '../../store/users';
-import  { useHistory } from 'react-router-dom';
+import  { useHistory} from 'react-router-dom';
 import { SessionContext } from '../../Context/SessionContext';
 import ProfileDropdown from '../ProfileDropdown';
 import OptionsDropdown from '../OptionsDropdown';
@@ -18,6 +18,9 @@ const Header = () => {
     const [profileClicked, setProfileClicked] = useState(false);
     const [optionsClicked, setOptionsClicked] = useState(false);
 
+    if (!sessionUser) return null;
+
+    console.log(sessionUser.user.id);
 
     const handleHome = (e) => {
         e.preventDefault();
@@ -32,7 +35,7 @@ const Header = () => {
     const handleFeed = (e) => {
         e.preventDefault();
         if (sessionUser) {
-            history.push(`/users/${sessionUser.id}`);
+            history.push(`/users/${sessionUser.user.id}`);
         } else {
             history.push('/');
         }
@@ -82,7 +85,7 @@ const Header = () => {
                     tabIndex="1"
                     >
                         <div>
-                            {sessionUser.username} ⌄
+                            {sessionUser ? sessionUser.username : "username"} ⌄
                         </div>
                         {profileClicked && <ProfileDropdown />}
                     </div>

@@ -1,8 +1,15 @@
 import './OptionsDropdown.css';
+import * as sessionActions from '../../store/session'
+import { useDispatch } from 'react-redux';
 
 const OptionsDropdown = () => {
 
-    // TODO: Link signout functionality
+    const dispatch = useDispatch();
+
+    const handleSignout = (e) => {
+        e.preventDefault();
+        dispatch(sessionActions.logout());
+    }
 
     return ( 
         <div className='options-dropdown'>
@@ -23,6 +30,7 @@ const OptionsDropdown = () => {
             >LinkedIn</a>
             <a href="#"
             className='sessionMenuItem'
+            onClick={(e) => handleSignout(e)}
             >Signout</a>
         </div>
      );
