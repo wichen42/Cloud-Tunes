@@ -13,8 +13,8 @@ export const receiveTracks = (tracks) => ({
     tracks
 })
 
-const getTrack = trackId => ({tracks}) => tracks ? tracks[trackId] : null;
-const getTracks = ({tracks}) => tracks ? Object.values(tracks) : [];
+export const getTrack = trackId => ({tracks}) => tracks ? tracks[trackId] : null;
+export const getTracks = ({tracks}) => tracks ? Object.values(tracks) : [];
 
 export const fetchTracks = () => async dispatch => {
     const res = await csrfFetch('/api/tracks');

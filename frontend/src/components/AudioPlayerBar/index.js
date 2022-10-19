@@ -6,8 +6,10 @@ import volLow from '../../assets/icons/volume-low-solid.svg';
 import volHigh from '../../assets/icons/volume-high-solid.svg';
 import volMute from '../../assets/icons/volume-xmark-solid.svg';
 import { useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
+import * as trackActions from '../../store/track';
 
-const AudioPlayerBar = ({tracks}) => {
+const AudioPlayerBar = () => {
     
     const playUrl = `url(${play})`;
     const pauseUrl = `url(${pause})`;
@@ -22,6 +24,7 @@ const AudioPlayerBar = ({tracks}) => {
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
 
+    const tracks = useSelector(trackActions.getTracks);
     const trackList = tracks.map(track => track.trackUrl);
 
     useEffect(() => {

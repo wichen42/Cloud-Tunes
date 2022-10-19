@@ -18,16 +18,11 @@ function App({location}) {
   // {location.pathname !== '/exclusion-path' && <Header/>}
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
-  const [tracks, setTracks] = useState([]);
   
   useEffect(() => {
-    // const fetchTracks = async () => {
-    //   const trackList = await csrfFetch('/api/tracks');
-    //   setTracks(await trackList.json())
-    // }
+
     dispatch(trackActions.fetchTracks());
     dispatch(fetchUsers());
-    // fetchTracks();
   }, [])
   
   return (
@@ -36,7 +31,7 @@ function App({location}) {
         <Header />
         <Switch>
           <Route path="/discover">
-            <DiscoverPage tracks={tracks}/>
+            <DiscoverPage />
           </Route>
 
           <Route path="/library">
@@ -55,7 +50,7 @@ function App({location}) {
             <SplashPage />
           </Route>
         </Switch>
-        <AudioPlayerBar tracks={tracks}/>
+        <AudioPlayerBar />
       </SessionContext.Provider>
 
     </>
