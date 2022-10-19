@@ -19,7 +19,6 @@ export const getTracks = ({tracks}) => tracks ? Object.values(tracks) : [];
 export const fetchTracks = () => async dispatch => {
     const res = await csrfFetch('/api/tracks');
     const data = await res.json();
-    console.log("Inside fetchTracks: " + data);
     dispatch(receiveTracks(data));
     return data;
 }

@@ -5,7 +5,6 @@ const TrackDisplay = ({track}) => {
 
     const [imageUrl, setImageUrl] = useState("https://cloud-tunes-dev.s3.amazonaws.com/pexels-pixabay-159868.jpg");
 
-    console.log(track.title);
 
     useEffect(() => {
         if (track.imageUrl) {
@@ -14,15 +13,20 @@ const TrackDisplay = ({track}) => {
     }, [])
 
     return ( 
-        <div className='track-display-container'>
+        <div className='track-display-container'
+        key={track.id}
+        >
             <div className='track-image-container'>
                 <img src={imageUrl} className='track-image'/>
             </div>
             <div className='track-details container'>
                 <div className='track-info'>
                     <div className='track-name-title'>
-                        <div className='track-artist'>{track.username}</div>
-                        <div className='track-title'>{track.title}</div>
+                        <div className='tnt-image'><button></button></div>
+                        <div>
+                            <div className='track-artist'>{track.username}</div>
+                            <div className='track-title'>{track.title}</div>
+                        </div>
                     </div>
                     <div className='track-create-genre'>
                         <div className='track-time'>{Math.floor(Math.random()*12)} months ago</div>

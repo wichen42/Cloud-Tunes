@@ -24,8 +24,7 @@ const UserProfilePage = () => {
     const [playlist, setPlaylist] = useState(false);
     const userTracks = allTracks.filter((track) => track.userId === parseInt(id));
 
-    console.log(userTracks);
-    const trackItem = userTracks.map(track => <TrackDisplay track={track}/>)
+    const trackItem = userTracks.map(track => <TrackDisplay key={track.id} track={track}/>)
 
     useEffect(() => {
         if (user) {

@@ -19,7 +19,6 @@ const AudioPlayerBar = () => {
     const audioPlayer = useRef();
     const progressBar = useRef();
     const sliderRef = useRef();
-    const [currentSong, setCurrentSong] = useState(sample);
     const [volBackground, setVolbackground] = useState(volLowUrl);
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
@@ -78,6 +77,8 @@ const AudioPlayerBar = () => {
         progressBar.current.style.setProperty('--bar-before', `${progressBar.current.value / duration * 100}%`)
         setCurrentTime(progressBar.current.value);
     }
+
+    if (audioPlayer.ended) console.log("END");
 
     return ( 
         

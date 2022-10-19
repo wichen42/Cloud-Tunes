@@ -49,7 +49,6 @@ function App({location}) {
         </Switch>
         <AudioPlayerBar />
       </SessionContext.Provider>
-
     </>
   );
 }

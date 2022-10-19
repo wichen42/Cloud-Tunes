@@ -18,8 +18,8 @@
 .track-image {
     background-size: contain;
     background-repeat: no-repeat;
-    height: 150px;
-    width: 150px;
+    height: 200px;
+    width: 200px;
     margin-left: 25px;
 }
 
@@ -31,12 +31,27 @@
 
 .track-name-title {
     margin-bottom: 25px;
+    display: flex;
 }
 
 .track-create-genre {
     padding-left: 10px;
 }
 
+.tnt-image {
+    background-image: url('../../assets/icons/circle-play-solid.svg');
+    width: 35px;
+    height: 35px;
+    margin-right: 5px;
+}
+
+.tnt-image button {
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+}
 .track-create-genre div {
     margin-bottom: 5px;
 }
@@ -87,6 +102,7 @@
     display: flex;
     width: 100%;
     align-items: flex-start;
+    margin-right: 15px;
 }
 
 .track-buttons-container div {

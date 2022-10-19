@@ -20,8 +20,6 @@ const Header = () => {
 
     if (!sessionUser) return null;
 
-    console.log(sessionUser);
-
     const handleHome = (e) => {
         e.preventDefault();
         history.push('/')
