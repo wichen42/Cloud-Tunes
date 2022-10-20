@@ -12,6 +12,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-end;
+    margin-top: 25px;
 }
 
 .comment-item {
@@ -69,3 +70,27 @@
     border: none;
 }
 
+.comment-buttons {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+.comment-edit {
+    margin-right: 10px;
+    cursor: pointer;
+    background-color: #F2F2F2;
+    width: 60%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.delete-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}

@@ -38,9 +38,14 @@ const CommentItem = ({commentId, userId, trackId, body, itemUpdate}) => {
 
             <div className='comment-tail'>
                 <div className='comment-time'>{Math.floor(Math.random()*22)+2} hours ago</div>
-                <button className='comment-delete'
-                onClick={(e) => handleDelete(e)}
-                ></button>
+                <div className="comment-buttons">
+                    <div className='comment-edit'>Edit</div>
+                    <div className="delete-container">
+                        <button className='comment-delete'
+                        onClick={(e) => handleDelete(e)}></button>
+                    </div>
+                </div>
+
             </div>
         </li>
     )
