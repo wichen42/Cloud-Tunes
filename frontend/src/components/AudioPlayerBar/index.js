@@ -8,6 +8,7 @@ import volMute from '../../assets/icons/volume-xmark-solid.svg';
 import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import * as trackActions from '../../store/track';
+import PlayListBar from '../PlayListBar';
 
 const AudioPlayerBar = () => {
     
@@ -22,23 +23,25 @@ const AudioPlayerBar = () => {
     const [volBackground, setVolbackground] = useState(volLowUrl);
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
-    const [trackNum, setTrackNum] = useState(0);
+    const [trackNum, setTrackNum] = useState();
+    const [playListClicked, setPlayListClicked] = useState(false);
+    const [artist, setArtist] = useState("");
+    const [title, setTitle] = useState("");
 
     const tracks = useSelector(trackActions.getTracks);
     const trackList = tracks.map(track => track.trackUrl);
-
+    
     useEffect(() => {
-        audioPlayer.current.play();
-        console.log(trackNum);
-
+        audioPlayer.current.play();       
+        // setArtist(trackList[trackNum].username) 
     }, [trackNum])
-
+    
     useEffect(() => {
         const seconds = Math.floor(audioPlayer.current.duration)
         setDuration(seconds);
         progressBar.current.max = seconds;
     }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
-
+    
     const handlePlay = (e) => {
         const prevState = isPlaying;
 
@@ -47,6 +50,7 @@ const AudioPlayerBar = () => {
         setIsPlaying(!prevState);
 
         if (!prevState) {
+            if(!trackNum) setTrackNum(0);
             audioPlayer.current.play();
             sliderRef.current = requestAnimationFrame(whilePlay);
         } else {
@@ -102,6 +106,14 @@ const AudioPlayerBar = () => {
         }
     }
 
+    const handlePlaylist = (e) => {
+        e.preventDefault();
+        setPlayListClicked(!playListClicked); 
+    }
+
+    console.table(tracks);
+    if (trackNum) console.table(tracks[trackNum].username)
+
     return ( 
         
         <div id='audio-bar-container'>
@@ -117,7 +129,7 @@ const AudioPlayerBar = () => {
                 ></button>
                 <button className='next-track'
                 onClick={(e) => handleNext(e)}></button>
-                <button className='shuffle-track'></button>
+                <button className='shuffle-track'                ></button>
                 <button className='repeat-track'></button>
             </div>
 
@@ -141,15 +153,18 @@ const AudioPlayerBar = () => {
 
             <div className='track-info'>
                 <div className='track-details'>
-                    <a href="#">Link to artist</a>
-                    <span>Track Title</span>
+                    <a href="#">{trackNum && tracks[trackNum].username}</a>
+                    <span>{trackNum && tracks[trackNum].title}</span>
                 </div>
 
                 <div className='track-socials'>
                     <button className='track-like'></button>
                     <button className='artist-follow'></button>
-                    <button className='playlist-tab'></button>
+                    <button className='playlist-tab'
+                    onClick={(e) => handlePlaylist(e)}
+                    ></button>
                 </div>
+                {playListClicked && <PlayListBar tracks={tracks}/>}
             </div>
         </div>
         </div>
