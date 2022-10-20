@@ -1,11 +1,14 @@
-import { useContext, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { SessionContext } from '../../Context/SessionContext';
+import csrfFetch from '../../store/csrf';
 import './TrackComments.css';
 
-const TrackComments = ({comments, trackId}) => {
+const TrackComments = ({comments, trackId, update}) => {
     
     const sessionUser = useContext(SessionContext);
     const trackComments = comments.filter(comment => comment.trackId === trackId);
+    const [commentId, setCommentId] = useState('');
+    const id = useRef();
 
     console.table(sessionUser);
 
@@ -16,9 +19,15 @@ const TrackComments = ({comments, trackId}) => {
         backgroundImage: 'url(https://cloud-tunes-dev.s3.amazonaws.com/user-regular.svg)'
     }
 
-    const handleDelete = (e) => {
+    const handleDelete = async (e) => {
         e.preventDefault();
-
+        const trackId = e.target.value;
+        // console.log(trackId);
+        const res = await csrfFetch(`/api/comments/${trackId}`, {
+            method: 'DELETE',
+        });
+        console.log("comment deleted...");
+        update();
     }
 
     return ( 
@@ -39,9 +48,11 @@ const TrackComments = ({comments, trackId}) => {
 
                             <div className='comment-tail'>
                                 <div className='comment-time'>{Math.floor(Math.random()*22)+2} hours ago</div>
-                                <div className='comment-delete'
+                                <button className='comment-delete'
+                                value={comment.id}
+                                ref={id}
                                 onClick={(e) => handleDelete(e)}
-                                ></div>
+                                ></button>
                             </div>
                         </li>
                     )

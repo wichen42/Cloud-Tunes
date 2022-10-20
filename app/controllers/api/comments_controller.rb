@@ -27,7 +27,6 @@ class Api::CommentsController < ApplicationController
         @comment = Comment.find(params[:id])
         if @comment
             @comment.destroy
-            render :index
         else
             render json: { errors: @comment.errors.full_messages}, status: :unprocessable_entity
         end

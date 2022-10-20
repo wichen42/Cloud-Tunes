@@ -102,7 +102,7 @@ const TrackDisplay = ({track}) => {
 
             </div>
         </div>
-            {showComment && <TrackComments comments={comments} trackId={track.id}/>}
+            {showComment && <TrackComments comments={comments} trackId={track.id} update={() => setCommentCounter(commentCounter + 1)}/>}
         </div>
 
 
