@@ -38,8 +38,22 @@
     color: rgb(165, 165, 165);
 }
 
+.comment-details-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
 .comment-details-container div {
     margin-bottom: 5px;
+}
+
+.comment-tail {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
 }
 
 .comment-tail div {
@@ -48,5 +62,9 @@
 
 .comment-delete {
     cursor: pointer;
+    background-image: url('../../assets//icons/trash-can-solid.svg');
+    height: 15px;
+    width: 15px;
+    background-repeat: no-repeat;
 }
 

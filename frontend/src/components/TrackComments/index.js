@@ -7,8 +7,6 @@ const TrackComments = ({comments, trackId}) => {
     const sessionUser = useContext(SessionContext);
     const trackComments = comments.filter(comment => comment.trackId === trackId);
 
-    const profileImage = sessionUser.imageURL ? sessionUser.imageURL : 'https://cloud-tunes-dev.s3.amazonaws.com/user-regular.svg';
-
     console.table(sessionUser);
 
     console.log("Inside track comments");
@@ -16,6 +14,11 @@ const TrackComments = ({comments, trackId}) => {
 
     const imageStyle = {
         backgroundImage: 'url(https://cloud-tunes-dev.s3.amazonaws.com/user-regular.svg)'
+    }
+
+    const handleDelete = (e) => {
+        e.preventDefault();
+
     }
 
     return ( 
@@ -35,10 +38,10 @@ const TrackComments = ({comments, trackId}) => {
                             </div>
 
                             <div className='comment-tail'>
-                                <div className='comment-time'>{Math.floor(Math.random()*24)} hours ago</div>
-                                <div className='comment-delete'>
-                                    Delete
-                                </div>
+                                <div className='comment-time'>{Math.floor(Math.random()*22)+2} hours ago</div>
+                                <div className='comment-delete'
+                                onClick={(e) => handleDelete(e)}
+                                ></div>
                             </div>
                         </li>
                     )

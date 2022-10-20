@@ -70,7 +70,7 @@ const TrackDisplay = ({track}) => {
                         </div>
                     </div>
                     <div className='track-create-genre'>
-                        <div className='track-time'>{Math.floor(Math.random()*12)} months ago</div>
+                        <div className='track-time'>{Math.floor(Math.random()*11)+1} months ago</div>
                         <div className='track-genre'><div>#{track.genre}</div></div>
                     </div>
                 </div>
