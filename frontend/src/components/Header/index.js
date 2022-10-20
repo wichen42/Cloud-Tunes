@@ -1,11 +1,5 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useState } from 'react';
 import './header.css';
-import LoginForm from '../LoginForm';
-import SignupForm from '../SignupForm';
-import * as sessionActions from '../../store/session';
-import { useDispatch } from 'react-redux';
-import WelcomeBack from '../WelcomeBackForm';
-import * as usersActions from '../../store/users';
 import  { useHistory} from 'react-router-dom';
 import { SessionContext } from '../../Context/SessionContext';
 import ProfileDropdown from '../ProfileDropdown';
