@@ -93,6 +93,14 @@ const AudioPlayerBar = () => {
         }
     }
 
+    const handlePrev = (e) => {
+        e.preventDefault();
+        if (trackNum <= 0) {
+            setTrackNum(4);
+        } else {
+            setTrackNum(trackNum-1);
+        }
+    }
 
     return ( 
         
@@ -100,7 +108,9 @@ const AudioPlayerBar = () => {
             <div className='audio-bar'>
             <audio src={trackList[trackNum]} ref={audioPlayer} id='myAudio'></audio>
             <div className='button-container'>
-                <button className='prev-track'></button>
+                <button className='prev-track'
+                onClick={(e) => handlePrev(e)}
+                ></button>
                 <button className='play-pause'
                 style={buttonBackground}
                 onClick={(e) => handlePlay(e)}
