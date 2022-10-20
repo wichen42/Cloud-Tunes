@@ -146,11 +146,12 @@
     width: 100%;
     height: 100vh;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     flex-direction: column;
     align-items: center;
     padding-left: 25px;
     padding-right: 25px;
+    margin-top: 10px;
 }
 
 .profile-about-container {
