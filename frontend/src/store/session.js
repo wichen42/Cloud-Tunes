@@ -74,7 +74,7 @@ const sessionReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case SET_SESSION:
-            nextState.user = action.user.user;
+            nextState.user = action.user;
             return nextState;
         case REMOVE_SESSION:
             nextState["user"] = null;

@@ -14,12 +14,14 @@ import * as trackActions from "./store/track";
 
 function App({location}) {
   const dispatch = useDispatch();
-  const sessionUser = useSelector(state => state.session.user);
+  const [sessionUser, setSessionUser] = useState(null);
+  const session = useSelector(state => state.session.user);
   
   useEffect(() => {
 
     dispatch(trackActions.fetchTracks());
     dispatch(fetchUsers());
+    setSessionUser(session);
   }, [])
   
   return (
