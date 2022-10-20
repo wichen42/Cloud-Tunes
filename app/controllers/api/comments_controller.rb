@@ -17,7 +17,7 @@ class Api::CommentsController < ApplicationController
     def update
         @comment = Comment.find(params[:id])
         if @comment
-            render :index
+            render :index 
         else
             render json: { errors: @comment.errors.full_messages}, status: :unprocessable_entity
         end
