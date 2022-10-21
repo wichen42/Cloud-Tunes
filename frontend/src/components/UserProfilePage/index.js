@@ -7,6 +7,7 @@ import { SessionContext } from '../../Context/SessionContext';
 import * as trackActions from '../../store/track';
 import './UserProfilePage.css';
 import TrackDisplay from '../TrackDisplayBar';
+import * as sessionActions from '../../store/session';
 
 const UserProfilePage = () => {
 
@@ -23,6 +24,8 @@ const UserProfilePage = () => {
     const allTracks = useSelector(trackActions.getTracks);
     const [playlist, setPlaylist] = useState(false);
     const userTracks = allTracks.filter((track) => track.userId === parseInt(id));
+    const [openEdit, setOpenEdit] = useState(false);
+    const [showTracks, setShowTracks] = useState(true);
 
     const trackItem = userTracks.map(track => <TrackDisplay key={track.id} track={track}/>)
 
@@ -119,6 +122,12 @@ const UserProfilePage = () => {
         setTrack(true);
     }
     
+    const handleOpenEdit = (e) => {
+        e.preventDefault();
+        setOpenEdit(!openEdit);
+        setShowTracks(!showTracks);
+    }
+
     
     if (user) {return(
         <div id="user-profile-container">
@@ -163,15 +172,16 @@ const UserProfilePage = () => {
                             style={fStyle}
                             onClick={e => handleFollowStyle(e)}
                             >{follow}</div>
-                            <div className='banner-share'>Share</div>
+                            <div className='banner-share'
+                            onClick={(e) => handleOpenEdit(e)}>Edit</div>
                         </div>
                     </div>
 
                     <div className='content-container'>
 
                         <div className='profile-content'>
-                            {(edit && (user.id === sessionUser.id)) && <UserProfileEdit />}
-                            {trackItem}
+                            { openEdit && <UserProfileEdit />}
+                            { showTracks && trackItem}
                         </div>
 
                         <div className='profile-about-container'>
