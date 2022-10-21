@@ -13,7 +13,6 @@ const SignupForm = ({signupOpen, signupClose, username}) => {
     const [errors, setErrors] = useState("");
     const [password, setPassword] = useState("");
     const [submitClicked, setSubmitClicked] = useState(false);
-    const [users, setUsers] = useState({});
     const [showPassword, setShowPassword] = useState(false);
 
 
@@ -42,11 +41,10 @@ const SignupForm = ({signupOpen, signupClose, username}) => {
             else setErrors([res.statusText]);
           });
 
-          
+          dispatch(sessionActions.getSession());
           history.push('/discover');
     }
 
-    console.log("username " + username);
 
     const handleOverlayClick = (e) => {
         e.preventDefault();

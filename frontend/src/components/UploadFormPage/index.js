@@ -13,21 +13,15 @@ const UploadFormPage = () => {
 
         setFiles(prev => ([...prev, ...acceptedFiles]));
 
-        console.log("---------");
-        console.log(acceptedFiles[0]); // file object
-        console.log("---------");
-
         // setFiles(prev => [...prev, ...acceptedFiles]);
         setFiles(acceptedFiles);
         acceptedFiles.forEach((file) => {
             const fileReader = new FileReader();
-            console.log(file);
             fileReader.onabort = () => console.log('file reading was aborted');
             fileReader.onerror = () => console.log('file reading has failed');
     
             fileReader.onload = () => {
                 const res = fileReader.result; // url
-                console.log(file); // file object
                 setTrack(file);
                 setTrackUrl(res);
             }
@@ -37,7 +31,6 @@ const UploadFormPage = () => {
     
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
     
-    console.log(files); // [file]
 
     return (
         <div className='upload-container' >

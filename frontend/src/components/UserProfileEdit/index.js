@@ -39,7 +39,6 @@ const UserProfileEdit = () => {
         });
 
         const data = await res.json();
-        console.log(data);
 
         // user profile and banner update
 
@@ -60,7 +59,6 @@ const UserProfileEdit = () => {
         })
         if (profileRes.ok) {
             const profileResData = await profileRes.json();
-            console.log(profileResData.message);
             setProfileImage(null);
             setProfileUrl(null);
         }
@@ -71,7 +69,6 @@ const UserProfileEdit = () => {
         })
         if (bannerRes.ok) {
             const bannerResData = await profileRes.json();
-            console.log(bannerResData.message);
             setBannerImage(null);
             setProfileUrl(null);
         }
@@ -80,9 +77,6 @@ const UserProfileEdit = () => {
 
     const profilePreview = profileUrl ? <img src={profileUrl}/> : null;
     const bannerPreview = bannerUrl ? <img src={bannerUrl}/> : null;
-
-    console.log(profileImage);
-    console.log(bannerImage);
 
     return ( 
         <div className='profile-edit-form-container'>

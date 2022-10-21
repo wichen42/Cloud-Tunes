@@ -6,11 +6,6 @@ const CommentItem = ({commentId, userId, trackId, body, itemUpdate}) => {
     
     const user = useSelector(userActions.getUser(userId));
 
-    console.log(user);
-    console.log(userId)
-    console.log(trackId)
-    console.log(body)
-
     const imageStyle = {
         backgroundImage: 'url(https://cloud-tunes-dev.s3.amazonaws.com/user-regular.svg)'
     }
@@ -20,7 +15,6 @@ const CommentItem = ({commentId, userId, trackId, body, itemUpdate}) => {
         const res = await csrfFetch(`/api/comments/${commentId}`, {
             method: 'DELETE',
         });
-        console.log("comment deleted...");
         itemUpdate();
     }
     

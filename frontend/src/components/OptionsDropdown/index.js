@@ -11,6 +11,7 @@ const OptionsDropdown = () => {
     const handleSignout = (e) => {
         e.preventDefault();
         dispatch(sessionActions.logout());
+        dispatch(sessionActions.getSession);
         history.push('/');
     }
 

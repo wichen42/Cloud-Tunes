@@ -12,7 +12,7 @@ import { fetchUsers } from "./store/users";
 import Library from "./components/Library";
 import * as trackActions from "./store/track";
 
-function App({location}) {
+function App() {
   const dispatch = useDispatch();
   const [sessionUser, setSessionUser] = useState(null);
   const session = useSelector(state => state.session.user);
@@ -22,7 +22,7 @@ function App({location}) {
     dispatch(trackActions.fetchTracks());
     dispatch(fetchUsers());
     setSessionUser(session);
-  }, [])
+  })
   
   return (
     <>

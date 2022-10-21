@@ -98,12 +98,10 @@ const UserProfilePage = () => {
     const handleProfileEdit = (e) => {
         e.preventDefault();
         if (user.id === sessionUser.id) {
-            console.log("id match");
             setTrack(false);
             setPlaylist(false);
             setEdit(true);
         } else {
-            console.log("id does not match");
         }
     }
 

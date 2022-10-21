@@ -18,14 +18,12 @@ const UploadInputForm = ({track, close}) => {
 
     const handleInput = (e) => {
         const file = e.currentTarget.files[0];
-        console.log(file);
         setImage(file);
     }
     
     const handleSubmit = async (e) => {
         e.preventDefault();
         const trackObj = {title, username, genre, desc}
-        console.log(trackObj);
         
         /// create formData for track 
         const formData = new FormData();
@@ -38,7 +36,6 @@ const UploadInputForm = ({track, close}) => {
         if (track) {
             formData.append('track[track]', track);
         }
-        console.log(formData);
         // upload track to backend
         const res = await csrfFetch('api/tracks', {
             method: 'POST',
@@ -46,7 +43,6 @@ const UploadInputForm = ({track, close}) => {
         });
         if (res.ok) {
             const message = await res.json();
-            console.log(message.message);
             dispatch(trackActions.fetchTracks());
             setTitle("");
             setGenre("");
@@ -62,8 +58,6 @@ const UploadInputForm = ({track, close}) => {
         return close();
     }
     
-    console.log(track);
-    console.log(username, id);
 
     return ( 
         <div className='upload-input-form-container'>

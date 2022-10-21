@@ -23,7 +23,6 @@ const TrackDisplay = ({track}) => {
         const fetchComments = async () => {
             const commentRes = await csrfFetch('/api/comments');
             const commentData = await commentRes.json();
-            // console.log(commentData);
             setComments(Object.values(commentData));
             console.table(comments);
         }
@@ -76,7 +75,9 @@ const TrackDisplay = ({track}) => {
                 </div>
 
                 <div className='track-description'>
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Debitis harum, sunt, iure laboriosam voluptates quaerat reprehenderit maiores asperiores necessitatibus quae molestiae maxime alias ex itaque neque dolorem placeat! Quis, amet?
+                    {/* Lorem ipsum dolor, sit amet consectetur adipisicing elit. Debitis harum, sunt, iure laboriosam voluptates quaerat reprehenderit maiores asperiores necessitatibus quae molestiae maxime alias ex itaque neque dolorem placeat! Quis, amet? */
+                    track.description
+                    }
                 </div>
 
                 <div className='track-comments'>

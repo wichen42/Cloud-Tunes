@@ -52,6 +52,7 @@ const LoginForm = ({open, onClose}) => {
             password: "password"
         }
         dispatch(sessionActions.login(demoUser));
+        dispatch(sessionActions.getSession);
     }
 
     const handleOverlayClick = (e) => {
@@ -65,16 +66,16 @@ const LoginForm = ({open, onClose}) => {
 
     return (
         
-        <div className="modal-overlay" onClick={(e) => handleOverlayClick(e)}>
-           <SignupForm signupOpen={signupModal} signupClose={() => setSignupModal(false)} username={username} />
-           <WelcomeBack welcomeOpen={welcomeModal} welcomeClose={() => setWelcomeModal(false)} username={username}/>
-           <div className="modal-container" onClick={(e) => {e.stopPropagation()}}>
-                <div className="close-btn-container">
-                    <p className="close-btn"
-                        onClick={(e) => handleOverlayClick(e)}
-                        >X
-                    </p>
-                </div>
+            <div className="modal-overlay" onClick={(e) => handleOverlayClick(e)}>
+            <SignupForm signupOpen={signupModal} signupClose={() => setSignupModal(false)} username={username} />
+            <WelcomeBack welcomeOpen={welcomeModal} welcomeClose={() => setWelcomeModal(false)} username={username}/>
+            <div className="modal-container" onClick={(e) => {e.stopPropagation()}}>
+                    <div className="close-btn-container">
+                        <p className="close-btn"
+                            onClick={(e) => handleOverlayClick(e)}
+                            >X
+                        </p>
+                    </div>
                 <div className="modal-links">
     
                     <div>
