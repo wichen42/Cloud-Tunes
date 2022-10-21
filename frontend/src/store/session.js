@@ -12,6 +12,13 @@ export const removeSession = () => ({
     type:REMOVE_SESSION
 })
 
+export const fetchSession = () => async dispatch => {
+    const res = await csrfFetch('/api/session');
+    const data = await res.json();
+    dispatch(setSession(data));
+    return data;
+}
+
 export const getSession = ({session}) => session ? session.user : null;
 
 export const login = ({username, password}) => async dispatch => {

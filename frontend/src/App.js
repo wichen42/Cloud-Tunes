@@ -11,18 +11,18 @@ import UserProfilePage from "./components/UserProfilePage";
 import { fetchUsers } from "./store/users";
 import Library from "./components/Library";
 import * as trackActions from "./store/track";
+import * as sessionActions from './store/session';
 
 function App() {
   const dispatch = useDispatch();
-  const [sessionUser, setSessionUser] = useState(null);
-  const session = useSelector(state => state.session.user);
+  const sessionUser = useSelector(sessionActions.getSession);
   
   useEffect(() => {
 
     dispatch(trackActions.fetchTracks());
     dispatch(fetchUsers());
-    setSessionUser(session);
-  })
+    dispatch(sessionActions.fetchSession);
+  }, [])
   
   return (
     <>

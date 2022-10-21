@@ -18,7 +18,11 @@ const LoginForm = ({open, onClose}) => {
     const [password, setPassword] = useState('');
     const [signupModal, setSignupModal] = useState(false);
     const [welcomeModal, setWelcomeModal] = useState(false);
+    const [loginCount, setLoginCount] = useState(0);
 
+    useEffect(() => {
+        dispatch(sessionActions.fetchSession)
+    }, [loginCount])
 
     useEffect(() => {
         dispatch(usersActions.fetchUsers());
@@ -32,7 +36,6 @@ const LoginForm = ({open, onClose}) => {
     for(let i = 0; i < users.length; i++) {
         usernames.push(users[i].username);
     }
-
 
 
     const handleLogin = (e) => {
@@ -52,7 +55,7 @@ const LoginForm = ({open, onClose}) => {
             password: "password"
         }
         dispatch(sessionActions.login(demoUser));
-        dispatch(sessionActions.getSession);
+        setLoginCount(loginCount + 1);
     }
 
     const handleOverlayClick = (e) => {

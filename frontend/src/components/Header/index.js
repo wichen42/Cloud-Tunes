@@ -27,7 +27,7 @@ const Header = () => {
     const handleFeed = (e) => {
         e.preventDefault();
         if (sessionUser) {
-            history.push(`/users/${sessionUser.id}`);
+            sessionUser.id ? history.push(`/users/${sessionUser.id}`) : history.push(`/users/${sessionUser.user.id}`);
         } else {
             history.push('/');
         }
@@ -86,7 +86,7 @@ const Header = () => {
                     tabIndex="1"
                     >
                         <div>
-                            {sessionUser ? sessionUser.username : "username"} ⌄
+                            {sessionUser.user ? sessionUser.user.username : sessionUser.username} ⌄
                         </div>
                         {profileClicked && <ProfileDropdown />}
                     </div>
