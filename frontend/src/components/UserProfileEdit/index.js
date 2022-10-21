@@ -33,7 +33,7 @@ const UserProfileEdit = () => {
         // user info update
         const update = {about, location}
 
-        const res = await csrfFetch(`/api/users/${sessionUser.id}`, {
+        const res = await csrfFetch(`/api/users/${sessionUser.id ? sessionUser.id : sessionUser.user.id}`, {
             method: "PATCH",
             body: JSON.stringify(update)
         });
@@ -68,11 +68,12 @@ const UserProfileEdit = () => {
             body: bannerData
         })
         if (bannerRes.ok) {
-            const bannerResData = await profileRes.json();
+            const bannerResData = await bannerRes.json();
             setBannerImage(null);
             setProfileUrl(null);
         }
-        history.push(`/users/${sessionUser.id}`);
+        // history.push(`/users/${sessionUser.id}`);
+        window.location.reload(false);
     }
 
     const profilePreview = profileUrl ? <img src={profileUrl}/> : null;

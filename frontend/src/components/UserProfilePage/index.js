@@ -157,12 +157,12 @@ const UserProfilePage = () => {
                             >Playlist</button>
 
                             <button className='reposts-tab'>Reposts</button>
-
+{/* 
                             {(sessionUser && (user.id === sessionUser.id)) && 
                             <button className='profile-edit'
                             onClick={(e) => handleProfileEdit(e)}
                             >Edit Profile</button>
-                            }
+                            } */}
 
                         </div>
 
