@@ -2,7 +2,7 @@
     width: 100%;
     bottom: 0; 
     height: 48px;
-    position: sticky;
+    position: fixed;
     border-top: 1px solid lightgray;
     display: flex;
     background-color: #F2F2F2;

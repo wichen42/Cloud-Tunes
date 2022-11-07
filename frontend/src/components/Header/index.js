@@ -28,7 +28,6 @@ const Header = () => {
         e.preventDefault();
         if (sessionUser) {
             sessionUser.id ? history.push(`/users/${sessionUser.id}`) : history.push(`/users/${sessionUser.user.id}`);
-            window.location.reload(false);
         } else {
             history.push('/');
         }
