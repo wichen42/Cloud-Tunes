@@ -20,6 +20,8 @@ const TrackDisplay = ({track}) => {
         if (track.imageUrl) {
             setImageUrl(track.imageUrl)
         }
+        dispatch(commentActions.fetchComments());
+
     }, [])
 
     useEffect(() => {
