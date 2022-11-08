@@ -4,6 +4,7 @@ import { SessionContext } from '../../Context/SessionContext';
 import csrfFetch from '../../store/csrf';
 import TrackComments from '../TrackComments';
 import * as commentActions from '../../store/comment';
+import * as trackActions from '../../store/track';
 import './TrackDisplay.css';
 
 const TrackDisplay = ({track}) => {
@@ -58,7 +59,8 @@ const TrackDisplay = ({track}) => {
     }
 
     const handleDeleteTrack = (e) => {
-        console.log(track);
+        // console.log(track);
+        dispatch(trackActions.deleteTrack(track.id));
     }
 
     return ( 
