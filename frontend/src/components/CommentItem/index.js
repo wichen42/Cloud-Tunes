@@ -1,20 +1,25 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as userActions from '../../store/users';
 import csrfFetch from "../../store/csrf";
+import * as commentActions from '../../store/comment';
+import { useEffect } from "react";
 
 const CommentItem = ({commentId, userId, trackId, body, itemUpdate}) => {
     
+    const dispatch = useDispatch();
     const user = useSelector(userActions.getUser(userId));
+    const comments = useSelector(commentActions.getComments);
+    useEffect(() => {
+        dispatch(commentActions.fetchComments());
+    }, [])
 
     const imageStyle = {
         backgroundImage: 'url(https://cloud-tunes-dev.s3.amazonaws.com/user-regular.svg)'
     }
 
-    const handleDelete = async (e) => {
+    const handleDelete = (e) => {
         e.preventDefault();
-        const res = await csrfFetch(`/api/comments/${commentId}`, {
-            method: 'DELETE',
-        });
+        dispatch(commentActions.deleteComment(commentId));
         itemUpdate();
     }
     

@@ -27,7 +27,7 @@ const Header = () => {
     const handleFeed = (e) => {
         e.preventDefault();
         if (sessionUser) {
-            sessionUser.id ? history.push(`/users/${sessionUser.id}`) : history.push(`/users/${sessionUser.user.id}`);
+            history.push(`/users/${sessionUser.id}`);
         } else {
             history.push('/');
         }

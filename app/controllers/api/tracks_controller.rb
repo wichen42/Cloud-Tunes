@@ -13,7 +13,15 @@ class Api::TracksController < ApplicationController
         else
             render json: track.errors.full_messages, status: 422
         end
+    end
 
+    def destroy
+        track = Track.find(params[:id])
+        if track
+            track.destroy
+        else
+            render json: { errors: track.errors.full_messages }, status: :unprocessable_entity
+        end
     end
 
     private

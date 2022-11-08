@@ -1,17 +1,20 @@
 import { useContext, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { SessionContext } from '../../Context/SessionContext';
 import csrfFetch from '../../store/csrf';
 import TrackComments from '../TrackComments';
+import * as commentActions from '../../store/comment';
 import './TrackDisplay.css';
 
 const TrackDisplay = ({track}) => {
 
+    const dispatch = useDispatch();
     const [imageUrl, setImageUrl] = useState("https://cloud-tunes-dev.s3.amazonaws.com/pexels-pixabay-159868.jpg");
     const [body, setBody] = useState("");
     const sessionUser = useContext(SessionContext);
-    const [comments, setComments] = useState({});
     const [commentCounter, setCommentCounter] = useState(0);
     const [showComment, setShowComment] = useState(false);
+    const [showMore, setShowMore] = useState(false);
 
     useEffect(() => {
         if (track.imageUrl) {
@@ -20,20 +23,15 @@ const TrackDisplay = ({track}) => {
     }, [])
 
     useEffect(() => {
-        const fetchComments = async () => {
-            const commentRes = await csrfFetch('/api/comments');
-            const commentData = await commentRes.json();
-            setComments(Object.values(commentData));
-            console.table(comments);
-        }
-
-        fetchComments();
+        dispatch(commentActions.fetchComments());
     }, [commentCounter])
+
+    const comments = useSelector(commentActions.getComments);
 
     const handleComment = async (e) => {
         e.preventDefault();
         const comment = {user_id: sessionUser.id, track_id: track.id, body: body}
-        console.table(comment);
+        // console.table(comment);
 
         const res = await csrfFetch(`/api/tracks/${track.id}/comments`, {
             method: 'POST',
@@ -49,6 +47,16 @@ const TrackDisplay = ({track}) => {
     const handleShowComments = (e) => {
         e.preventDefault();
         setShowComment(!showComment);
+    }
+
+    const handleShowMore = (e) => {
+        e.preventDefault();
+        setShowMore(!showMore);
+        console.log(showMore);
+    }
+
+    const handleDeleteTrack = (e) => {
+        console.log(track);
     }
 
     return ( 
@@ -98,7 +106,17 @@ const TrackDisplay = ({track}) => {
                     <div className='track-comment'
                     onClick={(e) => handleShowComments(e)}
                     >Comments</div>
+                    <div className='comment-options'
+                    onClick={(e) => handleShowMore(e)}
+                    ><span className='options-ellipsis'>⋯</span> More</div>
                 </div>
+                { showMore && <div className='comment-options-dropdown'>
+                        <div id='comment-options-inner'>Add to Up Next</div>
+                        <div id='comment-options-inner'>Add to Playlist</div>
+                        <div id='comment-options-inner'
+                        onClick={(e) => handleDeleteTrack(e)}
+                        >Delete</div>
+                    </div>}
                 
 
             </div>

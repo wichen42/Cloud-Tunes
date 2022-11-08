@@ -12,7 +12,7 @@ const TrackComments = ({comments, trackId, update}) => {
         <ul className='comments-list'>
             {trackComments.map(comment => {
                 return(
-                    <CommentItem commentId={comment.id} userId={comment.userId} trackId={comment.trackId} body={comment.body} itemUpdate={() => update}/>
+                    <CommentItem key={comment.id} commentId={comment.id} userId={comment.userId} trackId={comment.trackId} body={comment.body} itemUpdate={() => update}/>
                 )
             })}
         </ul>

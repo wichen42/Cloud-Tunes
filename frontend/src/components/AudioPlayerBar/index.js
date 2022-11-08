@@ -111,8 +111,8 @@ const AudioPlayerBar = () => {
         setPlayListClicked(!playListClicked); 
     }
 
-    console.table(tracks);
-    if (trackNum) console.table(tracks[trackNum].username)
+    // console.table(tracks);
+    // if (trackNum) console.table(tracks[trackNum].username)
 
     return ( 
         
