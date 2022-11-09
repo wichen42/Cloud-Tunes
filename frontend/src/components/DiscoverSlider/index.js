@@ -16,9 +16,9 @@ const DiscoverSlider = ({title, data}) => {
             
             <div
                 className='slide-left'
-                onClick={() => scroll(-100)}
+                onClick={() => scroll(-550)}
                 >
-                    <FontAwesomeIcon icon="fa-solid fa-arrow-left" />
+                    <FontAwesomeIcon icon="fa-solid fa-chevron-left" />
                 </div>
 
             <div>
@@ -40,9 +40,9 @@ const DiscoverSlider = ({title, data}) => {
             
             <div
                 className='slide-right'
-                onClick={() => scroll(100)}
+                onClick={() => scroll(550)}
                 >
-                    <FontAwesomeIcon icon="fa-solid fa-arrow-right" />
+                    <FontAwesomeIcon icon="fa-solid fa-chevron-right" />
                 </div>
 
         </div>
