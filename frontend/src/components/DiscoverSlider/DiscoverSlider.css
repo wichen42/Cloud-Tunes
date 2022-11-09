@@ -1,0 +1,42 @@
+.discover-slider-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.discover-slider {
+    height: 40%;
+    width: 100%;
+    background-color: bisque;
+    border-bottom: 1px solid black;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 19%;
+    gap: 15px;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+}
+
+.discover-slider-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.discover-slider-item-img {
+    height: 175px;
+    width: 100%;
+    margin-top: 25px;
+}
+
+.discover-slider-item-title {
+    margin-top: 15px;
+}
+
+.discover-slider-header {
+    font-size: 25px;
+    background-color: white;
+    margin-top: 15px;
+}
+

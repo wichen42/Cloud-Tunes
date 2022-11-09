@@ -6,6 +6,22 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
     padding-bottom: 10px;
 }
+
+.discover-body {
+    width: 70%;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.discover-body::-webkit-scrollbar {
+    display: none;
+}
+
+.discover-side-panel {
+    width: 30%;
+    height: 100%;
+    background-color: blueviolet;
+}
+

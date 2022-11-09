@@ -34,7 +34,6 @@ const ImageSlider = ({slides}) => {
     }
 
         useEffect(() => {
-            // changeIndex()
             const time = setInterval(() => {
                 changeIndex();
             }, 4500);
