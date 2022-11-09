@@ -22,11 +22,13 @@
     align-items: center;
     padding-left: 10px;
     padding-right: 10px;
+    cursor: pointer;
 }
 
 .discover-slider-item-img {
-    height: 175px;
+    height: 150px;
     width: 100%;
+    object-fit: cover;
     margin-top: 25px;
 }
 
