@@ -4,7 +4,7 @@ const DiscoverSliderItem = ({imageSource, title}) => {
 
     const handleClick = (e) => {
         e.preventDefault();
-        console.log();
+        console.log(imageSource);
     }
 
     return ( 

@@ -1,32 +1,34 @@
 .discover-slider-container {
     display: flex;
+    width: 95%;
     flex-direction: column;
 }
 
 .discover-slider {
     height: 40%;
     width: 100%;
-    background-color: bisque;
     border-bottom: 1px solid black;
     display: grid;
     grid-auto-flow: column;
     grid-auto-columns: 19%;
     gap: 15px;
     overflow-x: auto;
-    overscroll-behavior-inline: contain;
+    overflow-y: hidden;
+    padding-left: 30px;
+    white-space: nowrap;
 }
+
 
 .discover-slider-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-left: 10px;
-    padding-right: 10px;
     cursor: pointer;
+    margin-right: 15px;
 }
 
 .discover-slider-item-img {
-    height: 150px;
+    height: 140px;
     width: 100%;
     object-fit: cover;
     margin-top: 25px;
@@ -40,5 +42,14 @@
     font-size: 25px;
     background-color: white;
     margin-top: 15px;
+}
+
+.snaps-inline {
+    scroll-snap-type: inline mandatory;
+    scroll-padding-inline: 15px;
+}
+
+.snaps-inline > * {
+    scroll-snap-align: start;
 }
 
