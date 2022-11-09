@@ -13,16 +13,18 @@ const DiscoverSlider = ({title, data}) => {
     }
     return ( 
         <div className='discover-slider-container'>
+            
+            <div
+                className='slide-left'
+                onClick={() => scroll(-100)}
+                >
+                    <FontAwesomeIcon icon="fa-solid fa-arrow-left" />
+                </div>
 
             <div>
                 <div className='discover-slider-header'>{title}</div>
                 <div className='discover-slider snaps-inline' ref={slideRef}>
-                    <div
-                    className='slide-left'
-                    onClick={() => scroll(-100)}
-                    >
-                        <FontAwesomeIcon icon="fa-solid fa-arrow-left" />
-                    </div>
+
 
                     {data.map(ele => (
                         < DiscoverSliderItem
@@ -32,14 +34,16 @@ const DiscoverSlider = ({title, data}) => {
                         />
                     ))}
 
-                    <div
-                    className='slide-right'
-                    onClick={() => scroll(100)}
-                    >
-                        <FontAwesomeIcon icon="fa-solid fa-arrow-right" />
-                    </div>
+
                 </div>
             </div>
+            
+            <div
+                className='slide-right'
+                onClick={() => scroll(100)}
+                >
+                    <FontAwesomeIcon icon="fa-solid fa-arrow-right" />
+                </div>
 
         </div>
 
