@@ -10,6 +10,7 @@ import AudioPlayerBar from "./components/AudioPlayerBar";
 import UserProfilePage from "./components/UserProfilePage";
 import { fetchUsers } from "./store/users";
 import Library from "./components/Library";
+import './components/FontAwesomeIcons';
 import * as trackActions from "./store/track";
 import * as sessionActions from './store/session';
 

@@ -14,6 +14,7 @@ const DiscoverPage = () => {
     const tracks = useSelector(trackActions.getTracks);
     let sessionUser = useSelector(sessionActions.getSession);
 
+
     function shuffleArr(arr, num) {
         const res = [...arr].sort(() => 0.5 - Math.random());
         return res.slice(0, num);
