@@ -1,6 +1,6 @@
 .discover-slider-container {
     display: flex;
-    width: 95%;
+    width: 96%;
     flex-direction: column;
 }
 
@@ -17,6 +17,7 @@
     padding-left: 30px;
     white-space: nowrap;
     position: relative;
+    scroll-behavior: smooth;
 }
 
 
@@ -30,7 +31,7 @@
 }
 
 .discover-slider-item-img {
-    height: 140px;
+    height: 150px;
     width: 100%;
     object-fit: cover;
     margin-top: 25px;
@@ -73,7 +74,6 @@
 .slide-left:hover, .slide-right:hover {
 		background-color: rgba(0,0,0,0.8);
         color: white;
-
 }
 
 .slide-right {
