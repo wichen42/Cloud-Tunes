@@ -35,8 +35,18 @@
 
 .track-info {
     display: flex;
-    justify-content: space-between;
     width: 100%;
+}
+
+.audio-track-image {
+    height: 100%;
+    width: 100%;
+    flex-grow: 1;
+}
+
+.audio-track-image img {
+    height: 50px;
+    width: 50px;
 }
 
 .track-name-title {

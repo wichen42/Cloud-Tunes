@@ -113,7 +113,7 @@ const AudioPlayerBar = () => {
         setPlayListClicked(!playListClicked); 
     }
 
-    console.log(playlist[0].title); 
+    console.log(playlist.length); 
 
     return ( 
         
@@ -153,9 +153,12 @@ const AudioPlayerBar = () => {
             </div>
 
             <div className='track-info'>
+                <div className='audio-track-image'>
+                     {playlist[trackNum] && <img src={playlist[trackNum] ? playlist[trackNum].imageUrl : ""} />}
+                </div>
                 <div className='track-details'>
-                    <a href="#">{playlist[trackNum].username}</a>
-                    <span>{playlist[trackNum].title}</span>
+                    {playlist[trackNum] && <span>{playlist[trackNum] ? playlist[trackNum].username : ""}</span >}
+                    {playlist[trackNum] && <span>{playlist[trackNum] ? playlist[trackNum].title : ""}</span>}
                 </div>
 
                 <div className='track-socials'>
