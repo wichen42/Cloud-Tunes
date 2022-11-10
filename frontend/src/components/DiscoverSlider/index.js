@@ -20,6 +20,12 @@ const DiscoverSlider = ({title, data}) => {
         } else {
             setShowLeft(true);
         }
+
+        if (slideRef.current.scrollLeft >= 900 ) {
+            setShowRight(false);
+        } else {
+            setShowRight(true)
+        }
         console.log(slideRef.current.scrollLeft);
     }
     return ( 
@@ -53,6 +59,8 @@ const DiscoverSlider = ({title, data}) => {
             <div
                 className='slide-right'
                 onClick={() => scroll(300)}
+                style={ showRight ? {display: 'block'} : {display: 'none'} }
+
                 >
                     <FontAwesomeIcon icon="fa-solid fa-chevron-right" />
                 </div>
