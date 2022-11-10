@@ -4,24 +4,36 @@ const PlayListBar = ({tracks}) => {
 
 
     return ( 
+        
         <div className='playlist-menu'>
-            <ul>
-                {tracks.map(track => {
-                    return(
-                        <li key={track.id}
-                        className='playlist-titles'
-                        >
-                            <div className='playlist-track-container'>
-                                <div className='playlist-track-image'></div>
-                                <div className='playlist-track-details-container'>
-                                    <div className='playlist-track-title'>{track.title}</div>
-                                    <div className='playlist-track-artist'>{track.username}</div>
+
+            <div className='playlist-header'>
+                <div className='playlist-header-text'>Next Up</div>
+                <div className='playlist-header-buttons'>
+                    <div className='playlist-clear-button'>Clear</div>
+                    <div className='playlist-close-button'>X</div>
+                </div>
+            </div>
+            <div className='playlist-info-container'>
+                <ul>
+                    {tracks.map(track => {
+                        return(
+                            <li key={track.id}
+                            className='playlist-titles'
+                            >
+                                <div className='playlist-track-container'>
+                                    <div className='playlist-track-image'></div>
+                                    <div className='playlist-track-details-container'>
+                                        <div className='playlist-track-title'>{track.title}</div>
+                                        <div className='playlist-track-artist'>{track.username}</div>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                    )
-                })}
-            </ul>
+                            </li>
+                        )
+                    })}
+                </ul>
+            </div>
+            
         </div>
      );
 }
