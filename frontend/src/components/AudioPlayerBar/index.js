@@ -8,6 +8,7 @@ import volMute from '../../assets/icons/volume-xmark-solid.svg';
 import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import * as trackActions from '../../store/track';
+import * as playlistActions from '../../store/playlist';
 import PlayListBar from '../PlayListBar';
 
 const AudioPlayerBar = () => {
@@ -29,7 +30,8 @@ const AudioPlayerBar = () => {
     const [title, setTitle] = useState("");
 
     const tracks = useSelector(trackActions.getTracks);
-    const trackList = tracks.map(track => track.trackUrl);
+    const playlist = useSelector(playlistActions.getPlaylist);
+    const trackList = playlist.map(track => track.trackUrl);
     
     useEffect(() => {
         audioPlayer.current.play();       
@@ -153,8 +155,8 @@ const AudioPlayerBar = () => {
 
             <div className='track-info'>
                 <div className='track-details'>
-                    <a href="#">{trackNum && tracks[trackNum].username}</a>
-                    <span>{trackNum && tracks[trackNum].title}</span>
+                    <a href="#">{trackNum && playlist[trackNum].username}</a>
+                    <span>{trackNum && playlist[trackNum].title}</span>
                 </div>
 
                 <div className='track-socials'>
@@ -164,7 +166,7 @@ const AudioPlayerBar = () => {
                     onClick={(e) => handlePlaylist(e)}
                     ></button>
                 </div>
-                {playListClicked && <PlayListBar tracks={tracks}/>}
+                {playListClicked && <PlayListBar tracks={playlist}/>}
             </div>
         </div>
         </div>

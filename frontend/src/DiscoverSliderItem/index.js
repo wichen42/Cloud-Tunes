@@ -1,29 +1,51 @@
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as userActions from '../store/users';
+import * as trackActions from '../store/track';
+import * as playListActions from '../store/playlist';
 import './DiscoverSliderItem.css';
 import { useHistory } from 'react-router-dom';
 
-const DiscoverSliderItem = ({imageSource, title, data}) => {
+const DiscoverSliderItem = ({id, imageSource, title, data}) => {
     
+    const dispatch = useDispatch();
     const users = useSelector(userActions.getUsers);
+    const tracks = useSelector(trackActions.getTracks);
     const history = useHistory();
     const [showButton, setShowButton] = useState(false);
 
     const handleClick = (e) => {
         e.preventDefault();
         if (data[0].title) {
-            console.log("Tracks");
-            console.log(title);
+            // console.log("Tracks");
+            const user = users.filter(function (el) {
+                return el.username === data[0].username;
+            });
+            history.push(`/users/${user[0].id}`);
         } else {
             // console.log(data);
             const user = users.filter(function (el) {
                 return el.username === title;
             });
-            // console.log(user[0].id);
             history.push(`/users/${user[0].id}`);
         }
+    }
+
+    const handlePlay = (e) => {
+        e.preventDefault();
+        const song = tracks.filter(function (el) {
+            return el.id === id;
+        });
+        dispatch(playListActions.addSong(song[0]));
+    }
+
+    const handleImageClick = (e) => {
+        e.preventDefault();
+        const user = users.filter(function (el) {
+            return el.username === title;
+        });
+        history.push(`/users/${user[0].id}`);
     }
 
     return ( 
@@ -32,16 +54,19 @@ const DiscoverSliderItem = ({imageSource, title, data}) => {
         onMouseEnter={() => setShowButton(true)}
         onMouseLeave={() => setShowButton(false)}
         >
-            {showButton && 
+            {(showButton && data[0].title) &&
             <div className='slider-hover-item'
-            onClick={(e) => handleClick(e)}
+            onClick={(e) => handlePlay(e)}
             ><FontAwesomeIcon icon="fa-solid fa-circle-play" className='slider-play'/>
             </div>}
 
-            <img src={imageSource} 
+            <img src={imageSource}
+            onClick={(e) => handleImageClick(e)}
             className='discover-slider-item-img' 
             />
-            <div className='discover-slider-item-title'>{title}</div>
+            <div className='discover-slider-item-title'
+            onClick={(e) => handleClick(e)}
+            >{title}</div>
         </div>
      );
 }
