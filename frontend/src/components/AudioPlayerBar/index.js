@@ -9,7 +9,9 @@ import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import * as trackActions from '../../store/track';
 import * as playlistActions from '../../store/playlist';
+import * as userActions from '../../store/users';
 import PlayListBar from '../PlayListBar';
+import { useHistory } from 'react-router-dom';
 
 const AudioPlayerBar = () => {
     
@@ -31,8 +33,10 @@ const AudioPlayerBar = () => {
 
     const tracks = useSelector(trackActions.getTracks);
     const playlist = useSelector(playlistActions.getPlaylist);
+    const users = useSelector(userActions.getUsers);
     const trackList = playlist.map(track => track.trackUrl);
-    
+    const history = useHistory();
+
     useEffect(() => {
         audioPlayer.current.play();       
         // setArtist(trackList[trackNum].username) 
@@ -113,6 +117,14 @@ const AudioPlayerBar = () => {
         setPlayListClicked(!playListClicked); 
     }
 
+    const handleArtist = (e) => {
+        e.preventDefault();
+        const user = users.filter(function (el) {
+            return el.username === playlist[trackNum].username;
+        });
+        history.push(`/users/${user[0].id}`);
+    }
+
     console.log(playlist.length); 
 
     return ( 
@@ -130,7 +142,8 @@ const AudioPlayerBar = () => {
                 ></button>
                 <button className='next-track'
                 onClick={(e) => handleNext(e)}></button>
-                <button className='shuffle-track'                ></button>
+                <button className='shuffle-track'           
+                ></button>
                 <button className='repeat-track'></button>
             </div>
 
@@ -157,7 +170,9 @@ const AudioPlayerBar = () => {
                      {playlist[trackNum] && <img src={playlist[trackNum] ? playlist[trackNum].imageUrl : ""} />}
                 </div>
                 <div className='track-details'>
-                    {playlist[trackNum] && <span>{playlist[trackNum] ? playlist[trackNum].username : ""}</span >}
+                    {playlist[trackNum] && <span className='audio-artist-link'
+                    onClick={(e) => handleArtist(e)}
+                    >{playlist[trackNum] ? playlist[trackNum].username : ""}</span >}
                     {playlist[trackNum] && <span>{playlist[trackNum] ? playlist[trackNum].title : ""}</span>}
                 </div>
 

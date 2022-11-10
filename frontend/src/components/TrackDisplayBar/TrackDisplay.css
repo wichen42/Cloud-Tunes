@@ -40,13 +40,15 @@
 
 .audio-track-image {
     height: 100%;
-    width: 100%;
+    width: 55%;
     flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .audio-track-image img {
     height: 50px;
-    width: 50px;
+    width: 60px;
 }
 
 .track-name-title {

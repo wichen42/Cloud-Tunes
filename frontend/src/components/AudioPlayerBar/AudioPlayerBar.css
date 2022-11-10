@@ -96,10 +96,15 @@
 .track-details {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     flex-grow: 3;
-    width: 100%;
+    align-items: flex-start;
+    width: 80%;
+    margin-right: 20px;
+}
+
+.track-details span {
+    align-self: center;
+    font-size: 18px;
 }
 
 .track-timeline {
@@ -192,4 +197,13 @@
 
 .playlist-tab {
     background-image: url('../../assets/icons/table-list-solid.svg');
+}
+
+.audio-artist-link {
+    cursor: pointer;
+}
+
+.audio-artist-link:hover {
+    color: #FF5500;
+    text-decoration: underline;
 }
