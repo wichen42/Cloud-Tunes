@@ -8,14 +8,15 @@ import { useEffect } from 'react';
 
 const DiscoverSlider = ({title, data}) => {
     const [showLeft, setShowLeft] = useState(false);
-    const [showRight, setShowRight] = useState(false);
-    const [pos, setPos] = useState(5);
+    const [showRight, setShowRight] = useState(true);
     const slideRef = useRef();
+
+    const slider = document.querySelector(".discover-slider");
 
     const scroll = (offset) => {
         slideRef.current.scrollLeft += offset;
         /* 5 900 */
-        if (slideRef.current.scrollLeft <= 5) {
+        if (slideRef.current.scrollLeft === 5) {
             setShowLeft(false);
         } else {
             setShowLeft(true);
@@ -26,7 +27,8 @@ const DiscoverSlider = ({title, data}) => {
         } else {
             setShowRight(true)
         }
-        console.log(slideRef.current.scrollLeft);
+        // console.log(slideRef.current.scrollLeft);
+        console.log(slider.scrollLeft);
     }
     return ( 
         <div className='discover-slider-container'>
