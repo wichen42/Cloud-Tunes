@@ -1,14 +1,29 @@
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useSelector } from 'react-redux';
+import * as userActions from '../store/users';
 import './DiscoverSliderItem.css';
+import { useHistory } from 'react-router-dom';
 
-const DiscoverSliderItem = ({imageSource, title}) => {
-
+const DiscoverSliderItem = ({imageSource, title, data}) => {
+    
+    const users = useSelector(userActions.getUsers);
+    const history = useHistory();
     const [showButton, setShowButton] = useState(false);
 
     const handleClick = (e) => {
         e.preventDefault();
-        console.log(title);
+        if (data[0].title) {
+            console.log("Tracks");
+            console.log(title);
+        } else {
+            // console.log(data);
+            const user = users.filter(function (el) {
+                return el.username === title;
+            });
+            // console.log(user[0].id);
+            history.push(`/users/${user[0].id}`);
+        }
     }
 
     return ( 

@@ -51,6 +51,7 @@ const DiscoverSlider = ({title, data}) => {
                         key={ele.id}
                         imageSource={ele.profileUrl ? ele.profileUrl : ele.imageUrl}
                         title={ele.title ? ele.title : ele.username}
+                        data={data}
                         />
                     ))}
 
