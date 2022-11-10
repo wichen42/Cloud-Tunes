@@ -1,0 +1,16 @@
+.slider-hover-item {
+    position: absolute;
+    z-index: 40;
+    background-color: rgba(44, 44, 44, 0.1);
+    height: 75%;
+    margin-top: 25px;
+    width: 110%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FF5500;
+    font-size: 50px;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: orange;
+}
+
