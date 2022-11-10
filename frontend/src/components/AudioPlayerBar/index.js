@@ -113,8 +113,7 @@ const AudioPlayerBar = () => {
         setPlayListClicked(!playListClicked); 
     }
 
-    // console.table(tracks);
-    // if (trackNum) console.table(tracks[trackNum].username)
+    console.log(playlist[0].title); 
 
     return ( 
         
@@ -155,8 +154,8 @@ const AudioPlayerBar = () => {
 
             <div className='track-info'>
                 <div className='track-details'>
-                    <a href="#">{trackNum && playlist[trackNum].username}</a>
-                    <span>{trackNum && playlist[trackNum].title}</span>
+                    <a href="#">{playlist[trackNum].username}</a>
+                    <span>{playlist[trackNum].title}</span>
                 </div>
 
                 <div className='track-socials'>
