@@ -183,7 +183,7 @@ const AudioPlayerBar = () => {
                     onClick={(e) => handlePlaylist(e)}
                     ></button>
                 </div>
-                {playListClicked && <PlayListBar tracks={playlist} duration={duration}/>}
+                {playListClicked && <PlayListBar tracks={playlist} close={() => setPlayListClicked(!playListClicked )}/>}
             </div>
         </div>
         </div>

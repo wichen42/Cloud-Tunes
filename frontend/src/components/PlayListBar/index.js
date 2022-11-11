@@ -1,7 +1,12 @@
 import './PlayListBar.css';
 
-const PlayListBar = ({tracks, duration}) => {
+const PlayListBar = ({tracks, close}) => {
 
+
+    const handleClose = (e) => {
+        e.preventDefault();
+        close();
+    }
 
     return ( 
         
@@ -11,7 +16,9 @@ const PlayListBar = ({tracks, duration}) => {
                 <div className='playlist-header-text'>Next Up</div>
                 <div className='playlist-header-buttons'>
                     <div className='playlist-clear-button'>Clear</div>
-                    <div className='playlist-close-button'>X</div>
+                    <div className='playlist-close-button'
+                    onClick={(e) => handleClose(e)}
+                    >X</div>
                 </div>
             </div>
             <div className='playlist-info-container'>
