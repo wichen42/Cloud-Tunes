@@ -1,6 +1,6 @@
 import './PlayListBar.css';
 
-const PlayListBar = ({tracks}) => {
+const PlayListBar = ({tracks, duration}) => {
 
 
     return ( 
@@ -15,14 +15,18 @@ const PlayListBar = ({tracks}) => {
                 </div>
             </div>
             <div className='playlist-info-container'>
-                <ul>
+                <ul className='playlist-track-ul'>
                     {tracks.map(track => {
                         return(
                             <li key={track.id}
                             className='playlist-titles'
                             >
                                 <div className='playlist-track-container'>
-                                    <div className='playlist-track-image'></div>
+                                    <div className='playlist-track-image-container'>
+                                        <img src={track.imageUrl}
+                                        className="playlist-track-image"
+                                        />
+                                    </div>
                                     <div className='playlist-track-details-container'>
                                         <div className='playlist-track-title'>{track.title}</div>
                                         <div className='playlist-track-artist'>{track.username}</div>
