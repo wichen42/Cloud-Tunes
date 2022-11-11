@@ -8,6 +8,7 @@ import * as trackActions from '../../store/track';
 import './UserProfilePage.css';
 import TrackDisplay from '../TrackDisplayBar';
 import * as sessionActions from '../../store/session';
+import csrfFetch from '../../store/csrf';
 
 const UserProfilePage = () => {
 
@@ -53,7 +54,7 @@ const UserProfilePage = () => {
         dispatch(fetchUsers);
     }, [id])
     
-    const handleFollowStyle = (e) => {
+    const handleFollowStyle = async (e) => {
         e.preventDefault();
         if (follow === "Follow") {
             setFollow("Following");
@@ -62,6 +63,13 @@ const UserProfilePage = () => {
             setFollow("Follow");
             setFstyle(followStyle);
         }
+
+        const data = {follower_id: 3, followed_id: 1};
+
+        await csrfFetch(`/api/users/3/follows`, {
+            method: "POST",
+            body: JSON.stringify(data)
+        });
     }
     // Styles
 
