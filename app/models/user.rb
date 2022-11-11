@@ -24,11 +24,26 @@ class User < ApplicationRecord
 
   has_many :tracks
 
+  has_many :active_follows, 
+  class_name: "Follow", 
+  foreign_key: "follower_id", 
+  dependent: :destroy
+
+  has_many :passive_follows,
+  class_name: "Follow",
+  foreign_key: "followed_id",
+  dependent: :destroy
+
+  has_many :following, through: :active_follows, source: :followed
+  has_many :followers, through: :passive_follows, source: :follower
+
   def ensure_photo
     unless self.photo.attached?
         errors.add(:photo, "must be attached");
     end
   end
+
+  # User Auth Methods
 
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)
@@ -38,6 +53,20 @@ class User < ApplicationRecord
   def reset_session_token!
     self.update!(session_token: generate_unique_session_token)
     self.session_token
+  end
+
+  # Follow Methods
+
+  def follow(user)
+    active_follows.create(followed_id: user.id)
+  end
+
+  def unfollow(user)
+    active_follows.find_by(followed_id: user.id).destroy
+  end
+
+  def following?(user)
+    following.include?(user)
   end
 
   private
@@ -52,4 +81,5 @@ class User < ApplicationRecord
   def ensure_session_token
     self.session_token ||= generate_unique_session_token
   end
+
 end
