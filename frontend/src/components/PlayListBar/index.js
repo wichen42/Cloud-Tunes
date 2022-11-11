@@ -1,11 +1,20 @@
+import { useDispatch } from 'react-redux';
+import * as playlistActions from '../../store/playlist';
 import './PlayListBar.css';
 
 const PlayListBar = ({tracks, close}) => {
 
+    const dispatch = useDispatch();
 
     const handleClose = (e) => {
         e.preventDefault();
         close();
+    }
+
+    const handleClear = (e) => {
+        e.preventDefault();
+        console.log("clear")
+        dispatch(playlistActions.clearSongs());
     }
 
     return ( 
@@ -15,7 +24,9 @@ const PlayListBar = ({tracks, close}) => {
             <div className='playlist-header'>
                 <div className='playlist-header-text'>Next Up</div>
                 <div className='playlist-header-buttons'>
-                    <div className='playlist-clear-button'>Clear</div>
+                    <div className='playlist-clear-button'
+                    onClick={(e) => handleClear(e)}
+                    >Clear</div>
                     <div className='playlist-close-button'
                     onClick={(e) => handleClose(e)}
                     >X</div>
