@@ -27,8 +27,29 @@ const UserProfilePage = () => {
     const userTracks = allTracks.filter((track) => track.userId === parseInt(id));
     const [openEdit, setOpenEdit] = useState(false);
     const [showTracks, setShowTracks] = useState(true);
-
+    const [followList, setFollowList] = useState([]);
     const trackItem = userTracks.map(track => <TrackDisplay key={track.id} track={track}/>)
+
+    useEffect(() => {
+        const fetchFollows = async () => {
+            const res = await csrfFetch('/api/follows')
+            const data = await res.json();
+            setFollowList(Object.values(data));
+        } 
+        fetchFollows();
+    }, [])
+
+    useEffect(() => {
+        console.log(followList);
+        followList.forEach((follow) => {
+            const followData = {followedId: id, followerId: sessionUser.id}
+            if (Object.entries(follow).sort().toString() === Object.entries(followData).sort().toString()) {
+                setFollow("Following");
+                setFstyle(followingStyle)
+            }
+        });
+    }, [followList])
+
 
     useEffect(() => {
         if (user) {
@@ -56,20 +77,25 @@ const UserProfilePage = () => {
     
     const handleFollowStyle = async (e) => {
         e.preventDefault();
+        const data = {follower_id: sessionUser.id, followed_id: id};
         if (follow === "Follow") {
             setFollow("Following");
             setFstyle(followingStyle);
+
+            await csrfFetch(`/api/follows`, {
+                method: "POST",
+                body: JSON.stringify(data)
+            });
         } else {
             setFollow("Follow");
             setFstyle(followStyle);
+
+            await csrfFetch(`/api/follows/${id}`, {
+                method: "DELETE"
+            })
         }
 
-        const data = {follower_id: 3, followed_id: 1};
 
-        await csrfFetch(`/api/users/3/follows`, {
-            method: "POST",
-            body: JSON.stringify(data)
-        });
     }
     // Styles
 

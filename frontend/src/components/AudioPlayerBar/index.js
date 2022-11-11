@@ -125,8 +125,6 @@ const AudioPlayerBar = () => {
         history.push(`/users/${user[0].id}`);
     }
 
-    console.log(playlist.length); 
-
     return ( 
         
         <div id='audio-bar-container'>

@@ -8,10 +8,8 @@ Rails.application.routes.draw do
   # post '/api/test/', to: 'application#test'
   
   namespace :api, defaults: { format: :json } do
-    resources :users, only: [:create, :show, :update, :index, :destroy] do 
-      resources :follows, only: [:create, :destroy]
-    end
-    resources :follows, only: [:index]
+    resources :users, only: [:create, :show, :update, :index, :destroy]
+    resources :follows, only: [:index, :create, :destroy]
     resource :session, only: [:show, :create, :destroy]
     resources :posts, only: [:index, :show, :create]
     resources :tracks, only: [:create, :index, :destroy] do
