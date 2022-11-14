@@ -14,16 +14,9 @@ const PlaylistItem = ({track}) => {
             >
                 {showButtons && 
                     <div className='discover-playlist-buttons'>
-                            asdas
                     </div>
                 }
-                <div className='playlist-track-name-container'
-                >
-
-                    <div className='playlist-track-name'
-                    >{track.username} - </div> 
-                    <div>&nbsp;{track.title}</div>
-                </div>
+                    <span className='playlist-track-name'>{track.username} - </span> <span>&nbsp;{track.title}</span>
 
         </div>
      );
