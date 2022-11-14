@@ -12,5 +12,9 @@
     font-size: 50px;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: orange;
+    background-image: url(../assets/icons/orange-circle-play.png);
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
