@@ -4,19 +4,48 @@
     background-color: #612F31;
     display: flex;
     margin-bottom: 65px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.discover-playlist-container-header {
+    background-color: white;
+    height: 50px;
+    width: 100%;
+    margin-top: 25px;
+    font-size: 25px;
+}
+
+.playlist-box {
+    width: 100%;
+    height: fit-content;
+    margin-left: 15px;
+}
+
+.discover-playlist-container-body {
+    width: 100%;
+    height: 100%;
+    background-color: #612F31;
+    display: flex;
+    margin-bottom: 55px;
+    display: flex;
 }
 
 .discover-playlist-image-container {
-    width: 25%;
+    width: 35%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-left: 20px;
+    margin-top: 60px;
 }
 
 .discover-playlist-image {
     width: 100%;
+    height: 85%;
 }
 
 .discover-playlist-details-container {
@@ -27,7 +56,7 @@
     margin-left: 10px;
     overflow: auto;
     overflow-x: hidden;
-    padding-top: 25px;
+    padding-top: 45px;
 }
 
 .discover-track-playlist-details {
@@ -61,7 +90,6 @@
     justify-content: flex-end;
     align-items: center;
 }
-
 
 
 .discover-playlist-buttons-container {
