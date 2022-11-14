@@ -57,8 +57,7 @@ const DiscoverSliderItem = ({id, imageSource, title, data}) => {
             {(showButton && data[0].title) &&
             <div className='slider-hover-item'
             onClick={(e) => handlePlay(e)}
-            >{/* <FontAwesomeIcon icon="fa-solid fa-circle-play" className='slider-play'/> */}
-            </div>}
+            ></div>}
 
             <img src={imageSource}
             onClick={(e) => handleImageClick(e)}

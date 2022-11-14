@@ -37,8 +37,23 @@
     font-size: 20px;
     display: flex;
     align-items: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.playlist-track-name-container {
+    width: 100%;
+    height: 100%;
 }
 
 .playlist-track-name {
     color: rgb(156, 156, 156);
+}
+
+.discover-playlist-buttons {
+    position: absolute;
+    background-color: rgba(44, 44, 44, 0.3);
+    top: 10;
+    height: 25px;
+    width: 100%;
 }

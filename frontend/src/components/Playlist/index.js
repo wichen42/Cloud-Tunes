@@ -1,15 +1,10 @@
+import PlaylistItem from '../PlaylistItem';
 import './Playlist.css';
 
 const Playlist = ({tracks}) => {
 
-    console.log(tracks);
-    const playlistItems = tracks.map(track => {
-        return <div 
-        className='discover-track-playlist-details'
-        >
-            <span className='playlist-track-name'>{track.username} - </span> <span>&nbsp;{track.title}</span>
-        </div>
-    });
+
+    const playlistItems = tracks.map(track => <PlaylistItem track={track} key={track.id}/>);
 
     return ( 
         <div className='discover-playlist-container'>
@@ -18,6 +13,7 @@ const Playlist = ({tracks}) => {
                 className='discover-playlist-image'
                 />
             </div>
+
             <div className='discover-playlist-details-container'>
                     {playlistItems}
             </div>
