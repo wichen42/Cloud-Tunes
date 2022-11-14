@@ -1,15 +1,14 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from '../../store/session';
 import * as userActions from '../../store/users';
 import * as trackActions from '../../store/track';
 import DiscoverSlider from "../DiscoverSlider";
 import './Discover.css'
+import Playlist from "../Playlist";
 
 const DiscoverPage = () => {
     
-    const dispatch = useDispatch();
     const users = useSelector(userActions.getUsers);
     const tracks = useSelector(trackActions.getTracks);
     let sessionUser = useSelector(sessionActions.getSession);
@@ -32,6 +31,7 @@ const DiscoverPage = () => {
                 < DiscoverSlider title={"Discover Artists"} data={artistList}/>
                 < DiscoverSlider title={"More from demolition"} data={biggieTracks}/>
                 < DiscoverSlider title={"More from biggie"} data={demolitionTracks}/>
+                < Playlist tracks={tracks}/>
 
                 <div className="discover-playlist">
 

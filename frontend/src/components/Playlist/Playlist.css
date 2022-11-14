@@ -1,0 +1,44 @@
+.discover-playlist-container {
+    width: 100%;
+    height: 30%;
+    background-color: #612F31;
+    display: flex;
+    margin-bottom: 65px;
+}
+
+.discover-playlist-image-container {
+    width: 25%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 20px;
+}
+
+.discover-playlist-image {
+    width: 100%;
+}
+
+.discover-playlist-details-container {
+    width:75%;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin-left: 10px;
+    margin-top: 25px;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.discover-track-playlist-details {
+    color: white;
+    width: 100%;
+    height: 25%;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.playlist-track-name {
+    color: rgb(156, 156, 156);
+}
