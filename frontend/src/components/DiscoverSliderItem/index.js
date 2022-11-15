@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDispatch, useSelector } from 'react-redux';
-import * as userActions from '../store/users';
-import * as trackActions from '../store/track';
-import * as playListActions from '../store/playlist';
+import * as userActions from '../../store/users';
+import * as trackActions from '../../store/track';
+import * as playListActions from '../../store/playlist';
 import './DiscoverSliderItem.css';
 import { useHistory } from 'react-router-dom';
 

@@ -1,8 +1,8 @@
 import { useRef } from 'react';
-import DiscoverSliderItem from '../../DiscoverSliderItem';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './DiscoverSlider.css';
 import { useState } from 'react';
+import DiscoverSliderItem from '../DiscoverSliderItem';
 
 
 const DiscoverSlider = ({title, data}) => {

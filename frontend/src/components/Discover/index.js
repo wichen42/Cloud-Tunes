@@ -1,8 +1,9 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from '../../store/session';
 import * as userActions from '../../store/users';
 import * as trackActions from '../../store/track';
+import * as followActions from '../../store/follow';
 import DiscoverSlider from "../DiscoverSlider";
 import Playlist from "../Playlist";
 import { useEffect, useState } from "react";
@@ -11,19 +12,26 @@ import './Discover.css'
 
 const DiscoverPage = () => {
     
+    const dispatch = useDispatch();
     const users = useSelector(userActions.getUsers);
     const tracks = useSelector(trackActions.getTracks);
     let sessionUser = useSelector(sessionActions.getSession);
     const [followList, setFollowList] = useState([]);
+    const follows = useSelector(followActions.getFollows);
 
+    console.log(follows);
+
+    // useEffect(() => {
+    //     const fetchFollows = async () => {
+    //         const res = await csrfFetch('/api/follows')
+    //         const data = await res.json();
+    //         setFollowList(Object.values(data));
+    //     }
+    //     fetchFollows();
+    // }, [])
 
     useEffect(() => {
-        const fetchFollows = async () => {
-            const res = await csrfFetch('/api/follows')
-            const data = await res.json();
-            setFollowList(Object.values(data));
-        }
-        fetchFollows();
+        dispatch(followActions.fetchFollows());
     }, [])
 
     function shuffleArr(arr, num) {
@@ -43,7 +51,7 @@ const DiscoverPage = () => {
                 < DiscoverSlider title={"Discover Artists"} data={artistList}/>
                 < DiscoverSlider title={"More from demolition"} data={biggieTracks}/>
                 < DiscoverSlider title={"More from biggie"} data={demolitionTracks}/>
-                < Playlist tracks={tracks} users={users} sessionUser={sessionUser} followList={followList}/>
+                < Playlist tracks={tracks} users={users} sessionUser={sessionUser} followList={follows}/>
 
                 <div className="discover-playlist">
 

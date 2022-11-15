@@ -3,6 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './PlaylistItem.css';
 import { useEffect } from 'react';
 import csrfFetch from '../../store/csrf';
+import * as followActions from '../../store/follow';
+import * as playlistActions from '../../store/playlist';
+import { useDispatch } from 'react-redux';
 
 const PlaylistItem = ({track, users, sessionUser, followList, user, followData}) => {
 
@@ -18,6 +21,7 @@ const PlaylistItem = ({track, users, sessionUser, followList, user, followData})
         color: "black"
     }
 
+    const dispatch = useDispatch();
     const [showButtons, setShowButtons] = useState(false);
     const [follow, setFollow] = useState('Follow');
     const [trackUser, setTrackUser] = useState({});
@@ -37,35 +41,39 @@ const PlaylistItem = ({track, users, sessionUser, followList, user, followData})
 
     const handlePlay = (e) => {
         e.preventDefault();
-        console.log("Play");
+        console.log(track);
+        dispatch(playlistActions.addSong(track));
     }
     
     // const [likeStyle, setLikeStyle] = useState()
     const handleLike = (e) => {
         e.preventDefault();
         console.log("Like");
+        console.log(followList);
     }
 
     const handleFollow = async (e) => {
         e.preventDefault();
 
-        const data = {follower_id: sessionUser.id, followed_id: trackUser.id}
             if (follow === "Follow") {
                 setFollow("Following");
                 setFstyle(followingStyle)
                 console.log(trackUser);
 
-                await csrfFetch(`/api/follows`, {
-                    method: "POST",
-                    body: JSON.stringify(followData)
-                });
+                // await csrfFetch(`/api/follows`, {
+                //     method: "POST",
+                //     body: JSON.stringify(followData)
+                // });
+
+                dispatch(followActions.addFollow(followData));
             } else {
                 setFollow("Follow");
                 setFstyle(followStyle)
                 console.log(trackUser);
-                await csrfFetch(`/api/follows/${trackUser.id}`, {
-                    method: "DELETE"
-                })
+                // await csrfFetch(`/api/follows/${track.userId}`, {
+                //     method: "DELETE"
+                // })
+                dispatch(followActions.deleteFollow(track.userId));
             }
     }
 

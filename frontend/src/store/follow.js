@@ -31,11 +31,11 @@ export const addFollow = (followData) => async dispatch => {
     dispatch(follow(data));
 }
 
-export const deleteFollow = (id, followedId) => async dispatch => {
+export const deleteFollow = (followedId) => async dispatch => {
     await csrfFetch(`/api/follows/${followedId}`, {
         method: "DELETE"
     });
-    dispatch(unfollow(id));
+    dispatch(fetchFollows());
 }
 
 const followReducer = (state = {}, action) => {
@@ -45,7 +45,6 @@ const followReducer = (state = {}, action) => {
     switch (action.type) {
         case ADD_FOLLOW:
             return {...nextState, ...action.followData};
-        case DELETE_FOLLOW:
         default:
             return state;
     }
