@@ -29,7 +29,7 @@ const PlaylistItem = ({track}) => {
             onMouseLeave={() => setShowButtons(false)}
             >
                 {showButtons && 
-                    <div className='discover-playlist-buttons'>
+                    <div className='discover-playlist-buttons' >
                         <div className='discover-playlist-buttons-container'>
                             <div className='discover-playlist-play'
                             onClick={(e) => handlePlay(e)} 

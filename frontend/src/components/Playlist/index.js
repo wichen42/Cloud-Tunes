@@ -20,7 +20,7 @@ const Playlist = ({tracks}) => {
                     />
                 </div>
     
-                <div className='discover-playlist-details-container'>
+                <div className='discover-playlist-details-container' id='playlist-scrollbar'>
                         {playlistItems}
                 </div>
             </div>
