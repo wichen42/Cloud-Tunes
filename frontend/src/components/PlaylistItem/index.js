@@ -9,10 +9,7 @@ const PlaylistItem = ({track, users, sessionUser}) => {
     const [showButtons, setShowButtons] = useState(false);
     const [follow, setFollow] = useState('Follow');
     const [followList, setFollowList] = useState([]);
-
-    const user = users.filter(function (el) {
-        return el.username === track.username;
-    })
+    const [followData, setFollowData] = useState({});
 
     useEffect(() => {
         const fetchFollows = async () => {
@@ -24,9 +21,14 @@ const PlaylistItem = ({track, users, sessionUser}) => {
     }, [])
 
     useEffect(() => {
+        const user = users.filter(function (el) {
+            return el.username === track.username;
+        })
         // console.log(followList);
-        const followData = {followedId: user.id, followerId: sessionUser.id}
-        // console.log(user[0]);
+        if (user[0]) {
+            setFollowData({followedId: user[0].id, followerId: sessionUser.id})
+            console.log(followData);
+        }
         followList.forEach((follow) => {
             if (Object.entries(follow).sort().toString() === Object.entries(followData).sort().toString()) {
                 setFollow("Following");
@@ -48,6 +50,9 @@ const PlaylistItem = ({track, users, sessionUser}) => {
 
     const handleFollow = async (e) => {
         e.preventDefault();
+        const user = users.filter(function (el) {
+            return el.username === track.username;
+        })
         const data = {follower_id: sessionUser.id, followed_id: user[0].id}
         if (user[0].id !== sessionUser.id) {
             if (follow === "Follow") {
