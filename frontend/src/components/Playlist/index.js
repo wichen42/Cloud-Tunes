@@ -1,10 +1,17 @@
 import PlaylistItem from '../PlaylistItem';
 import './Playlist.css';
 
-const Playlist = ({tracks, users, sessionUser}) => {
+const Playlist = ({tracks, users, sessionUser, followList}) => {
 
 
-    const playlistItems = tracks.map(track => <PlaylistItem track={track} key={track.id} sessionUser={sessionUser} users={users}/>);
+    const playlistItems = tracks.map((track) => {
+        const trackUser = users.filter(function (el) {
+            return el.username === track.username;
+        });
+        const followData = {followedId: track.userId, followerId: sessionUser.id}
+        return <PlaylistItem track={track} user={trackUser[0]} followData={followData} key={track.id} sessionUser={sessionUser} users={users} followList={followList} />
+    });
+
 
     return ( 
         <div className='playlist-box'>

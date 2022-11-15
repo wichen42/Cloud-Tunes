@@ -4,15 +4,27 @@ import * as sessionActions from '../../store/session';
 import * as userActions from '../../store/users';
 import * as trackActions from '../../store/track';
 import DiscoverSlider from "../DiscoverSlider";
-import './Discover.css'
 import Playlist from "../Playlist";
+import { useEffect, useState } from "react";
+import csrfFetch from "../../store/csrf";
+import './Discover.css'
 
 const DiscoverPage = () => {
     
     const users = useSelector(userActions.getUsers);
     const tracks = useSelector(trackActions.getTracks);
     let sessionUser = useSelector(sessionActions.getSession);
+    const [followList, setFollowList] = useState([]);
 
+
+    useEffect(() => {
+        const fetchFollows = async () => {
+            const res = await csrfFetch('/api/follows')
+            const data = await res.json();
+            setFollowList(Object.values(data));
+        }
+        fetchFollows();
+    }, [])
 
     function shuffleArr(arr, num) {
         const res = [...arr].sort(() => 0.5 - Math.random());
@@ -31,7 +43,7 @@ const DiscoverPage = () => {
                 < DiscoverSlider title={"Discover Artists"} data={artistList}/>
                 < DiscoverSlider title={"More from demolition"} data={biggieTracks}/>
                 < DiscoverSlider title={"More from biggie"} data={demolitionTracks}/>
-                < Playlist tracks={tracks} users={users} sessionUser={sessionUser}/>
+                < Playlist tracks={tracks} users={users} sessionUser={sessionUser} followList={followList}/>
 
                 <div className="discover-playlist">
 

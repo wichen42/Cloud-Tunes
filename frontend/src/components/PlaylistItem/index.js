@@ -4,39 +4,23 @@ import './PlaylistItem.css';
 import { useEffect } from 'react';
 import csrfFetch from '../../store/csrf';
 
-const PlaylistItem = ({track, users, sessionUser}) => {
+const PlaylistItem = ({track, users, sessionUser, followList, user, followData}) => {
 
     const [showButtons, setShowButtons] = useState(false);
     const [follow, setFollow] = useState('Follow');
-    const [followList, setFollowList] = useState([]);
-    const [followData, setFollowData] = useState({});
+    const [trackUser, setTrackUser] = useState({});
 
     useEffect(() => {
-        const fetchFollows = async () => {
-            const res = await csrfFetch('/api/follows')
-            const data = await res.json();
-            setFollowList(Object.values(data));
-        }
-        fetchFollows();
-    }, [])
-
-    useEffect(() => {
-        const user = users.filter(function (el) {
-            return el.username === track.username;
-        })
-        // console.log(followList);
-        if (user[0]) {
-            setFollowData({followedId: user[0].id, followerId: sessionUser.id})
-            console.log(followData);
-        }
+        setTrackUser(user);
         followList.forEach((follow) => {
             if (Object.entries(follow).sort().toString() === Object.entries(followData).sort().toString()) {
                 setFollow("Following");
                 setFstyle(followingStyle);
             }
         });
-    }, [followList])
-    
+    }, []);
+
+
     const handlePlay = (e) => {
         e.preventDefault();
         console.log("Play");
@@ -50,28 +34,25 @@ const PlaylistItem = ({track, users, sessionUser}) => {
 
     const handleFollow = async (e) => {
         e.preventDefault();
-        const user = users.filter(function (el) {
-            return el.username === track.username;
-        })
-        const data = {follower_id: sessionUser.id, followed_id: user[0].id}
-        if (user[0].id !== sessionUser.id) {
+
+        const data = {follower_id: sessionUser.id, followed_id: trackUser.id}
             if (follow === "Follow") {
                 setFollow("Following");
                 setFstyle(followingStyle)
+                console.log(trackUser);
 
                 await csrfFetch(`/api/follows`, {
                     method: "POST",
-                    body: JSON.stringify(data)
+                    body: JSON.stringify(followData)
                 });
             } else {
                 setFollow("Follow");
                 setFstyle(followStyle)
-
-                await csrfFetch(`/api/follows/${user[0].id}`, {
+                console.log(trackUser);
+                await csrfFetch(`/api/follows/${trackUser.id}`, {
                     method: "DELETE"
-                });
+                })
             }
-        }
     }
 
     const followStyle = {
