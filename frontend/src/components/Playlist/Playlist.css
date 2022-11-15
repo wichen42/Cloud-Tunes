@@ -98,6 +98,7 @@
     margin-left: 10px;
 }
 
+
 .discover-playlist-buttons {
     position: absolute;
     background-color: rgba(138, 138, 138, 0.3);
@@ -129,3 +130,4 @@
 .discover-playlist-buttons-container div:hover {
     background-color: rgba(138, 138, 138, 0.3);
 }
+

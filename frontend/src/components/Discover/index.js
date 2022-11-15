@@ -31,7 +31,7 @@ const DiscoverPage = () => {
                 < DiscoverSlider title={"Discover Artists"} data={artistList}/>
                 < DiscoverSlider title={"More from demolition"} data={biggieTracks}/>
                 < DiscoverSlider title={"More from biggie"} data={demolitionTracks}/>
-                < Playlist tracks={tracks}/>
+                < Playlist tracks={tracks} users={users} sessionUser={sessionUser}/>
 
                 <div className="discover-playlist">
 

@@ -1,10 +1,10 @@
 import PlaylistItem from '../PlaylistItem';
 import './Playlist.css';
 
-const Playlist = ({tracks}) => {
+const Playlist = ({tracks, users, sessionUser}) => {
 
 
-    const playlistItems = tracks.map(track => <PlaylistItem track={track} key={track.id}/>);
+    const playlistItems = tracks.map(track => <PlaylistItem track={track} key={track.id} sessionUser={sessionUser} users={users}/>);
 
     return ( 
         <div className='playlist-box'>

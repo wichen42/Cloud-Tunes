@@ -1,26 +1,83 @@
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './PlaylistItem.css';
+import { useEffect } from 'react';
+import csrfFetch from '../../store/csrf';
 
-const PlaylistItem = ({track}) => {
+const PlaylistItem = ({track, users, sessionUser}) => {
 
     const [showButtons, setShowButtons] = useState(false);
+    const [follow, setFollow] = useState('Follow');
+    const [followList, setFollowList] = useState([]);
 
+    const user = users.filter(function (el) {
+        return el.username === track.username;
+    })
+
+    useEffect(() => {
+        const fetchFollows = async () => {
+            const res = await csrfFetch('/api/follows')
+            const data = await res.json();
+            setFollowList(Object.values(data));
+        }
+        fetchFollows();
+    }, [])
+
+    useEffect(() => {
+        // console.log(followList);
+        const followData = {followedId: user.id, followerId: sessionUser.id}
+        // console.log(user[0]);
+        followList.forEach((follow) => {
+            if (Object.entries(follow).sort().toString() === Object.entries(followData).sort().toString()) {
+                setFollow("Following");
+                setFstyle(followingStyle);
+            }
+        });
+    }, [followList])
+    
     const handlePlay = (e) => {
         e.preventDefault();
         console.log("Play");
     }
-
+    
+    // const [likeStyle, setLikeStyle] = useState()
     const handleLike = (e) => {
         e.preventDefault();
         console.log("Like");
     }
 
-    const handleFollow = (e) => {
+    const handleFollow = async (e) => {
         e.preventDefault();
-        console.log("Follow");
+        const data = {follower_id: sessionUser.id, followed_id: user[0].id}
+        if (user[0].id !== sessionUser.id) {
+            if (follow === "Follow") {
+                setFollow("Following");
+                setFstyle(followingStyle)
+
+                await csrfFetch(`/api/follows`, {
+                    method: "POST",
+                    body: JSON.stringify(data)
+                });
+            } else {
+                setFollow("Follow");
+                setFstyle(followStyle)
+
+                await csrfFetch(`/api/follows/${user[0].id}`, {
+                    method: "DELETE"
+                });
+            }
+        }
     }
 
+    const followStyle = {
+        color: "white"
+    }
+
+    const followingStyle = {
+        color: "#FF5500"
+    }
+
+    const [fStyle, setFstyle] = useState(followStyle);
 
     return ( 
         <div 
@@ -35,10 +92,11 @@ const PlaylistItem = ({track}) => {
                             onClick={(e) => handlePlay(e)} 
                             ><FontAwesomeIcon icon="fa-solid fa-play" /></div>
                             <div className='discover-playlist-like'
-                            onClick={(e) => handleLike(e)}
+                            onClick={(e) => handleLike(e)}                          
                             ><FontAwesomeIcon icon="fa-solid fa-heart" /></div>
                             <div className='discover-playlist-follow'
                             onClick={(e) => handleFollow(e)}
+                            style={fStyle}  
                             ><FontAwesomeIcon icon="fa-solid fa-user-plus" /></div>
                         </div>
                     </div>
