@@ -137,18 +137,14 @@
 
 .content-container {
     display: flex;
-    align-items: center;
-    justify-content: center;
     margin-top: 15px;
 }
 
 .profile-content {
     width: 100%;
-    min-height: 100vh;
+    min-height: 100%;
     display: flex;
-    justify-content: flex-start;
     flex-direction: column;
-    align-items: center;
     padding-left: 25px;
     padding-right: 25px;
     margin-top: 10px;
@@ -156,10 +152,14 @@
 
 .profile-about-container {
     width: 30%;
-    height: 100vh;
+    height: 100%;
     border-left: 1px solid lightgray;
     margin-right: 20px;
     padding-left: 40px;
+}
+
+.profile-about {
+    height: 100%;
 }
 
 .profile-about-socials {
@@ -167,6 +167,7 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 15px;
+    height: 100%;
 }
 
 .profile-about-socials > div {

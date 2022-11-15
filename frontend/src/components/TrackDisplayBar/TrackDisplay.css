@@ -36,6 +36,7 @@
 .track-info {
     display: flex;
     width: 100%;
+    justify-content: space-between;
 }
 
 .audio-track-image {

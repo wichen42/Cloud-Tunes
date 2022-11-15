@@ -6,9 +6,23 @@ import csrfFetch from '../../store/csrf';
 
 const PlaylistItem = ({track, users, sessionUser, followList, user, followData}) => {
 
+    const followStyle = {
+        color: "white"
+    }
+
+    const followingStyle = {
+        color: "#FF5500"
+    }
+
+    const noStyle = {
+        color: "black"
+    }
+
     const [showButtons, setShowButtons] = useState(false);
     const [follow, setFollow] = useState('Follow');
     const [trackUser, setTrackUser] = useState({});
+    const [fStyle, setFstyle] = useState(followStyle);
+
 
     useEffect(() => {
         setTrackUser(user);
@@ -55,15 +69,8 @@ const PlaylistItem = ({track, users, sessionUser, followList, user, followData})
             }
     }
 
-    const followStyle = {
-        color: "white"
-    }
 
-    const followingStyle = {
-        color: "#FF5500"
-    }
 
-    const [fStyle, setFstyle] = useState(followStyle);
 
     return ( 
         <div 
