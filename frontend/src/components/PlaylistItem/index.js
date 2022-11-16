@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import csrfFetch from '../../store/csrf';
 import * as followActions from '../../store/follow';
 import * as playlistActions from '../../store/playlist';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const PlaylistItem = ({track, users, sessionUser, followList, user, followData}) => {
 
@@ -23,21 +23,29 @@ const PlaylistItem = ({track, users, sessionUser, followList, user, followData})
 
     const dispatch = useDispatch();
     const [showButtons, setShowButtons] = useState(false);
-    const [follow, setFollow] = useState('Follow');
+    const [follow, setFollow] = useState();
     const [trackUser, setTrackUser] = useState({});
     const [fStyle, setFstyle] = useState(followStyle);
+    const [render, setRender] = useState(false);
 
+    const follows = useSelector(followActions.getFollows);
 
     useEffect(() => {
         setTrackUser(user);
         followList.forEach((follow) => {
             if (Object.entries(follow).sort().toString() === Object.entries(followData).sort().toString()) {
-                setFollow("Following");
+                setFollow(false);
                 setFstyle(followingStyle);
+            } else {
+                setFollow(true)
+                setFstyle(followStyle)
             }
         });
     }, []);
 
+    // useEffect(() => {
+
+    // }, [render])
 
     const handlePlay = (e) => {
         e.preventDefault();
@@ -55,8 +63,8 @@ const PlaylistItem = ({track, users, sessionUser, followList, user, followData})
     const handleFollow = async (e) => {
         e.preventDefault();
 
-            if (follow === "Follow") {
-                setFollow("Following");
+            if (follow === true) {
+                setFollow(false);
                 setFstyle(followingStyle)
                 console.log(trackUser);
 
@@ -66,14 +74,15 @@ const PlaylistItem = ({track, users, sessionUser, followList, user, followData})
                 // });
 
                 dispatch(followActions.addFollow(followData));
+                setRender(!render);
             } else {
-                setFollow("Follow");
+                setFollow(true);
                 setFstyle(followStyle)
-                console.log(trackUser);
                 // await csrfFetch(`/api/follows/${track.userId}`, {
                 //     method: "DELETE"
                 // })
                 dispatch(followActions.deleteFollow(track.userId));
+                setRender(!render);
             }
     }
 

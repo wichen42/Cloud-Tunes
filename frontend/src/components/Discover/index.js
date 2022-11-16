@@ -7,6 +7,7 @@ import * as followActions from '../../store/follow';
 import DiscoverSlider from "../DiscoverSlider";
 import Playlist from "../Playlist";
 import { useEffect, useState } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import csrfFetch from "../../store/csrf";
 import './Discover.css'
 
@@ -61,6 +62,12 @@ const DiscoverPage = () => {
             <div className="discover-side-panel">
                 <div className="side-panel-follow">
                     {/* Auto generate 3 users that are not followed here */}
+                    <div className="side-panel-follow-header">
+                        <FontAwesomeIcon icon="fa-solid fa-users" /> Artists you should follow
+                    </div>
+                    <div className="side-panel-follow-body">
+
+                    </div>
                 </div>
 
                 <div className="side-panel-like">

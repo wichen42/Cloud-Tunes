@@ -13,6 +13,7 @@ export const unfollow = (id) => ({
     id
 });
 
+
 export const getFollows = ({follows}) => follows ? Object.values(follows) : [];
 
 export const fetchFollows = () => async dispatch => {
@@ -40,11 +41,12 @@ export const deleteFollow = (followedId) => async dispatch => {
 
 const followReducer = (state = {}, action) => {
     Object.freeze(state);
-    const nextState = {...state};
+    let nextState = {...state};
 
     switch (action.type) {
         case ADD_FOLLOW:
-            return {...nextState, ...action.followData};
+            nextState = {...nextState, ...action.followData};
+            return nextState;
         default:
             return state;
     }
