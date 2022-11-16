@@ -1,11 +1,13 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import './FollowUserItem.css';
 
 const FollowUserItem = ({artist, tracks, follows, users}) => {
 
     const [follow, showFollow] = useState(false);
     const [count, showCount] = useState(false)
+    const history = useHistory();
     // console.log(artist);
     // console.log(follows);
 
@@ -18,6 +20,11 @@ const FollowUserItem = ({artist, tracks, follows, users}) => {
     })
     console.log(`${artist.username}: ${userFollows.length}`);
     console.log(`${artist.username}: ${userTracks.length}`);
+
+    const handleProfile = (e) => {
+        e.preventDefault();
+        history.push(`/users/${artist.id}`);
+    }
 
     return ( 
         <div className='artist-follow-container'>
@@ -51,6 +58,18 @@ const FollowUserItem = ({artist, tracks, follows, users}) => {
                     </div>
                 </div>
             </div>
+            
+            <div className='artist-follow-button-container'>
+                <div className='artist-follow-button'>
+                    <div className='aritst-follow-profile-button-image'>
+                        <FontAwesomeIcon icon="fa-solid fa-address-card" />
+                    </div>
+                    <div className='artist-follow-profile-button'
+                    onClick={(e) => handleProfile(e)}
+                    >Profile</div>
+                </div>
+            </div>
+
         </div>
      );
 }
