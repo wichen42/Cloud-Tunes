@@ -23,6 +23,22 @@
 .discover-side-panel {
     width: 30%;
     height: 100%;
-    background-color: blueviolet;
+    border-left: 1px solid lightgray;
 }
 
+.side-panel-follow-header {
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    margin: 32px 20px 20px 25px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid lightgray;
+    color: gray;
+}
+
+.side-panel-follow-text1 {
+}
+
+.side-panel-follow-text2 {
+    cursor: pointer;
+}

@@ -28,8 +28,6 @@ const PlaylistItem = ({track, users, sessionUser, followList, user, followData})
     const [fStyle, setFstyle] = useState(followStyle);
     const [render, setRender] = useState(false);
 
-    const follows = useSelector(followActions.getFollows);
-
     useEffect(() => {
         setTrackUser(user);
         followList.forEach((follow) => {
@@ -43,17 +41,12 @@ const PlaylistItem = ({track, users, sessionUser, followList, user, followData})
         });
     }, []);
 
-    // useEffect(() => {
-
-    // }, [render])
-
     const handlePlay = (e) => {
         e.preventDefault();
         console.log(track);
         dispatch(playlistActions.addSong(track));
     }
     
-    // const [likeStyle, setLikeStyle] = useState()
     const handleLike = (e) => {
         e.preventDefault();
         console.log("Like");

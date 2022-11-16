@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import csrfFetch from "../../store/csrf";
 import './Discover.css'
+import FollowUserItem from "../FollowUserItem";
 
 const DiscoverPage = () => {
     
@@ -43,8 +44,14 @@ const DiscoverPage = () => {
     const artistList = shuffleArr(users, 10);
     const demolitionTracks = tracks.filter(track => track.userId === 1);
     const biggieTracks = tracks.filter(track => track.userId === 17);
+    
+    const artistFollow = shuffleArr(users, 3);
+    const followArtistList = artistFollow.map(track => {
 
-    if(!sessionUser) return <Redirect to='/' />;
+        return <FollowUserItem track={track}/>
+    })
+
+    if(!sessionUser) return <Redirect to='/'/>;
     
     return (
         <div className="discover-container">
@@ -63,10 +70,15 @@ const DiscoverPage = () => {
                 <div className="side-panel-follow">
                     {/* Auto generate 3 users that are not followed here */}
                     <div className="side-panel-follow-header">
-                        <FontAwesomeIcon icon="fa-solid fa-users" /> Artists you should follow
+                        <div className="side-panel-follow-text1">
+                            <FontAwesomeIcon icon="fa-solid fa-users" /> Artists you should follow
+                        </div>
+                        <div className="side-panel-follow-text2">
+                            <FontAwesomeIcon icon="fa-solid fa-rotate-right" /> Refresh List
+                        </div>
                     </div>
                     <div className="side-panel-follow-body">
-
+                        {followArtistList}
                     </div>
                 </div>
 
