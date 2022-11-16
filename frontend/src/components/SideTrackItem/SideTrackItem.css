@@ -1,0 +1,18 @@
+.side-track-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.side-track-image {
+    width: 30%;
+    margin-left: 15px;
+    margin-bottom: 10px;
+}
+
+.side-track-image-source {
+    height: 85px;
+    width: 85px;
+}

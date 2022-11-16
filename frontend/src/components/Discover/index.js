@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import csrfFetch from "../../store/csrf";
 import './Discover.css'
 import FollowUserItem from "../FollowUserItem";
+import SideTrackItem from "../SideTrackItem";
 
 const DiscoverPage = () => {
     
@@ -44,10 +45,14 @@ const DiscoverPage = () => {
     const artistList = shuffleArr(users, 10);
     const demolitionTracks = tracks.filter(track => track.userId === 1);
     const biggieTracks = tracks.filter(track => track.userId === 17);
-    
+    const sideTracks = shuffleArr(tracks, 4)
     const artistFollow = shuffleArr(users, 3);
-    const followArtistList = artistFollow.map(artist => {
 
+    const sideTrackItem = sideTracks.map(track => {
+        return <SideTrackItem track={track} />
+    })
+
+    const followArtistList = artistFollow.map(artist => {
         return <FollowUserItem artist={artist} tracks={tracks} follows={follows} users={users}/>
     })
 
@@ -84,11 +89,25 @@ const DiscoverPage = () => {
 
                 <div className="side-panel-like">
                     {/* User's liked tracks show here */}
-                    
+                    <div className="side-panel-likes-header">
+                        <div className="side-panel-likes-heart">
+                            <FontAwesomeIcon icon="fa-solid fa-heart" /> X Likes
+                        </div>
+                    </div>
+
                 </div>
 
                 <div className="side-panel-music">
                     {/* Randomly selected track here */}
+                    <div className="side-panel-tracks-header">
+                        <div className="side-panel-music">
+                            <FontAwesomeIcon icon="fa-solid fa-music" /> Tracks you might like
+                        </div>
+                    </div>
+
+                    <div className="side-track-body">
+                        {sideTrackItem}
+                    </div>
                 </div>
             </div>
 
