@@ -22,7 +22,9 @@ class User < ApplicationRecord
   has_one_attached :image
   has_one_attached :banner
 
+  has_many :comments
   has_many :tracks
+  has_many :likes
 
   has_many :active_follows, 
   class_name: "Follow", 

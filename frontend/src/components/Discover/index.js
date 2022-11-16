@@ -46,9 +46,9 @@ const DiscoverPage = () => {
     const biggieTracks = tracks.filter(track => track.userId === 17);
     
     const artistFollow = shuffleArr(users, 3);
-    const followArtistList = artistFollow.map(track => {
+    const followArtistList = artistFollow.map(artist => {
 
-        return <FollowUserItem track={track}/>
+        return <FollowUserItem artist={artist} tracks={tracks} follows={follows} users={users}/>
     })
 
     if(!sessionUser) return <Redirect to='/'/>;
