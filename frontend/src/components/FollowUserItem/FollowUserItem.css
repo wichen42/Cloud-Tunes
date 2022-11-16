@@ -25,11 +25,14 @@
     justify-content: center;
     align-items: center;
     border: 1px solid black;
+    transition: .2s ease-in;
 }
 
-.aritst-follow-profile-button-image {
-    color: black;
+.artist-follow-button:hover {
+    color: #FF5500;
+    border: 1px solid #FF5500;
 }
+
 
 .artist-follow-profile-button {
     margin-top: 2px;
@@ -64,12 +67,6 @@
     margin-bottom: 10px;
 }
 
-.artist-follow-info {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
 
 .artist-follow-stats {
     display: flex;
@@ -77,12 +74,21 @@
 }
 
 .artist-follow-info {
+    margin-left: 12px;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.artist-follow-track-info {
     margin-left: 5px;
     margin-top: 2px;
 }
 
-.artist-follow-track-info {
-    margin-left: 2px;
+.artist-follow-info-details {
+    margin-left: 5px;
     margin-top: 2px;
 }
 

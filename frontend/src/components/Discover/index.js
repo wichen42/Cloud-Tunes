@@ -84,6 +84,7 @@ const DiscoverPage = () => {
 
                 <div className="side-panel-like">
                     {/* User's liked tracks show here */}
+                    
                 </div>
 
                 <div className="side-panel-music">

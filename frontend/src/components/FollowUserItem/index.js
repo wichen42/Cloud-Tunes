@@ -40,7 +40,7 @@ const FollowUserItem = ({artist, tracks, follows, users}) => {
                         onMouseLeave={() => showFollow(false)}
                         >
                             <FontAwesomeIcon icon="fa-solid fa-users" /> 
-                            <div className='artist-follow-info'>{userFollows.length}</div>
+                            <div className='artist-follow-info-details'>{userFollows.length}</div>
                             {follow && (
                                 <div className='artist-follow-tooltip'>{userFollows.length} Followers</div>
                             )}
