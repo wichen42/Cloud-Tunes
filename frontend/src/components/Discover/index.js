@@ -21,8 +21,16 @@ const DiscoverPage = () => {
     let sessionUser = useSelector(sessionActions.getSession);
     const [followList, setFollowList] = useState([]);
     const follows = useSelector(followActions.getFollows);
+    const [refresh, setRefresh] = useState(0);
+    const [artistFollow, setArtistFollow] = useState([]);
+    const [sideTracks, setSideTracks] = useState([]);
 
     console.log(follows);
+
+    function shuffleArr(arr, num) {
+        const res = [...arr].sort(() => 0.5 - Math.random());
+        return res.slice(0, num);
+    }
 
     // useEffect(() => {
     //     const fetchFollows = async () => {
@@ -35,18 +43,19 @@ const DiscoverPage = () => {
 
     useEffect(() => {
         dispatch(followActions.fetchFollows());
+        setSideTracks(shuffleArr(tracks, 3));
     }, [])
 
-    function shuffleArr(arr, num) {
-        const res = [...arr].sort(() => 0.5 - Math.random());
-        return res.slice(0, num);
-    }
+    useEffect(() => {
+        setArtistFollow(shuffleArr(users, 3));
+    }, [refresh])
+
 
     const artistList = shuffleArr(users, 10);
     const demolitionTracks = tracks.filter(track => track.userId === 1);
     const biggieTracks = tracks.filter(track => track.userId === 17);
-    const sideTracks = shuffleArr(tracks, 4)
-    const artistFollow = shuffleArr(users, 3);
+    // const sideTracks = shuffleArr(tracks, 4)
+    // const artistFollow = shuffleArr(users, 3);
 
     const sideTrackItem = sideTracks.map(track => {
         return <SideTrackItem track={track} />
@@ -58,6 +67,11 @@ const DiscoverPage = () => {
 
     if(!sessionUser) return <Redirect to='/'/>;
     
+    const handleRefresh = (e) => {
+        e.preventDefault();
+        setRefresh(val => val + 1);
+    }
+
     return (
         <div className="discover-container">
             <div className="discover-body">
@@ -78,8 +92,10 @@ const DiscoverPage = () => {
                         <div className="side-panel-follow-text1">
                             <FontAwesomeIcon icon="fa-solid fa-users" /> Artists you should follow
                         </div>
-                        <div className="side-panel-follow-text2">
-                            <FontAwesomeIcon icon="fa-solid fa-rotate-right" /> Refresh List
+                        <div className="side-panel-follow-text2"
+                        onClick={(e) => handleRefresh(e)}
+                        >
+                            <FontAwesomeIcon icon="fa-solid fa-rotate-right" /> Refresh
                         </div>
                     </div>
                     <div className="side-panel-follow-body">

@@ -6,13 +6,57 @@
     justify-content: flex-start;
 }
 
+.side-track-body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 15px;
+}
+
 .side-track-image {
     width: 30%;
     margin-left: 15px;
     margin-bottom: 10px;
+    position: relative;
 }
 
 .side-track-image-source {
-    height: 85px;
-    width: 85px;
+    height: 95px;
+    width: 95px;
 }
+
+.side-track-image-hover {
+    position: absolute;
+    background-color: rgba(255, 255, 255, .5);
+    height: 100%;
+    width: 100%;
+    background-image: url(../../assets/icons/orange-circle-play.png);
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+}
+
+.side-track-details {
+    width: 100%;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.side-track-buttons {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.side-track-username {
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+.side-track-title {
+    font-size: 20px;
+}
+
