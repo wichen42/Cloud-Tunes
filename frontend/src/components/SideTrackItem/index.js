@@ -8,25 +8,11 @@ const SideTrackItem = ({track}) => {
 
     const dispatch = useDispatch();
     const [hover, setHover] = useState(false);
-    const [showButtons, setShowButtons] = useState(false);
-
+    
     const handleClick = (e) => {
         e.preventDefault();
         dispatch(playlistActions.addSong(track));
     }
-
-    const handlePlay = (e) => {
-        e.preventDefault();
-    }
-
-    const handleFollow = (e) => {
-        e.preventDefault();
-    }
-
-    const handleLike = (e) => {
-        e.preventDefault(e)
-    }
-
     return ( 
         <div className='side-track-container'>
             <div className='side-track-image'
@@ -41,16 +27,7 @@ const SideTrackItem = ({track}) => {
                 <img src={track.imageUrl} className='side-track-image-source'/>
             </div>
             <div className='side-track-details'
-            onMouseEnter={() => setShowButtons(true)}
-            onMouseLeave={() => setShowButtons(false)}
             >
-                {showButtons && (
-                    <div
-                    className='side-track-buttons'
-                    >
-                        <div className='side-track'></div>
-                    </div>
-                )}
                 <div className='side-track-username'
                 >{track.username}</div>
                 <div className='side-track-title'>{track.title}</div>

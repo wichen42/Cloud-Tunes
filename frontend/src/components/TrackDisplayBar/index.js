@@ -5,6 +5,7 @@ import csrfFetch from '../../store/csrf';
 import TrackComments from '../TrackComments';
 import * as commentActions from '../../store/comment';
 import * as trackActions from '../../store/track';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './TrackDisplay.css';
 
 const TrackDisplay = ({track}) => {
@@ -20,6 +21,9 @@ const TrackDisplay = ({track}) => {
     useEffect(() => {
         if (track.imageUrl) {
             setImageUrl(track.imageUrl)
+        }
+        if (sessionUser.id === track.userId) {
+            setShowMore(true);
         }
         dispatch(commentActions.fetchComments());
 
@@ -59,8 +63,9 @@ const TrackDisplay = ({track}) => {
     }
 
     const handleDeleteTrack = (e) => {
-        // console.log(track);
-        dispatch(trackActions.deleteTrack(track.id));
+        if (sessionUser.id === track.userId) {
+            dispatch(trackActions.deleteTrack(track.id));
+        }
     }
 
     return ( 
@@ -110,17 +115,13 @@ const TrackDisplay = ({track}) => {
                     <div className='track-comment'
                     onClick={(e) => handleShowComments(e)}
                     >Comments</div>
-                    <div className='comment-options'
-                    onClick={(e) => handleShowMore(e)}
-                    ><span className='options-ellipsis'>⋯</span> More</div>
-                </div>
-                { showMore && <div className='comment-options-dropdown'>
-                        <div id='comment-options-inner'>Add to Up Next</div>
-                        <div id='comment-options-inner'>Add to Playlist</div>
-                        <div id='comment-options-inner'
+                    {showMore && (
+                        <div className='comment-options'
                         onClick={(e) => handleDeleteTrack(e)}
                         >Delete</div>
-                    </div>}
+                    )}
+                </div>
+      
                 
 
             </div>
