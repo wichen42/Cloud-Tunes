@@ -5,12 +5,12 @@ export const REMOVE_LIKE = 'likes/REMOVE_LIKE';
 export const ADD_LIKE = 'like/ADD_LIKE';
 
 export const receiveLikes = (likes) => ({
-    action: RECEIVE_LIKES,
+    type: RECEIVE_LIKES,
     likes
 });
 
 export const removeLike = (trackId) => ({
-    action: REMOVE_LIKE,
+    type: REMOVE_LIKE,
     trackId
 });
 
@@ -20,12 +20,15 @@ export const getLikes = ({likes}) => likes ? Object.values(likes) : [];
 export const fetchLikes = () => async dispatch => {
     const res = await csrfFetch('/api/likes');
     const data = await res.json();
+    console.log(data);
     dispatch(receiveLikes(data));
     return data
 }
 
 export const deleteLike = (trackId) => async dispatch => {
-    const res = await csrfFetch(`/api/tracks/${trackId}/like`);
+    const res = await csrfFetch(`/api/tracks/${trackId}/like`, {
+        method: 'DELETE'
+    });
     const data = await res.json();
     console.log(data);
 }

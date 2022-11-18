@@ -13,6 +13,7 @@ import Library from "./components/Library";
 import './components/FontAwesomeIcons';
 import * as trackActions from "./store/track";
 import * as sessionActions from './store/session';
+import * as likeActions from './store/like';
 
 function App() {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ function App() {
     dispatch(trackActions.fetchTracks());
     dispatch(fetchUsers());
     dispatch(sessionActions.fetchSession);
+    dispatch(likeActions.fetchLikes());
   }, [])
   
   return (

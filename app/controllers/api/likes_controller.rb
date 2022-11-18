@@ -22,10 +22,8 @@ class Api::LikesController < ApplicationController
 
     def destroy
         like = Like.find_by(user_id: current_user.id, track_id: params[:track_id])
-
-        if like.destroy
-            track = Track.find(params[:track_id])
-            render json: {trackId: track}
+        if like
+            like.destroy
         end
     end
 end

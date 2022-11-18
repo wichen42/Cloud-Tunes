@@ -24,6 +24,7 @@ const TrackDisplay = ({track}) => {
     const [imageUrl, setImageUrl] = useState("https://cloud-tunes-dev.s3.amazonaws.com/pexels-pixabay-159868.jpg");
     const [body, setBody] = useState("");
     const sessionUser = useContext(SessionContext);
+    const likeList = useSelector(likeActions.getLikes);
     const [commentCounter, setCommentCounter] = useState(0);
     const [showComment, setShowComment] = useState(false);
     const [showMore, setShowMore] = useState(false);
@@ -31,12 +32,9 @@ const TrackDisplay = ({track}) => {
     const [lStyle, setLstyle] = useState(unlikeStyle)
 
     useEffect(() => {
-        if (track.imageUrl) {
-            setImageUrl(track.imageUrl)
-        }
-        if (sessionUser.id === track.userId) {
-            setShowMore(true);
-        }
+        if (track.imageUrl) setImageUrl(track.imageUrl);
+        if (sessionUser.id === track.userId) setShowMore(true);
+
         dispatch(commentActions.fetchComments());
 
     }, [])
@@ -46,6 +44,14 @@ const TrackDisplay = ({track}) => {
     }, [commentCounter])
 
     const comments = useSelector(commentActions.getComments);
+
+    const findLike = (trackId) => {
+        const like = likeList.filter(function (el) {
+            return el.trackId === trackId;
+        });
+
+        return like[0];
+    }
 
     const handleComment = async (e) => {
         e.preventDefault();
@@ -88,20 +94,31 @@ const TrackDisplay = ({track}) => {
         if (liked === false) {
             setLiked(!liked)
             setLstyle(likeStyle);
-            const res = await csrfFetch(`/api/tracks/${track.id}/like`, {
-                method: 'POST'
-            });
-            const data = await res.json()
-            console.log(data);
-
+            // const res = await csrfFetch(`/api/tracks/${track.id}/like`, {
+            //     method: 'POST'
+            // });
+            // // const data = await res.json()
+            // dispatch(likeActions.fetchLikes());
+            const likeData = findLike(track.id);
+            if (likeData) {
+                console.log(likeData);
+            } else {
+                console.log("Like not found");
+            }
         } else {
             setLiked(!liked)
             setLstyle(unlikeStyle);
-            const res = await csrfFetch(`/api/tracks/${track.id}/like`, {
-                method: 'DELETE'
-            });
-            const data = await res.json()
-            console.log(data);
+            // const res = await csrfFetch(`/api/tracks/${track.id}/like`, {
+            //     method: 'DELETE'
+            // });
+            // // const data = await res.json();
+            // dispatch(likeActions.deleteLike(track.id));
+            const likeData = findLike(track.id);
+            if (likeData) {
+                console.log(likeData);
+            } else {
+                console.log("Like not found");
+            }
         }
     }
 
