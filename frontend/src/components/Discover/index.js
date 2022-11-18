@@ -52,11 +52,11 @@ const DiscoverPage = () => {
     const artistFollow = shuffleArr(users, 3);
 
     const sideTrackItem = sideTracks.map(track => {
-        return <SideTrackItem track={track} />
+        return <SideTrackItem track={track} key={track.id}/>
     })
 
     const followArtistList = artistFollow.map(artist => {
-        return <FollowUserItem artist={artist} tracks={tracks} follows={follows} users={users}/>
+        return <FollowUserItem key={artist.id} artist={artist} tracks={tracks} follows={follows} users={users}/>
     })
 
     if(!sessionUser) return <Redirect to='/'/>;

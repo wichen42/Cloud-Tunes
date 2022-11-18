@@ -5,6 +5,7 @@ import csrfFetch from '../../store/csrf';
 import TrackComments from '../TrackComments';
 import * as commentActions from '../../store/comment';
 import * as trackActions from '../../store/track';
+import * as likeActions from '../../store/like';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './TrackDisplay.css';
 
@@ -82,15 +83,25 @@ const TrackDisplay = ({track}) => {
         }
     }
 
-    const handleLike = (e) => {
+    const handleLike = async (e) => {
         e.preventDefault(); 
         if (liked === false) {
             setLiked(!liked)
             setLstyle(likeStyle);
+            const res = await csrfFetch(`/api/tracks/${track.id}/like`, {
+                method: 'POST'
+            });
+            const data = await res.json()
+            console.log(data);
 
         } else {
             setLiked(!liked)
             setLstyle(unlikeStyle);
+            const res = await csrfFetch(`/api/tracks/${track.id}/like`, {
+                method: 'DELETE'
+            });
+            const data = await res.json()
+            console.log(data);
         }
     }
 

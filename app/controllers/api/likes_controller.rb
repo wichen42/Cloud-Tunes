@@ -10,13 +10,12 @@ class Api::LikesController < ApplicationController
     end
 
     def create
-        like = current_user.likes.new()
-        like.track_id = params[:track_id]
-        if like.save
-            track = Track.find(like.track_id)
-            render json: {trackId: track}
+        @like = current_user.likes.new()
+        @like.track_id = params[:track_id]
+        if @like.save
+            render :show
         else
-            render json: like.errors.full_messages, status: 401
+            render json: @like.errors.full_messages, status: 401
 
         end
     end
