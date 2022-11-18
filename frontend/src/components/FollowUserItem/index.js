@@ -18,8 +18,6 @@ const FollowUserItem = ({artist, tracks, follows, users}) => {
     const userFollows = follows.filter(function (el) {
         return el.followedId === artist.id;
     })
-    console.log(`${artist.username}: ${userFollows.length}`);
-    console.log(`${artist.username}: ${userTracks.length}`);
 
     const handleProfile = (e) => {
         e.preventDefault();

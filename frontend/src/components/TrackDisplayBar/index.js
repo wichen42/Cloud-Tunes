@@ -10,6 +10,15 @@ import './TrackDisplay.css';
 
 const TrackDisplay = ({track}) => {
 
+    const likeStyle = {
+        color: "white",
+        backgroundColor: "#FF5500"
+    }
+
+    const unlikeStyle = {
+        color: "black"
+    }
+
     const dispatch = useDispatch();
     const [imageUrl, setImageUrl] = useState("https://cloud-tunes-dev.s3.amazonaws.com/pexels-pixabay-159868.jpg");
     const [body, setBody] = useState("");
@@ -17,6 +26,8 @@ const TrackDisplay = ({track}) => {
     const [commentCounter, setCommentCounter] = useState(0);
     const [showComment, setShowComment] = useState(false);
     const [showMore, setShowMore] = useState(false);
+    const [liked, setLiked] = useState(false);
+    const [lStyle, setLstyle] = useState(unlikeStyle)
 
     useEffect(() => {
         if (track.imageUrl) {
@@ -51,6 +62,9 @@ const TrackDisplay = ({track}) => {
         return data;
     }
 
+
+
+
     const handleShowComments = (e) => {
         e.preventDefault();
         setShowComment(!showComment);
@@ -65,6 +79,18 @@ const TrackDisplay = ({track}) => {
     const handleDeleteTrack = (e) => {
         if (sessionUser.id === track.userId) {
             dispatch(trackActions.deleteTrack(track.id));
+        }
+    }
+
+    const handleLike = (e) => {
+        e.preventDefault(); 
+        if (liked === false) {
+            setLiked(!liked)
+            setLstyle(likeStyle);
+
+        } else {
+            setLiked(!liked)
+            setLstyle(unlikeStyle);
         }
     }
 
@@ -110,7 +136,10 @@ const TrackDisplay = ({track}) => {
                 </div>
 
                 <div className='track-buttons-container'>
-                    <div className='track-likes'>Like</div>
+                    <div className='track-likes'
+                    onClick={(e) => handleLike(e)}
+                    style={lStyle}
+                    >Like</div>
                     <div className='track-links'>Copy Link</div>
                     <div className='track-comment'
                     onClick={(e) => handleShowComments(e)}

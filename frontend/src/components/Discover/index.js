@@ -8,7 +8,6 @@ import DiscoverSlider from "../DiscoverSlider";
 import Playlist from "../Playlist";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import csrfFetch from "../../store/csrf";
 import './Discover.css'
 import FollowUserItem from "../FollowUserItem";
 import SideTrackItem from "../SideTrackItem";
@@ -16,46 +15,41 @@ import SideTrackItem from "../SideTrackItem";
 const DiscoverPage = () => {
     
     const dispatch = useDispatch();
+    const follows = useSelector(followActions.getFollows);
     const users = useSelector(userActions.getUsers);
     const tracks = useSelector(trackActions.getTracks);
     let sessionUser = useSelector(sessionActions.getSession);
-    const [followList, setFollowList] = useState([]);
-    const follows = useSelector(followActions.getFollows);
     const [refresh, setRefresh] = useState(0);
-    const [artistFollow, setArtistFollow] = useState([]);
-    const [sideTracks, setSideTracks] = useState([]);
+    // const [artistFollow, setArtistFollow] = useState([]);
+    // const [sideTracks, setSideTracks] = useState([]);
+    const [testTracks, setTestTracks] = useState([]);
 
-    console.log(follows);
 
     function shuffleArr(arr, num) {
         const res = [...arr].sort(() => 0.5 - Math.random());
         return res.slice(0, num);
     }
 
+    useEffect(() => {
+        // dispatch(followActions.fetchFollows());
+        // dispatch(userActions.fetchUsers());
+        // dispatch(trackActions.fetchTracks());
+        const testTracks = setTestTracks(shuffleArr(tracks, 4));
+    }, []);
+
+    console.log(testTracks);
     // useEffect(() => {
-    //     const fetchFollows = async () => {
-    //         const res = await csrfFetch('/api/follows')
-    //         const data = await res.json();
-    //         setFollowList(Object.values(data));
-    //     }
-    //     fetchFollows();
-    // }, [])
-
-    useEffect(() => {
-        dispatch(followActions.fetchFollows());
-        setSideTracks(shuffleArr(tracks, 3));
-    }, [])
-
-    useEffect(() => {
-        setArtistFollow(shuffleArr(users, 3));
-    }, [refresh])
+    //     setArtistFollow(shuffleArr(users, 3));
+    //     setArtistFollow(shuffleArr(users, 3));
+    //     setSideTracks(shuffleArr(tracks, 3));
+    // }, [refresh]);
 
 
     const artistList = shuffleArr(users, 10);
     const demolitionTracks = tracks.filter(track => track.userId === 1);
     const biggieTracks = tracks.filter(track => track.userId === 17);
-    // const sideTracks = shuffleArr(tracks, 4)
-    // const artistFollow = shuffleArr(users, 3);
+    const sideTracks = shuffleArr(tracks, 3)
+    const artistFollow = shuffleArr(users, 3);
 
     const sideTrackItem = sideTracks.map(track => {
         return <SideTrackItem track={track} />
