@@ -30,20 +30,7 @@ const TrackDisplay = ({track}) => {
     const [showMore, setShowMore] = useState(false);
     const [liked, setLiked] = useState(false);
     const [lStyle, setLstyle] = useState(unlikeStyle)
-
-    useEffect(() => {
-        if (track.imageUrl) setImageUrl(track.imageUrl);
-        if (sessionUser.id === track.userId) setShowMore(true);
-
-        dispatch(commentActions.fetchComments());
-
-    }, [])
-
-    useEffect(() => {
-        dispatch(commentActions.fetchComments());
-    }, [commentCounter])
-
-    const comments = useSelector(commentActions.getComments);
+    const [likeData, setLikeData] = useState({});
 
     const findLike = (trackId) => {
         const like = likeList.filter(function (el) {
@@ -52,6 +39,29 @@ const TrackDisplay = ({track}) => {
 
         return like[0];
     }
+
+    useEffect(() => {
+        if (track.imageUrl) setImageUrl(track.imageUrl);
+        if (sessionUser.id === track.userId) setShowMore(true);
+        setLikeData(findLike(track.id));
+        // console.log(likeData);
+        dispatch(commentActions.fetchComments());
+
+    }, [])
+
+    useEffect(() => {
+        dispatch(commentActions.fetchComments());
+    }, [commentCounter])
+
+    useEffect(() => {
+        if (likeData && likeData.trackId === track.id) {
+            // console.log(track.id);
+            setLiked(!liked)
+            setLstyle(likeStyle);
+        }
+    }, [likeData])
+
+    const comments = useSelector(commentActions.getComments);
 
     const handleComment = async (e) => {
         e.preventDefault();
@@ -99,9 +109,10 @@ const TrackDisplay = ({track}) => {
             // });
             // // const data = await res.json()
             // dispatch(likeActions.fetchLikes());
-            const likeData = findLike(track.id);
+            // const likeData = findLike(track.id);
             if (likeData) {
                 console.log(likeData);
+                console.log(track.id)
             } else {
                 console.log("Like not found");
             }
@@ -116,8 +127,10 @@ const TrackDisplay = ({track}) => {
             const likeData = findLike(track.id);
             if (likeData) {
                 console.log(likeData);
+                console.log(track.id);
             } else {
                 console.log("Like not found");
+                console.log(track.id);
             }
         }
     }
