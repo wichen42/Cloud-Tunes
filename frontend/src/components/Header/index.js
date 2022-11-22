@@ -12,7 +12,10 @@ const Header = () => {
     const sessionUser = useContext(SessionContext);
     const [profileClicked, setProfileClicked] = useState(false);
     const [optionsClicked, setOptionsClicked] = useState(false);
+    const [uploadStyle, setUploadStyle] = useState({});
     const [headerStyle, setHeaderStyle] = useState({});
+    const [optionStyle, setOptionStyle] = useState({});
+
 
     if (!sessionUser) return null;
 
@@ -21,7 +24,7 @@ const Header = () => {
         e.preventDefault();
         history.push('/')
     }
-
+    
     const handleUpload = (e) => {
         e.preventDefault();
         history.push('/upload');
@@ -37,16 +40,19 @@ const Header = () => {
     }
 
     const handleProfile = (e) => {
-        e.preventDefault();
+        e.preventDefault()
         if (!profileClicked) {
-            console.log("clicked");
             setProfileClicked(true);
             setHeaderStyle({backgroundColor: "black"});
         } else {
-            console.log("not clicked");
             setProfileClicked(false);
             setHeaderStyle({backgroundColor: "transparent"});
         }
+    }
+
+    const handleProfileOut = () => {
+        setHeaderStyle({backgroundColor: "transparent"});
+        setProfileClicked(false);
     }
 
     const handleOptions = (e) => {
@@ -93,9 +99,14 @@ const Header = () => {
                     <div className='next-pro'>Try Next Pro</div>
                     <div className='header-upload'
                     onClick={(e) => handleUpload(e)}
+                    onMouseEnter={() => setUploadStyle({backgroundColor: "black"})}
+                    onMouseLeave={() => setUploadStyle({backgroundColor: "transparent"})}
+                    style={uploadStyle}
                     >Upload</div>
                     <div className='header-profile'
                     onClick={(e) => handleProfile(e)}
+                    onMouseEnter={() => setHeaderStyle({backgroundColor: "black"})}
+                    onMouseLeave={() => handleProfileOut()}
                     tabIndex="1"
                     style={headerStyle}
                     >
