@@ -13,16 +13,27 @@ const Header = () => {
     const [profileClicked, setProfileClicked] = useState(false);
     const [optionsClicked, setOptionsClicked] = useState(false);
     const [homeStyle, setHomeStyle] = useState({});
+    const [libraryStyle, setLibraryStyle] = useState({});
+    const [feedStyle, setFeedStyle] = useState({});
     const [uploadStyle, setUploadStyle] = useState({});
     const [headerStyle, setHeaderStyle] = useState({});
     const [optionStyle, setOptionStyle] = useState({});
 
     if (!sessionUser) return null;
     
+    const blackBG = {
+        backgroundColor: "black"
+    }
+
+    const transparentBG = {
+        backgroundColor: "transparent"
+    }
+
     const handleHome = (e) => {
         e.preventDefault();
         history.push('/')
     }
+
     
     const handleUpload = (e) => {
         e.preventDefault();
@@ -31,26 +42,22 @@ const Header = () => {
 
     const handleFeed = (e) => {
         e.preventDefault();
-        if (sessionUser) {
-            history.push(`/users/${sessionUser.id}`);
-        } else {
-            history.push('/');
-        }
+        history.push(`/users/${sessionUser.id}`);
     }
 
     const handleProfile = (e) => {
         e.preventDefault()
         if (!profileClicked) {
             setProfileClicked(true);
-            setHeaderStyle({backgroundColor: "black"});
+            setHeaderStyle(blackBG);
         } else {
             setProfileClicked(false);
-            setHeaderStyle({backgroundColor: "transparent"});
+            setHeaderStyle(transparentBG);
         }
     }
 
     const handleProfileOut = () => {
-        setHeaderStyle({backgroundColor: "transparent"});
+        setHeaderStyle(transparentBG);
         setProfileClicked(false);
     }
 
@@ -60,7 +67,7 @@ const Header = () => {
     }
 
     const handleOptionOut = () => {
-        setOptionStyle({backgroundColor: "transparent"});
+        setOptionStyle(transparentBG);
         setOptionsClicked(false);
     }
 
@@ -77,15 +84,24 @@ const Header = () => {
                 <div className='header-start'>
                     <div className='header-home'
                     onClick={(e) => handleHome(e)}
+                    onMouseEnter={() => setHomeStyle(blackBG)}
+                    onMouseLeave={() => setHomeStyle(transparentBG)}
+                    style={homeStyle}
                     >
                         <div className='home-logo'></div>
                         <div className='home-text'>Home</div>
                     </div>
                     <div className='header-feed'
                     onClick={(e) => handleFeed(e)}
+                    onMouseEnter={() => setFeedStyle(blackBG)}
+                    onMouseLeave={() => setFeedStyle(transparentBG)}
+                    style={feedStyle}
                     >Feed</div>
                     <div className='header-library'
                     onClick={(e) => handleLibrary(e)}
+                    onMouseEnter={() => setLibraryStyle(blackBG)}
+                    onMouseLeave={() => setLibraryStyle(transparentBG)}
+                    style={libraryStyle}
                     >Library</div>
                 </div>
 
