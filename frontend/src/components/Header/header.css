@@ -48,7 +48,8 @@
 
 .header-home {
     flex-grow: 3;
-    background-color: black;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
     height: 100%;
     display: flex;
 }

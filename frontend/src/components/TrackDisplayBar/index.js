@@ -79,9 +79,6 @@ const TrackDisplay = ({track}) => {
         return data;
     }
 
-
-
-
     const handleShowComments = (e) => {
         e.preventDefault();
         setShowComment(!showComment);
@@ -101,37 +98,17 @@ const TrackDisplay = ({track}) => {
 
     const handleLike = async (e) => {
         e.preventDefault(); 
-        if (liked === false) {
+        if (liked) {
             setLiked(!liked)
             setLstyle(likeStyle);
-            // const res = await csrfFetch(`/api/tracks/${track.id}/like`, {
-            //     method: 'POST'
-            // });
-            // // const data = await res.json()
-            // dispatch(likeActions.fetchLikes());
-            // const likeData = findLike(track.id);
-            if (likeData) {
-                console.log(likeData);
-                console.log(track.id)
-            } else {
-                console.log("Like not found");
-            }
+            await csrfFetch(`/api/tracks/${track.id}/like`, {
+                method: 'POST'
+            });
+            dispatch(likeActions.fetchLikes());
         } else {
             setLiked(!liked)
             setLstyle(unlikeStyle);
-            // const res = await csrfFetch(`/api/tracks/${track.id}/like`, {
-            //     method: 'DELETE'
-            // });
-            // // const data = await res.json();
-            // dispatch(likeActions.deleteLike(track.id));
-            const likeData = findLike(track.id);
-            if (likeData) {
-                console.log(likeData);
-                console.log(track.id);
-            } else {
-                console.log("Like not found");
-                console.log(track.id);
-            }
+            dispatch(likeActions.deleteLike(track.id));
         }
     }
 

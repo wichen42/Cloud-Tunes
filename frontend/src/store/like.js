@@ -20,17 +20,14 @@ export const getLikes = ({likes}) => likes ? Object.values(likes) : [];
 export const fetchLikes = () => async dispatch => {
     const res = await csrfFetch('/api/likes');
     const data = await res.json();
-    console.log(data);
     dispatch(receiveLikes(data));
-    return data
 }
 
 export const deleteLike = (trackId) => async dispatch => {
     const res = await csrfFetch(`/api/tracks/${trackId}/like`, {
         method: 'DELETE'
     });
-    const data = await res.json();
-    console.log(data);
+    dispatch(removeLike(trackId));
 }
 
 

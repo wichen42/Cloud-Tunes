@@ -4,6 +4,7 @@ import * as sessionActions from '../../store/session';
 import * as userActions from '../../store/users';
 import * as trackActions from '../../store/track';
 import * as followActions from '../../store/follow';
+import * as likeActions from '../../store/like';
 import DiscoverSlider from "../DiscoverSlider";
 import Playlist from "../Playlist";
 import { useEffect, useState } from "react";
@@ -19,10 +20,12 @@ const DiscoverPage = () => {
     const users = useSelector(userActions.getUsers);
     const tracks = useSelector(trackActions.getTracks);
     let sessionUser = useSelector(sessionActions.getSession);
+    const likeList = useSelector(likeActions.getLikes);
     const [refresh, setRefresh] = useState(0);
     // const [artistFollow, setArtistFollow] = useState([]);
     // const [sideTracks, setSideTracks] = useState([]);
     const [testTracks, setTestTracks] = useState([]);
+    const [likes, setLikes] = useState([]);
 
 
     function shuffleArr(arr, num) {
@@ -35,9 +38,12 @@ const DiscoverPage = () => {
         // dispatch(userActions.fetchUsers());
         // dispatch(trackActions.fetchTracks());
         const testTracks = setTestTracks(shuffleArr(tracks, 4));
+        const likeData = likeList.filter(function (el) {
+            return el.userId === sessionUser.id;
+        })
+        console.log(likeData);
     }, []);
 
-    console.log(testTracks);
     // useEffect(() => {
     //     setArtistFollow(shuffleArr(users, 3));
     //     setArtistFollow(shuffleArr(users, 3));

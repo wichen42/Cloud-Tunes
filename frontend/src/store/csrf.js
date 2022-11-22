@@ -25,7 +25,6 @@ export function storeCSRFToken(response) {
       }
       options.headers["X-CSRF-Token"] = sessionStorage.getItem("X-CSRF-Token");
     }
-
     const res = await fetch(url, options);
     if (res.status >= 400) throw res;
   

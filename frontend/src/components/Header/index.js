@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import './header.css';
-import  { useHistory} from 'react-router-dom';
+import  { useHistory, useParams} from 'react-router-dom';
 import { SessionContext } from '../../Context/SessionContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ProfileDropdown from '../ProfileDropdown';
@@ -12,14 +12,13 @@ const Header = () => {
     const sessionUser = useContext(SessionContext);
     const [profileClicked, setProfileClicked] = useState(false);
     const [optionsClicked, setOptionsClicked] = useState(false);
+    const [homeStyle, setHomeStyle] = useState({});
     const [uploadStyle, setUploadStyle] = useState({});
     const [headerStyle, setHeaderStyle] = useState({});
     const [optionStyle, setOptionStyle] = useState({});
 
-
     if (!sessionUser) return null;
-
-
+    
     const handleHome = (e) => {
         e.preventDefault();
         history.push('/')
