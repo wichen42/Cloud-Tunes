@@ -60,6 +60,11 @@ const Header = () => {
         setOptionsClicked(!optionsClicked);
     }
 
+    const handleOptionOut = () => {
+        setOptionStyle({backgroundColor: "transparent"});
+        setOptionsClicked(false);
+    }
+
     const handleLibrary = (e) => {
         e.preventDefault();
         history.push('/library');
@@ -107,7 +112,6 @@ const Header = () => {
                     onClick={(e) => handleProfile(e)}
                     onMouseEnter={() => setHeaderStyle({backgroundColor: "black"})}
                     onMouseLeave={() => handleProfileOut()}
-                    tabIndex="1"
                     style={headerStyle}
                     >
                         <div>
@@ -116,11 +120,11 @@ const Header = () => {
                         {profileClicked && <ProfileDropdown />}
                     </div>
                     <div className='header-icons'>
-                        {/* <div className='header-bell'></div>
-                        <div className='header-mail'></div> */}
                         <div className='header-options'
-                        tabIndex="2"
                         onClick={(e) => {handleOptions(e)}}
+                        onMouseEnter={() => setOptionStyle({backgroundColor: "black"})}
+                        onMouseLeave={() => handleOptionOut()}
+                        style={optionStyle}
                         >
                             <FontAwesomeIcon icon="fa-solid fa-caret-down" />
                             {optionsClicked && <OptionsDropdown />}

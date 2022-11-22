@@ -88,6 +88,10 @@
 
 .header-icons {
     margin-left: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 100%;
 }
 
 .header-bell {
@@ -107,8 +111,11 @@
 }
 
 .header-options {
-    height: 20px;
     width: 20px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .header-profile {
@@ -119,3 +126,4 @@
 .header-upload {
     height: 100%;
 }
+
