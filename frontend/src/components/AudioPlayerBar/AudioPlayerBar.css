@@ -8,6 +8,7 @@
     background-color: #F2F2F2;
     justify-content: center;
     align-items: center;
+    z-index: 45;
 }
 
 .audio-bar {

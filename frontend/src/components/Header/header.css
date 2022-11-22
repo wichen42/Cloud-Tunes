@@ -109,14 +109,10 @@
 .header-options {
     height: 20px;
     width: 20px;
-    background-image: url('../../assets/icons/square-caret.svg');
-    background-repeat: no-repeat;
-    stroke: white;
 }
 
-.header-profile:focus {
+.header-profile {
     height: 100%;
-    background-color: black;
     width: fit-content;
 }
 

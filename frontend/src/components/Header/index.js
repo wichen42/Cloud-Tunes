@@ -2,6 +2,7 @@ import { useContext, useState } from 'react';
 import './header.css';
 import  { useHistory} from 'react-router-dom';
 import { SessionContext } from '../../Context/SessionContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ProfileDropdown from '../ProfileDropdown';
 import OptionsDropdown from '../OptionsDropdown';
 
@@ -11,8 +12,10 @@ const Header = () => {
     const sessionUser = useContext(SessionContext);
     const [profileClicked, setProfileClicked] = useState(false);
     const [optionsClicked, setOptionsClicked] = useState(false);
+    const [headerStyle, setHeaderStyle] = useState({});
 
     if (!sessionUser) return null;
+
 
     const handleHome = (e) => {
         e.preventDefault();
@@ -35,7 +38,15 @@ const Header = () => {
 
     const handleProfile = (e) => {
         e.preventDefault();
-        setProfileClicked(!profileClicked);
+        if (!profileClicked) {
+            console.log("clicked");
+            setProfileClicked(true);
+            setHeaderStyle({backgroundColor: "black"});
+        } else {
+            console.log("not clicked");
+            setProfileClicked(false);
+            setHeaderStyle({backgroundColor: "transparent"});
+        }
     }
 
     const handleOptions = (e) => {
@@ -47,6 +58,8 @@ const Header = () => {
         e.preventDefault();
         history.push('/library');
     }
+
+
 
     return (
         <div className='header-container'>
@@ -84,9 +97,10 @@ const Header = () => {
                     <div className='header-profile'
                     onClick={(e) => handleProfile(e)}
                     tabIndex="1"
+                    style={headerStyle}
                     >
                         <div>
-                            {sessionUser.user ? sessionUser.user.username : sessionUser.username} ⌄
+                            {sessionUser.user ? sessionUser.user.username : sessionUser.username} &nbsp;  <FontAwesomeIcon icon="fa-solid fa-chevron-down" size='xs'/>
                         </div>
                         {profileClicked && <ProfileDropdown />}
                     </div>
@@ -97,6 +111,7 @@ const Header = () => {
                         tabIndex="2"
                         onClick={(e) => {handleOptions(e)}}
                         >
+                            <FontAwesomeIcon icon="fa-solid fa-caret-down" />
                             {optionsClicked && <OptionsDropdown />}
                         </div>
                     </div>

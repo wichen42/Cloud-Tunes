@@ -1,8 +1,7 @@
 .profileDropdown {
     position: absolute;
     top: 35px;
-    width: 91px;
-    transform: translate(0%);
+    width: 127px;
     background-color: white;
     border: 1px solid lightgray;
     display: flex;
@@ -13,6 +12,7 @@
 
 .profileDropdown a {
     width: 100%;
+    justify-content: center;
     color: black;
     padding-left: 5px;
 }
