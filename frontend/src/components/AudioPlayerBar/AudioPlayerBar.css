@@ -212,7 +212,6 @@
 
 .track-volume-container {
     position: relative;
-    width: 100%;
 }
 
 .track-volume-slider {
@@ -250,6 +249,6 @@
     align-items: center;
     justify-content: center;
     top: -135%;
-    left: 895px;
+    left: 1040px;
     z-index: 100;
   }

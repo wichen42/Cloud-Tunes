@@ -35,9 +35,6 @@ const DiscoverPage = () => {
     }
 
     useEffect(() => {
-        // dispatch(followActions.fetchFollows());
-        // dispatch(userActions.fetchUsers());
-        // dispatch(trackActions.fetchTracks());
         const testTracks = setTestTracks(shuffleArr(tracks, 4));
         const likeData = likeList.filter(function (el) {
             return el.userId === sessionUser.id;
@@ -51,6 +48,7 @@ const DiscoverPage = () => {
     //     setSideTracks(shuffleArr(tracks, 3));
     // }, [refresh]);
 
+    console.log(testTracks);
 
     const artistList = shuffleArr(users, 10);
     const demolitionTracks = tracks.filter(track => track.userId === 1);

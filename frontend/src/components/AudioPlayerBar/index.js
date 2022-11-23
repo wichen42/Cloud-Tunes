@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 import * as trackActions from '../../store/track';
 import * as playlistActions from '../../store/playlist';
 import * as userActions from '../../store/users';
+import * as likeActions from '../../store/like';
 import PlayListBar from '../PlayListBar';
 import { useHistory } from 'react-router-dom';
 
@@ -37,19 +38,20 @@ const AudioPlayerBar = () => {
     const tracks = useSelector(trackActions.getTracks);
     const playlist = useSelector(playlistActions.getPlaylist);
     const users = useSelector(userActions.getUsers);
+    const likeList = useSelector(likeActions.getLikes);
     const trackList = playlist.map(track => track.trackUrl);
     const history = useHistory();
 
     useEffect(() => {
         audioPlayer.current.play();       
         // setArtist(trackList[trackNum].username) 
-    }, [trackNum])
+    }, [trackNum]);
     
     useEffect(() => {
         const seconds = Math.floor(audioPlayer.current.duration)
         setDuration(seconds);
         progressBar.current.max = seconds;
-    }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
+    }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState]);
     
     const handlePlay = (e) => {
         const prevState = isPlaying;
@@ -65,23 +67,23 @@ const AudioPlayerBar = () => {
         } else {
             audioPlayer.current.pause();
             cancelAnimationFrame(sliderRef.current);
-        }
-    }
+        };
+    };
 
     const whilePlay = () => {
         progressBar.current.value = audioPlayer.current.currentTime;
         progressBar.current.style.setProperty('--bar-before', `${progressBar.current.value / duration * 100}%`)
         setCurrentTime(progressBar.current.value);
         sliderRef.current = requestAnimationFrame(whilePlay);
-    }
+    };
 
     const volumeBackground = {
         backgroundImage: volBackground
-    }
+    };
     
     const buttonBackground = {
         backgroundImage: playPause
-    }
+    };
 
     const convertTime = (seconds) => {
         const minutes = Math.floor(seconds / 60);
@@ -89,22 +91,22 @@ const AudioPlayerBar = () => {
         const second = Math.floor(seconds % 60);
         const sec = second < 10 ? `0${second}` : `${second}`;
         return `${min}:${sec}`;
-    }
+    };
 
     const handleChange = () => {
 
         audioPlayer.current.currentTime = progressBar.current.value;
         progressBar.current.style.setProperty('--bar-before', `${progressBar.current.value / duration * 100}%`)
         setCurrentTime(progressBar.current.value);
-    }
+    };
 
     const handleNext = (e) => {
         if (trackNum >= trackList.length-1 ) {
             setTrackNum(0);
         } else {
             setTrackNum(trackNum + 1);
-        }
-    }
+        };
+    };
 
     const handlePrev = (e) => {
         e.preventDefault();
@@ -112,13 +114,13 @@ const AudioPlayerBar = () => {
             setTrackNum(4);
         } else {
             setTrackNum(trackNum-1);
-        }
-    }
+        };
+    };
 
     const handlePlaylist = (e) => {
         e.preventDefault();
         setPlayListClicked(!playListClicked); 
-    }
+    };
 
     const handleArtist = (e) => {
         e.preventDefault();
@@ -126,17 +128,27 @@ const AudioPlayerBar = () => {
             return el.username === playlist[trackNum].username;
         });
         history.push(`/users/${user[0].id}`);
-    }
+    };
 
     const handleShowVolume = (e) => {
         e.preventDefault();
         setShowVol(!showVol);
-    }
+    };
 
     const handleVolume = (e) => {
         setVolume(e.target.value);
         console.log(volume);
         audioPlayer.current.volume = (volume / 10);
+    };
+
+    const handleLike = (e) => {
+        e.preventDefault();
+        console.log(playlist[trackNum]);
+    };
+
+    const handleFollow = (e) => {
+        e.preventDefault();
+        console.log(playlist[trackNum].username);
     }
 
     return ( 
@@ -213,8 +225,12 @@ const AudioPlayerBar = () => {
                 </div>
 
                 <div className='track-socials'>
-                    <button className='track-like'></button>
-                    <button className='artist-follow'></button>
+                    <button className='track-like'
+                    onClick={(e) => handleLike(e)}
+                    ></button>
+                    <button className='artist-follow'
+                    onClick={(e) => handleFollow(e)}
+                    ></button>
                     <button className='playlist-tab'
                     onClick={(e) => handlePlaylist(e)}
                     ></button>
