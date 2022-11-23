@@ -22,9 +22,12 @@ const PlayListBar = ({tracks, close}) => {
         <div className='playlist-menu'>
 
             <div className='playlist-header'>
-                <div className='playlist-header-text'>Next Up</div>
+                <div className='playlist-header-text'
+                id='playlist-header-text-id'
+                >Next Up</div>
                 <div className='playlist-header-buttons'>
                     <div className='playlist-clear-button'
+                    id="playlist-clear-id"
                     onClick={(e) => handleClear(e)}
                     >Clear</div>
                     <div className='playlist-close-button'

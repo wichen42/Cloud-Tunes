@@ -1,6 +1,6 @@
 .playlist-menu {
     position: absolute;
-    top: -653px;
+    top: -698px;
     right: 315px;
     display: flex;
     flex-direction: column;
@@ -12,7 +12,7 @@
     overflow: scroll;
     border: 1px solid black;
     border-radius: 4px;
-    padding-top: 30px;
+    padding-top: 75px;
 }
 
 .playlist-titles {
@@ -65,10 +65,15 @@
     cursor: pointer;
 }
 
+#playlist-header-text-id{
+    cursor: default;
+}
+
 .playlist-clear-button {
     border: 1px solid lightgray;
     border-radius: 5px;
     margin-left: 50px;
+    padding: 5px;
 }
 
 .playlist-clear-button:hover {
