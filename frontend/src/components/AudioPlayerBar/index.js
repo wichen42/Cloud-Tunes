@@ -128,13 +128,31 @@ const AudioPlayerBar = () => {
         history.push(`/users/${user[0].id}`);
     }
 
-    const handleVolume = (e) => {
+    const handleShowVolume = (e) => {
         e.preventDefault();
         setShowVol(!showVol);
     }
 
+    const handleVolume = (e) => {
+        setVolume(e.target.value);
+        console.log(volume);
+    }
+
     return ( 
-        
+        <>
+        {showVol && (
+            <div className='volume-slider-container'>
+                <input type="range" 
+                min="1" max="100"
+                className='track-volume-slider'
+                ref={audioVolume}
+                defaultValue={volume}
+                onMouseLeave={() => setShowVol(false)}
+                onChange={(e) => handleVolume(e)}
+                ></input>
+            </div>
+        )}
+
         <div id='audio-bar-container'>
             <div className='audio-bar'>
             <audio src={trackList[trackNum]} ref={audioPlayer} id='myAudio'></audio>
@@ -169,18 +187,16 @@ const AudioPlayerBar = () => {
             
             <div className='track-volume-container'>
                 <button id='track-volume' style={volumeBackground}
-                onClick={(e) => handleVolume(e)}
-                onMouseEnter={() => setShowVol(true)}
-                ></button>
-                {showVol && (
-                         <input type="range" 
-                         min="1" max="100"
-                         className='track-volume-slider'
-                         ref={audioVolume}
-                         defaultValue={volume}
-                         onMouseLeave={() => setShowVol(false)}
-                         ></input>
-                )}
+                onClick={(e) => handleShowVolume(e)}
+                onMouseEnter={() => {
+                    setTimeout(() => {
+                        setShowVol(true);
+                    }, 250);
+                }}
+                >
+
+                </button>
+
             </div>
 
             <div className='track-info'>
@@ -205,6 +221,7 @@ const AudioPlayerBar = () => {
             </div>
         </div>
         </div>
+        </>
     );
 }
  
