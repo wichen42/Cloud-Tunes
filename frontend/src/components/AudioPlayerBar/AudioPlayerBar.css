@@ -217,7 +217,6 @@
 
 .track-volume-slider {
     position: absolute;
-    border: 1px solid lightgrey;
     -webkit-appearance: none;  /* Override default CSS styles */
     appearance: none;
     width: 80%; /* Full-width */
@@ -243,13 +242,14 @@
     position: absolute;
     background-color: #F2F2F2;
     border: 1px solid rgb(167, 167, 167);
-    height: 25px;
+    height: 30px;
     border-radius: 2px;
-    width: 90px;
+    width: 105px;
     transform: rotate(270deg);
     display: flex;
     align-items: center;
     justify-content: center;
-    top: 100%;
+    top: -135%;
+    left: 895px;
     z-index: 100;
   }

@@ -32,7 +32,7 @@ const AudioPlayerBar = () => {
     const [showVol, setShowVol] = useState(false);
     const [artist, setArtist] = useState("");
     const [title, setTitle] = useState("");
-    const [volume, setVolume] = useState(25);
+    const [volume, setVolume] = useState(5);
 
     const tracks = useSelector(trackActions.getTracks);
     const playlist = useSelector(playlistActions.getPlaylist);
@@ -136,14 +136,18 @@ const AudioPlayerBar = () => {
     const handleVolume = (e) => {
         setVolume(e.target.value);
         console.log(volume);
+        audioPlayer.current.volume = (volume / 10);
     }
 
     return ( 
         <>
+
+
+        <div id='audio-bar-container'>
         {showVol && (
             <div className='volume-slider-container'>
                 <input type="range" 
-                min="1" max="100"
+                min="-1" max="11"
                 className='track-volume-slider'
                 ref={audioVolume}
                 defaultValue={volume}
@@ -152,8 +156,6 @@ const AudioPlayerBar = () => {
                 ></input>
             </div>
         )}
-
-        <div id='audio-bar-container'>
             <div className='audio-bar'>
             <audio src={trackList[trackNum]} ref={audioPlayer} id='myAudio'></audio>
             <div className='button-container'>
