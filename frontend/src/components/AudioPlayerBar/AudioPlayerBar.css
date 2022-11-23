@@ -217,13 +217,14 @@
 .track-volume-slider {
     position: absolute;
     transform: rotate(270deg);
-    top: -70%;
-    left: -3%;
-    border: 1px solid gray;
+    top: -250%;
+    left: -6%;
+    border: 10px solid gray;
+    border-radius: 4px;
     -webkit-appearance: none;  /* Override default CSS styles */
     appearance: none;
     width: 20%; /* Full-width */
-    height: 3px; /* Specified height */
+    height: 2px; /* Specified height */
     background: #d3d3d3; /* Grey background */
     -webkit-transition: .2s; /* 0.2 seconds transition on hover */
     transition: opacity .2s;

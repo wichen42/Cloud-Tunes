@@ -22,6 +22,7 @@ const AudioPlayerBar = () => {
     const [playPause, setPlayPause] = useState(playUrl);
     const audioPlayer = useRef();
     const progressBar = useRef();
+    const audioVolume = useRef();
     const sliderRef = useRef();
     const [volBackground, setVolbackground] = useState(volLowUrl);
     const [duration, setDuration] = useState(0);
@@ -31,6 +32,7 @@ const AudioPlayerBar = () => {
     const [showVol, setShowVol] = useState(false);
     const [artist, setArtist] = useState("");
     const [title, setTitle] = useState("");
+    const [volume, setVolume] = useState(25);
 
     const tracks = useSelector(trackActions.getTracks);
     const playlist = useSelector(playlistActions.getPlaylist);
@@ -168,11 +170,15 @@ const AudioPlayerBar = () => {
             <div className='track-volume-container'>
                 <button id='track-volume' style={volumeBackground}
                 onClick={(e) => handleVolume(e)}
+                onMouseEnter={() => setShowVol(true)}
                 ></button>
                 {showVol && (
                          <input type="range" 
-                         min="1" max="100" value="50"
-                         className='track-volume-slider' 
+                         min="1" max="100"
+                         className='track-volume-slider'
+                         ref={audioVolume}
+                         defaultValue={volume}
+                         onMouseLeave={() => setShowVol(false)}
                          ></input>
                 )}
             </div>
