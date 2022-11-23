@@ -62,3 +62,11 @@
     border-bottom: 1px solid lightgray;
     color: gray;
 }
+
+.view-likes {
+    cursor: pointer;
+}
+
+.view-likes:hover {
+    color: black;
+}

@@ -14,6 +14,7 @@ import './components/FontAwesomeIcons';
 import * as trackActions from "./store/track";
 import * as sessionActions from './store/session';
 import * as likeActions from './store/like';
+import LikesPage from "./components/LikesPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -46,6 +47,10 @@ function App() {
 
           <Route path={"/users/:id"}>
             <UserProfilePage />
+          </Route>
+
+          <Route path={"/you/likes"}>
+            <LikesPage />
           </Route>
 
           <Route path={"/"}>

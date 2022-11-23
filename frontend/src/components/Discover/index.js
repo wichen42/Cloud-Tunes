@@ -40,8 +40,8 @@ const DiscoverPage = () => {
         const testTracks = setTestTracks(shuffleArr(tracks, 4));
         const likeData = likeList.filter(function (el) {
             return el.userId === sessionUser.id;
-        })
-        console.log(likeData);
+        });
+        setLikes(likeData);
     }, []);
 
     // useEffect(() => {
@@ -107,7 +107,10 @@ const DiscoverPage = () => {
                     {/* User's liked tracks show here */}
                     <div className="side-panel-likes-header">
                         <div className="side-panel-likes-heart">
-                            <FontAwesomeIcon icon="fa-solid fa-heart" /> X Likes
+                            <FontAwesomeIcon icon="fa-solid fa-heart" /> {likes.length} Likes
+                        </div>
+                        <div className="view-likes">
+                            View All
                         </div>
                     </div>
 

@@ -56,7 +56,7 @@ const TrackDisplay = ({track}) => {
     useEffect(() => {
         if (likeData && likeData.trackId === track.id) {
             // console.log(track.id);
-            setLiked(!liked)
+            setLiked(!liked);
             setLstyle(likeStyle);
         }
     }, [likeData])
@@ -98,8 +98,8 @@ const TrackDisplay = ({track}) => {
 
     const handleLike = async (e) => {
         e.preventDefault(); 
-        if (liked) {
-            setLiked(!liked)
+        if (!liked) {
+            setLiked(true)
             setLstyle(likeStyle);
             await csrfFetch(`/api/tracks/${track.id}/like`, {
                 method: 'POST'
