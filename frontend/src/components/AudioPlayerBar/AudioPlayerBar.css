@@ -208,3 +208,34 @@
     color: #FF5500;
     text-decoration: underline;
 }
+
+.track-volume-container {
+    position: relative;
+    width: 100%;
+}
+
+.track-volume-slider {
+    position: absolute;
+    transform: rotate(270deg);
+    top: -70%;
+    left: -3%;
+    border: 1px solid gray;
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 20%; /* Full-width */
+    height: 3px; /* Specified height */
+    background: #d3d3d3; /* Grey background */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.track-volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 12px; /* Set a specific slider handle width */
+    height: 12px; /* Slider handle height */
+    border-radius: 50%;
+    background: #FF5500; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+  }

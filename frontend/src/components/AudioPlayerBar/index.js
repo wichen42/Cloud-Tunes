@@ -28,6 +28,7 @@ const AudioPlayerBar = () => {
     const [currentTime, setCurrentTime] = useState(0);
     const [trackNum, setTrackNum] = useState();
     const [playListClicked, setPlayListClicked] = useState(false);
+    const [showVol, setShowVol] = useState(false);
     const [artist, setArtist] = useState("");
     const [title, setTitle] = useState("");
 
@@ -125,6 +126,11 @@ const AudioPlayerBar = () => {
         history.push(`/users/${user[0].id}`);
     }
 
+    const handleVolume = (e) => {
+        e.preventDefault();
+        setShowVol(!showVol);
+    }
+
     return ( 
         
         <div id='audio-bar-container'>
@@ -159,8 +165,16 @@ const AudioPlayerBar = () => {
                 <div className='track-end'>{(duration && !isNaN(duration)) ? convertTime(duration) : ""}</div>
             </div>
             
-            <div>
-                <button id='track-volume' style={volumeBackground}></button>
+            <div className='track-volume-container'>
+                <button id='track-volume' style={volumeBackground}
+                onClick={(e) => handleVolume(e)}
+                ></button>
+                {showVol && (
+                         <input type="range" 
+                         min="1" max="100" value="50"
+                         className='track-volume-slider' 
+                         ></input>
+                )}
             </div>
 
             <div className='track-info'>
