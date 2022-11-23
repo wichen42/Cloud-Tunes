@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import * as sessionActions from '../../store/session';
 import * as userActions from '../../store/users';
 import * as trackActions from '../../store/track';
@@ -26,6 +26,7 @@ const DiscoverPage = () => {
     // const [sideTracks, setSideTracks] = useState([]);
     const [testTracks, setTestTracks] = useState([]);
     const [likes, setLikes] = useState([]);
+    const history = useHistory();
 
 
     function shuffleArr(arr, num) {
@@ -72,6 +73,11 @@ const DiscoverPage = () => {
         setRefresh(val => val + 1);
     }
 
+    const handleViewAll = (e) => {
+        e.preventDefault();
+        history.push('/you/likes');
+    }
+
     return (
         <div className="discover-container">
             <div className="discover-body">
@@ -109,7 +115,9 @@ const DiscoverPage = () => {
                         <div className="side-panel-likes-heart">
                             <FontAwesomeIcon icon="fa-solid fa-heart" /> {likes.length} Likes
                         </div>
-                        <div className="view-likes">
+                        <div className="view-likes"
+                        onClick={(e) => handleViewAll(e)}
+                        >
                             View All
                         </div>
                     </div>
