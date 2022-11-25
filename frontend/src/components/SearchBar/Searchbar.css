@@ -45,7 +45,21 @@
     color: white;
 }
 
+.search-result-icon {
+    transition: .2s ease-in;
+}
+
+.search-result-icon:hover {
+    color: #FF5500;
+}
+
 .search-result-name {
     margin-left: 8px;
     align-self: center;
+    width: 100%;
+    height: 100%;
+    transition: .2s ease-in;
 }
+
+
+
