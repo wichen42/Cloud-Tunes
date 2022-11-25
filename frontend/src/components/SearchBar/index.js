@@ -15,10 +15,18 @@ const SearchBar = () => {
 
     useEffect(() => {
         const allData = [];
+        const newData = [];
         userList.map((el) => allData.push(el.username));
         trackList.map((el) => allData.push(el.title));
-        console.log(allData);
-    }, [userList, trackList])
+        for (let i = 0; i < userList.length; i++) {
+            newData.push({
+                key: i,
+                name: allData[i]
+            });
+        };
+        setData(newData);
+    }, [userList, trackList]);
+
 
     return ( 
         <div className='header-search-container'>
@@ -32,9 +40,15 @@ const SearchBar = () => {
                 </button>
             </div>
             <div className='search-dropdown'>
-                {userList.map((searchItem) => (
-                    <div>
-                        {searchItem.username ? searchItem.username : searchItem.title} 
+                {data.filter((searchItem) => {
+                    const searchValue = value.toLowerCase();
+                    const name = searchItem.name.toLowerCase();
+                    return (
+                        searchValue && name.startsWith(searchValue)
+                    );
+                }).map((searchItem) => (
+                    <div className='search-result'>
+                        {searchItem.name} 
                     </div>
                 ))}
             </div>
