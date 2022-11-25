@@ -27,6 +27,10 @@ const SearchBar = () => {
         setData(newData);
     }, [userList, trackList]);
 
+    const handleClick = (searchItem) => {
+        setValue(searchItem);
+        console.log(searchItem);
+    }
 
     return ( 
         <div className='header-search-container'>
@@ -44,11 +48,19 @@ const SearchBar = () => {
                     const searchValue = value.toLowerCase();
                     const name = searchItem.name.toLowerCase();
                     return (
-                        searchValue && name.startsWith(searchValue)
+                        searchValue && name.startsWith(searchValue) && searchValue !== name
                     );
                 }).map((searchItem) => (
-                    <div className='search-result'>
-                        {searchItem.name} 
+                    <div className='search-result'
+                    onClick={() => handleClick(searchItem.name)}
+                    key={searchItem.key}
+                    >
+                        <div className='search-result-icon'>
+                            <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" size='sm'/>       
+                        </div>
+                        <div className='search-result-name'>
+                            {searchItem.name}
+                        </div> 
                     </div>
                 ))}
             </div>
