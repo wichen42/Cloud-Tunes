@@ -5,6 +5,7 @@ import { SessionContext } from '../../Context/SessionContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ProfileDropdown from '../ProfileDropdown';
 import OptionsDropdown from '../OptionsDropdown';
+import SearchBar from '../SearchBar';
 
 const Header = () => {
 
@@ -105,12 +106,7 @@ const Header = () => {
                     >Library</div>
                 </div>
 
-                <div className='header-search'>
-                    <input type="search"
-                    className='search'
-                    placeholder='Search functionality coming soon'
-                    />
-                </div>
+                <SearchBar />
 
                 <div className='header-end'>
                     <div className='go-plus'

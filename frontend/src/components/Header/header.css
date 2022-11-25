@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 35px;
+    height: 40px;
     background-color: #333333;
     width: 100vw;
     position: sticky;
@@ -57,10 +57,20 @@
 .header-search {
     flex-grow: 1;
     margin-right: 15px;
+    display: flex;
+    position: relative;
+    height: fit-content;
+    width: fit-content;
 }
 
 .search {
     width: 100%;
+    height: 100%;
+    font-size: inherit;
+}
+
+.search:focus {
+    outline: none;
 }
 
 .header-end {
