@@ -2,7 +2,7 @@
     position: absolute;
     top: 35px;
     width: 95px;
-    transform: translate(-20%);
+    transform: translate(0%);
     background-color: white;
     border: 1px solid lightgray;
     display: flex;

@@ -35,20 +35,12 @@ const DiscoverPage = () => {
     }
 
     useEffect(() => {
-        const testTracks = setTestTracks(shuffleArr(tracks, 4));
         const likeData = likeList.filter(function (el) {
-            return el.userId === sessionUser.id;
+            if (sessionUser) return el.userId === sessionUser.id;
         });
         setLikes(likeData);
-    }, []);
-
-    // useEffect(() => {
-    //     setArtistFollow(shuffleArr(users, 3));
-    //     setArtistFollow(shuffleArr(users, 3));
-    //     setSideTracks(shuffleArr(tracks, 3));
-    // }, [refresh]);
-
-    console.log(testTracks);
+    }, [likeList]);
+    
 
     const artistList = shuffleArr(users, 10);
     const demolitionTracks = tracks.filter(track => track.userId === 1);

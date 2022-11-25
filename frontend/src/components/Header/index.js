@@ -116,7 +116,7 @@ const Header = () => {
                     <div className='go-plus'
                     onClick={() => window.open('https://www.appacademy.io/', '_blank')}
                     >Try App Academy</div>
-                    <div className='next-pro'>Try Next Pro</div>
+                    {/* <div className='next-pro'>Try Next Pro</div> */}
                     <div className='header-upload'
                     onClick={(e) => handleUpload(e)}
                     onMouseEnter={() => setUploadStyle({backgroundColor: "black"})}
@@ -141,7 +141,8 @@ const Header = () => {
                         onMouseLeave={() => handleOptionOut()}
                         style={optionStyle}
                         >
-                            <FontAwesomeIcon icon="fa-solid fa-caret-down" />
+                            More&nbsp; <FontAwesomeIcon icon="fa-solid fa-caret-down" id='header-carrot'/>
+
                             {optionsClicked && <OptionsDropdown />}
                         </div>
                     </div>
