@@ -56,7 +56,7 @@ const DiscoverPage = () => {
         return <FollowUserItem key={artist.id} artist={artist} tracks={tracks} follows={follows} users={users}/>
     })
 
-    if(!sessionUser) return <Redirect to='/'/>;
+    if(!sessionUser.user) return <Redirect to='/'/>;
     
     const handleRefresh = (e) => {
         e.preventDefault();

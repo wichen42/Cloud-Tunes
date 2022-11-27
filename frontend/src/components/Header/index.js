@@ -20,7 +20,7 @@ const Header = () => {
     const [headerStyle, setHeaderStyle] = useState({});
     const [optionStyle, setOptionStyle] = useState({});
 
-    if (!sessionUser) return null;
+    if (!sessionUser.user) return null;
     
     const blackBG = {
         backgroundColor: "black"

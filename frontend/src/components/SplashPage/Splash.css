@@ -1,11 +1,92 @@
 .splash-slider-container {
     width: 100%;
     height: 450px;
+    display: flex;
+    flex-direction: column;
 }
 
 .splash-container {
     width: 1275px;
-    border: 1px solid black;
     margin: auto;
+}
+
+.splash-content-container {
+    margin-top: 50px;
+    display: flex;
+}
+
+.splash1-img {
+    height: autopx;
+    width: 800px;
+}
+
+.splash-1-text {
+    margin-left: 35px;
+    margin-top: 65px;
+}
+
+.splash-1-p {
+    font-size: 25px;
+    margin-bottom: 10px;
+    color: rgb(51,51,51);
+
+}
+
+.splash-1-header {
+    font-size: 40px;
+    margin-bottom: 15px;
+    color: rgb(51,51,51);
+}
+
+.gradient-bar {
+    height: 4px;
+    width: 75px;
+    margin-bottom: 20px;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(83,83,208,1) 0%, rgba(255,85,0,1) 100%);
+}
+
+.splash-1-button-container {
+    display: flex;
+    margin-top: 55px;
+}
+
+.splash-button {
+    background-color: black;
+    color: white;
+    margin-right: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: .2s ease-in;
+}
+
+.splash-button:hover {
+    background-color: #FF5500;
+    color: white;
+}
+
+.splash-2-text {
+    display: flex;
+    padding-top: 1px;
+    width: 100%;
+}
+
+.splash-2-text-container {
+    background-color: rgb(1,1,1);
+    color: white;
+    width: 100%;
+    padding-top: 60px;
+    padding-left: 60px;
+}
+
+.splash-2-header {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.splash-2-text-p {
+    font-size: 25px;
+    margin-bottom: 8px;
 }
 
