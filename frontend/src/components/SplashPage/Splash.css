@@ -55,6 +55,8 @@
 .splash-button {
     background-color: black;
     color: white;
+    font-weight: bold;
+    font-size: 15px;
     margin-right: 10px;
     padding: 10px;
     border-radius: 4px;
@@ -93,9 +95,10 @@
 
 .splash-2-button {
     margin-top: 50px;
-    border: 1px solid white;
+    border: 2px solid white;
     width: fit-content;
     padding: 10px;
     border-radius: 4px;
     cursor: pointer;
+    font-weight: bold;
 }

@@ -33,6 +33,15 @@ const SplashPage = () => {
         {url: `${concert}`, title: 'concert-image'}
     ];
 
+    const handleMore = (e) => {
+        e.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+        setLoginModal(true);
+    }
+
     if (sessionUser.user) return <Redirect to='/discover' />
 
     return (
@@ -80,7 +89,7 @@ const SplashPage = () => {
                             <p className="splash-2-text-p">your sounds, and grow your audience. What are</p>
                             <p className="splash-2-text-p">you waiting for?</p>
                             <div className="splash-2-button"
-                            onClick={() => setLoginModal(true)}
+                            onClick={(e) => handleMore(e)}
                             > 
                                 Find Out More
                             </div>
