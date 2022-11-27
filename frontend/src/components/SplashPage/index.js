@@ -4,7 +4,8 @@ import concert from '../../assets/temp_images/concert.jpg';
 import musicians from '../../assets/temp_images/musicians.jpg';
 import splash1 from '../../assets/temp_images/splash-1.jpg';
 import splash2 from '../../assets/temp_images/splash2.jpg';
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import * as trackActions from '../../store/track';
 import * as sessionActions from '../../store/session';
 import { Redirect, useHistory } from "react-router-dom";
 import { useEffect } from "react";
@@ -12,14 +13,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
 import { useState } from "react";
 import LoginForm from "../LoginForm";
+import DiscoverSlider from "../DiscoverSlider";
 
 
 
 const SplashPage = () => {
     
-    const dispatch = useDispatch();
     const sessionUser = useSelector(sessionActions.getSession);
+    const trackList = useSelector(trackActions.getTracks);
     const [loginModal, setLoginModal] = useState(false);
+
+    function shuffleArr(arr, num) {
+        const res = [...arr].sort(() => 0.5 - Math.random());
+        return res.slice(0, num);
+    }
 
     const slides = [
         {url: `${musicians}`, title: 'musicians-image'},
@@ -34,6 +41,8 @@ const SplashPage = () => {
             <div className='splash-container'>
                 <div className='splash-slider-container'>
                     <ImageSlider slides={slides} />
+                </div>
+                <div className="splash-tracks-container">
                 </div>
                 <div className="splash-content-container">
                     <div className="splash-1-container">
