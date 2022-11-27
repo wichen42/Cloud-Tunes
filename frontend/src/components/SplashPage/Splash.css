@@ -18,6 +18,7 @@
 .splash1-img {
     height: autopx;
     width: 800px;
+    margin-left: 35px;
 }
 
 .splash-1-text {
@@ -90,3 +91,11 @@
     margin-bottom: 8px;
 }
 
+.splash-2-button {
+    margin-top: 50px;
+    border: 1px solid white;
+    width: fit-content;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}

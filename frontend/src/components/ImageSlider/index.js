@@ -66,10 +66,6 @@ const ImageSlider = ({slides}) => {
         setCurrentIndex(1);
     }
 
-/* 
-    width: 20%;
-    height: 55%;
-*/
 
     return(
 

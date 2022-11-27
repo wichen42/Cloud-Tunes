@@ -4,25 +4,37 @@ import concert from '../../assets/temp_images/concert.jpg';
 import musicians from '../../assets/temp_images/musicians.jpg';
 import splash1 from '../../assets/temp_images/splash-1.jpg';
 import splash2 from '../../assets/temp_images/splash2.jpg';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as sessionActions from '../../store/session';
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
-
-const slides = [
-    {url: `${musicians}`, title: 'musicians-image'},
-    {url: `${concert}`, title: 'concert-image'}
-];
 
 
 
 const SplashPage = () => {
     
+    const dispatch = useDispatch();
+    const history = useHistory();
     const sessionUser = useSelector(sessionActions.getSession);
 
+    const slides = [
+        {url: `${musicians}`, title: 'musicians-image'},
+        {url: `${concert}`, title: 'concert-image'}
+    ];
+
     if (sessionUser.user) return <Redirect to='/discover' />
+
+    const handleClick = (e) => {
+        e.preventDefault();
+        const demoUser = {
+            username: "demolition",
+            password: "password"
+        }
+        dispatch(sessionActions.login(demoUser));
+        history.push('/discover');
+    }
 
     return (
         <>
@@ -65,8 +77,10 @@ const SplashPage = () => {
                             <p className="splash-2-text-p">Get on CloudTunes to connect with fans, share</p>
                             <p className="splash-2-text-p">your sounds, and grow your audience. What are</p>
                             <p className="splash-2-text-p">you waiting for?</p>
-                            <div className="splash-2-button"> 
-                                Demo Login
+                            <div className="splash-2-button"
+                            onClick={(e) => handleClick(e)}
+                            > 
+                                Find Out More
                             </div>
                         </div>
                         <div className="splash-2-content">
