@@ -113,7 +113,6 @@ const LoginForm = ({open, onClose}) => {
                         <div><p className="border-box-text">or</p></div>
                         <div className="border-back"></div> 
                     </div>
-   
                 </div>
 
                 <div className="login-form">

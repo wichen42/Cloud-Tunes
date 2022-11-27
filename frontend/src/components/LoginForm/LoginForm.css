@@ -15,16 +15,16 @@
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
+    height: 1340px;
     margin: 0;
     z-index: 100;
 }
 
 .modal-container {
     width: 20%;
-    height: 55%;
+    height: 39%;
     position: absolute;
-    top: 40%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: grid;

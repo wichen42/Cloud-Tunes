@@ -10,14 +10,16 @@ import { Redirect, useHistory } from "react-router-dom";
 import { useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
+import { useState } from "react";
+import LoginForm from "../LoginForm";
 
 
 
 const SplashPage = () => {
     
     const dispatch = useDispatch();
-    const history = useHistory();
     const sessionUser = useSelector(sessionActions.getSession);
+    const [loginModal, setLoginModal] = useState(false);
 
     const slides = [
         {url: `${musicians}`, title: 'musicians-image'},
@@ -26,18 +28,9 @@ const SplashPage = () => {
 
     if (sessionUser.user) return <Redirect to='/discover' />
 
-    const handleClick = (e) => {
-        e.preventDefault();
-        const demoUser = {
-            username: "demolition",
-            password: "password"
-        }
-        dispatch(sessionActions.login(demoUser));
-        history.push('/discover');
-    }
-
     return (
         <>
+            <LoginForm open={loginModal} onClose={() => setLoginModal(false)}/>
             <div className='splash-container'>
                 <div className='splash-slider-container'>
                     <ImageSlider slides={slides} />
@@ -78,7 +71,7 @@ const SplashPage = () => {
                             <p className="splash-2-text-p">your sounds, and grow your audience. What are</p>
                             <p className="splash-2-text-p">you waiting for?</p>
                             <div className="splash-2-button"
-                            onClick={(e) => handleClick(e)}
+                            onClick={() => setLoginModal(true)}
                             > 
                                 Find Out More
                             </div>
