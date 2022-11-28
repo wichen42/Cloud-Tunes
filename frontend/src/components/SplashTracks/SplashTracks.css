@@ -1,0 +1,11 @@
+.splash-tracks-container {
+    display: flex;
+    justify-content: center;
+}
+
+.splash-track-container {
+    display: grid;
+    grid-template-columns: repeat(5, 250px);
+    grid-template-rows: 300px 300px;
+    place-items: center;
+}

@@ -102,3 +102,15 @@
     cursor: pointer;
     font-weight: bold;
 }
+
+.splash-main-header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 35px;
+    margin-bottom: 15px;
+}
+
+.splash-main-header p {
+    font-size: 28px;
+}
