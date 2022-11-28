@@ -5,6 +5,10 @@ const SplashTrackItem = ({track}) => {
 
     const [showPlay, setShowPlay] = useState(false);
 
+    const handleClick = (e) => {
+        e.preventDefault();
+        
+    }
 
     return ( 
         <div className='splash-track-item-container'>
@@ -14,9 +18,9 @@ const SplashTrackItem = ({track}) => {
             >
                 <img src={track.imageUrl} className='splash-track-img' />
                 {showPlay && (
-                    <div className='splash-track-play'>
-                        hi
-                    </div>
+                    <div className='splash-track-play'
+                    onClick={(e) => handleClick(e)}
+                    ></div>
                 )}
             </div>
             <div className='splash-track-details-container'>
