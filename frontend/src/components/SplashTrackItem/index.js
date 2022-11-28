@@ -1,13 +1,16 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import * as playListActions from '../../store/playlist';
 import './SplashTrackItem.css';
 
 const SplashTrackItem = ({track}) => {
 
+    const dispatch = useDispatch();
     const [showPlay, setShowPlay] = useState(false);
 
     const handleClick = (e) => {
         e.preventDefault();
-        
+        dispatch(playListActions.addSong(track));
     }
 
     return ( 
