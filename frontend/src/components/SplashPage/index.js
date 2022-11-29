@@ -41,7 +41,7 @@ const SplashPage = () => {
     }
 
     if (sessionUser) return <Redirect to='/discover' />
-
+    
     return (
         <>
             <LoginForm open={loginModal} onClose={() => setLoginModal(false)}/>

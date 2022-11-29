@@ -19,7 +19,7 @@ const DiscoverPage = () => {
     const follows = useSelector(followActions.getFollows);
     const users = useSelector(userActions.getUsers);
     const tracks = useSelector(trackActions.getTracks);
-    let sessionUser = useSelector(sessionActions.getSession);
+    const sessionUser = useSelector(sessionActions.getSession);
     const likeList = useSelector(likeActions.getLikes);
     const [refresh, setRefresh] = useState(0);
     // const [artistFollow, setArtistFollow] = useState([]);
@@ -28,11 +28,12 @@ const DiscoverPage = () => {
     const [likes, setLikes] = useState([]);
     const history = useHistory();
 
-
+    
     function shuffleArr(arr, num) {
         const res = [...arr].sort(() => 0.5 - Math.random());
         return res.slice(0, num);
     }
+
 
     useEffect(() => {
         const likeData = likeList.filter(function (el) {
@@ -41,11 +42,13 @@ const DiscoverPage = () => {
         setLikes(likeData);
     }, [likeList]);
     
+    console.log(sessionUser);
+    if (!sessionUser) return <Redirect to={'/'} />;
 
     const artistList = shuffleArr(users, 10);
     const demolitionTracks = tracks.filter(track => track.userId === 1);
     const biggieTracks = tracks.filter(track => track.userId === 17);
-    const sideTracks = shuffleArr(tracks, 3)
+    const sideTracks = shuffleArr(tracks, 3);
     const artistFollow = shuffleArr(users, 3);
 
     const sideTrackItem = sideTracks.map(track => {
@@ -56,8 +59,6 @@ const DiscoverPage = () => {
         return <FollowUserItem key={artist.id} artist={artist} tracks={tracks} follows={follows} users={users}/>
     })
 
-    if(!sessionUser) return <Redirect to='/'/>;
-    console.log(sessionUser);
     
     const handleRefresh = (e) => {
         e.preventDefault();

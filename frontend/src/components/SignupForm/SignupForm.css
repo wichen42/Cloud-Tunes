@@ -9,17 +9,17 @@
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
+    height: 2000px;
     margin: 0;
     z-index: 100;
 }
 
 .smodal-container {
     width: 20%;
-    min-height: 55%;
+    min-height: 28%;
     max-height: 650px;
     position: absolute;
-    top: 40%;
+    top: 20%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #ffffff;

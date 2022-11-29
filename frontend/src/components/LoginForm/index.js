@@ -12,7 +12,7 @@ const LoginForm = ({open, onClose}) => {
     
     
     const dispatch = useDispatch();
-    const sessionUser = useSelector(state => state.session.user);
+    const sessionUser = useSelector(sessionActions.getSession);
     const users = useSelector(usersActions.getUsers);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -29,7 +29,7 @@ const LoginForm = ({open, onClose}) => {
     }, [signupModal, username])
 
     if (!open) return null;
-    if (sessionUser.user) return <Redirect to={"/"}/>;
+    if (sessionUser) return <Redirect to={"/"}/>;
 
     const usernames = [];
 
