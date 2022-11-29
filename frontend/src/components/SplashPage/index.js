@@ -40,7 +40,7 @@ const SplashPage = () => {
         setLoginModal(true);
     }
 
-    if (sessionUser.user) return <Redirect to='/discover' />
+    if (sessionUser) return <Redirect to='/discover' />
 
     return (
         <>
