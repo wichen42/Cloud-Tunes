@@ -37,10 +37,12 @@ const AudioPlayerBar = () => {
 
     const tracks = useSelector(trackActions.getTracks);
     const playlist = useSelector(playlistActions.getPlaylist);
+    const [list, setList] = useState([]);
     const users = useSelector(userActions.getUsers);
     const likeList = useSelector(likeActions.getLikes);
     const trackList = playlist.map(track => track.trackUrl);
     const history = useHistory();
+
 
     useEffect(() => {
         audioPlayer.current.play();       
@@ -53,6 +55,10 @@ const AudioPlayerBar = () => {
         progressBar.current.max = seconds;
     }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState]);
     
+    useEffect(() => {
+        
+    }, [playlist])
+
     const handlePlay = (e) => {
         const prevState = isPlaying;
 
