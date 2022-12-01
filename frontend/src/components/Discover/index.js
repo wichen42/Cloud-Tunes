@@ -42,7 +42,6 @@ const DiscoverPage = () => {
         setLikes(likeData);
     }, [likeList]);
     
-    console.log(sessionUser);
     if (!sessionUser) return <Redirect to={'/'} />;
 
     const artistList = shuffleArr(users, 10);

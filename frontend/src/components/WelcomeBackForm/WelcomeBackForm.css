@@ -7,9 +7,9 @@
 
 .wmodal-container {
     width: 20%;
-    height: 60%;
+    height: 40%;
     position: absolute;
-    top: 40%;
+    top: 25%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #ffffff;
@@ -19,10 +19,6 @@
     display: grid;
     grid-template-rows: .2fr .1fr .6fr .1fr;
     z-index: 101;
-}
-
-.wclose-btn-container {
-    padding: 5px;
 }
 
 .wclose-btn {
@@ -52,18 +48,17 @@
 
 .welcome-text p {
     width: 100%;
-    height: 100%;
+    height: 60%;
     text-align: center;
 }
 
 .winput-container {
     width: 100%;
-    height: 100%;
+    height: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-top: -60px;
 }
 
 .welcome-username-container {

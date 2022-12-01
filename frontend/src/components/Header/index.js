@@ -126,7 +126,7 @@ const Header = () => {
                     style={headerStyle}
                     >
                         <div>
-                            {sessionUser.user ? sessionUser.user.username : sessionUser.username} &nbsp;  <FontAwesomeIcon icon="fa-solid fa-chevron-down" size='xs'/>
+                            {sessionUser.username} &nbsp;  <FontAwesomeIcon icon="fa-solid fa-chevron-down" size='xs'/>
                         </div>
                         {profileClicked && <ProfileDropdown />}
                     </div>

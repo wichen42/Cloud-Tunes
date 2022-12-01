@@ -29,7 +29,7 @@ const LoginForm = ({open, onClose}) => {
     }, [signupModal, username])
 
     if (!open) return null;
-    if (sessionUser) return <Redirect to={"/"}/>;
+    // if (sessionUser) return <Redirect to={"/"}/>;
 
     const usernames = [];
 

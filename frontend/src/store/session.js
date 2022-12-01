@@ -31,6 +31,7 @@ export const login = ({username, password}) => async dispatch => {
     });
     
     const data = await res.json();
+    storeCurrentUser(data.user);
     dispatch(setSession(data));
     return res;
 }
@@ -39,7 +40,7 @@ export const logout = () => async dispatch => {
     await csrfFetch('/api/session', {
         method: 'DELETE'
     });
-    storeCurrentUser();
+    sessionStorage.setItem("currentUser", null);
     dispatch(removeSession());
 }
 
@@ -73,7 +74,7 @@ export const restoreSession = () => async dispatch => {
 }
 
 // const initialState = {user: null}
-const initialState = {user: JSON.parse(sessionStorage.getItem("currentUser"))}
+const initialState = {user: JSON.parse(sessionStorage.getItem("currentUser"))};
 
 const sessionReducer = (state = initialState, action) => {
     Object.freeze(state);
@@ -81,7 +82,7 @@ const sessionReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case SET_SESSION:
-            nextState.user = action.user;
+            nextState["user"] = action.user;
             return nextState;
         case REMOVE_SESSION:
             nextState["user"] = null;
