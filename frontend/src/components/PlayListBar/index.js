@@ -1,10 +1,13 @@
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import * as playlistActions from '../../store/playlist';
 import './PlayListBar.css';
+import PlaylistTrackItem from '../PlayListTrackItem';
 
 const PlayListBar = ({tracks, close}) => {
 
     const dispatch = useDispatch();
+    const [remove, showRemove] = useState(false);
 
     const handleClose = (e) => {
         e.preventDefault();
@@ -16,6 +19,10 @@ const PlayListBar = ({tracks, close}) => {
         console.log("clear")
         dispatch(playlistActions.clearSongs());
     }
+
+    const playListItem = tracks.map(track => 
+        {return <PlaylistTrackItem track={track}/>}
+    )
 
     return ( 
         
@@ -37,25 +44,7 @@ const PlayListBar = ({tracks, close}) => {
             </div>
             <div className='playlist-info-container'>
                 <ul className='playlist-track-ul'>
-                    {tracks.map(track => {
-                        return(
-                            <li key={track.id}
-                            className='playlist-titles'
-                            >
-                                <div className='playlist-track-container'>
-                                    <div className='playlist-track-image-container'>
-                                        <img src={track.imageUrl}
-                                        className="playlist-track-image"
-                                        />
-                                    </div>
-                                    <div className='playlist-track-details-container'>
-                                        <div className='playlist-track-title'>{track.title}</div>
-                                        <div className='playlist-track-artist'>{track.username}</div>
-                                    </div>
-                                </div>
-                            </li>
-                        )
-                    })}
+                    {playListItem}
                 </ul>
             </div>
             

@@ -16,15 +16,17 @@ export const clearSongs = () => ({
     type: CLEAR_SONGS
 });
 
-export const getPlaylist = ({playlist}) => playlist ? Object.values(playlist) : [];
+// export const getPlaylist = ({playlist}) => playlist ? Object.values(playlist) : [];
+export const getPlaylist = ({playlist}) => playlist ? playlist : [];
 
-const playListReducer = (state = {}, action) => {
+const playListReducer = (state = [], action) => {
     Object.freeze(state);
-    const nextState = {...state};
+    const nextState = [...state];
 
     switch (action.type) {
         case ADD_SONG:
-            nextState[action.track.id] = action.track;
+            // nextState[action.track.id] = action.track;
+            nextState.push(action.track);
             return nextState;
         case REMOVE_SONG:
             delete nextState[action.trackId];
