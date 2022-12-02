@@ -31,22 +31,15 @@ const AudioPlayerBar = () => {
     const [trackNum, setTrackNum] = useState();
     const [playListClicked, setPlayListClicked] = useState(false);
     const [showVol, setShowVol] = useState(false);
-    const [artist, setArtist] = useState("");
-    const [title, setTitle] = useState("");
     const [volume, setVolume] = useState(5);
-
-    const tracks = useSelector(trackActions.getTracks);
     const playlist = useSelector(playlistActions.getPlaylist);
-    const [list, setList] = useState([]);
     const users = useSelector(userActions.getUsers);
-    const likeList = useSelector(likeActions.getLikes);
     const trackList = playlist.map(track => track.trackUrl);
     const history = useHistory();
 
 
     useEffect(() => {
         audioPlayer.current.play();       
-        // setArtist(trackList[trackNum].username) 
     }, [trackNum]);
     
     useEffect(() => {
@@ -56,7 +49,7 @@ const AudioPlayerBar = () => {
     }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState]);
     
     useEffect(() => {
-        
+        console.log(playlist);
     }, [playlist])
 
     const handlePlay = (e) => {

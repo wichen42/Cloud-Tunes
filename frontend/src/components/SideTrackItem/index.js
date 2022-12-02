@@ -29,8 +29,8 @@ const SideTrackItem = ({track}) => {
             <div className='side-track-details'
             >
                 <div className='side-track-username'
-                >{track.username}</div>
-                <div className='side-track-title'>{track.title}</div>
+                >{track.title}</div>
+                <div className='side-track-title'>{track.username}</div>
             </div>
         </div>
      );
