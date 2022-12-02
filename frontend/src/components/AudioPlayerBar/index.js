@@ -37,7 +37,6 @@ const AudioPlayerBar = () => {
     const trackList = playlist.map(track => track.trackUrl);
     const history = useHistory();
 
-
     useEffect(() => {
         audioPlayer.current.play();       
     }, [trackNum]);
@@ -48,10 +47,6 @@ const AudioPlayerBar = () => {
         progressBar.current.max = seconds;
     }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState]);
     
-    useEffect(() => {
-        console.log(playlist);
-    }, [playlist])
-
     const handlePlay = (e) => {
         const prevState = isPlaying;
 
