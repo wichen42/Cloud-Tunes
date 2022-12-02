@@ -29,7 +29,8 @@ const playListReducer = (state = [], action) => {
             nextState.push(action.track);
             return nextState;
         case REMOVE_SONG:
-            delete nextState[action.trackId];
+            // delete nextState[action.trackId];
+            nextState.splice(action.trackId, 1);
             return nextState;
         case CLEAR_SONGS:
             for (const key in nextState) {

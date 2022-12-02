@@ -1,15 +1,23 @@
 import './PlayListTrackItem.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
-
+import { useDispatch, useSelector } from 'react-redux';
+import * as playListActions from '../../store/playlist';
 
 const PlaylistTrackItem = ({track}) => {
     
+    const dispatch = useDispatch();
     const [showRemove, setShowRemove] = useState(false);
+    const playlist = useSelector(playListActions.getPlaylist);
     
     const handleRemove = (e) => {
         e.preventDefault();
-        console.log(track);
+        let idx = 0;
+        for (let i = 0; i < playlist.length; i++) {
+            if (playlist[i] === track) idx = i;
+        }
+        console.log(idx);
+        dispatch(playListActions.removeSong(idx));
     }
 
     return(
