@@ -25,11 +25,14 @@ const playListReducer = (state = [], action) => {
 
     switch (action.type) {
         case ADD_SONG:
-            // nextState[action.track.id] = action.track;
-            nextState.push(action.track);
-            return nextState;
+            if (nextState.includes(action.track)) {
+                
+                return nextState;
+            } else {
+                nextState.push(action.track);
+                return nextState;
+            }
         case REMOVE_SONG:
-            // delete nextState[action.trackId];
             nextState.splice(action.trackId, 1);
             return nextState;
         case CLEAR_SONGS:

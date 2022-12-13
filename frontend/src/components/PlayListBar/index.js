@@ -3,11 +3,20 @@ import { useDispatch } from 'react-redux';
 import * as playlistActions from '../../store/playlist';
 import './PlayListBar.css';
 import PlaylistTrackItem from '../PlayListTrackItem';
+import { useEffect } from 'react';
 
 const PlayListBar = ({tracks, close}) => {
 
     const dispatch = useDispatch();
     const [remove, showRemove] = useState(false);
+    const [trackList, setTrackList] = useState([]);
+    
+    useEffect(() => {
+        setTrackList(tracks);
+    }, [tracks]);
+
+    console.log(trackList);
+
 
     const handleClose = (e) => {
         e.preventDefault();
@@ -17,11 +26,14 @@ const PlayListBar = ({tracks, close}) => {
     const handleClear = (e) => {
         e.preventDefault();
         console.log("clear")
+        setTrackList([]);
         dispatch(playlistActions.clearSongs());
     }
 
-    const playListItem = tracks.map(track => 
-        {return <PlaylistTrackItem track={track}/>}
+    const playListItem = trackList.map(track => 
+        {
+            return <PlaylistTrackItem track={track}/>
+        }
     )
 
     return ( 
