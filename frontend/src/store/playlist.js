@@ -19,6 +19,10 @@ export const clearSongs = () => ({
 // export const getPlaylist = ({playlist}) => playlist ? Object.values(playlist) : [];
 export const getPlaylist = ({playlist}) => playlist ? playlist : [];
 
+function uniqueId(value, index, self) {
+    return self.indexOf(value) === index;
+}
+
 const playListReducer = (state = [], action) => {
     Object.freeze(state);
     const nextState = [...state];
@@ -26,8 +30,9 @@ const playListReducer = (state = [], action) => {
     switch (action.type) {
         case ADD_SONG:
             if (nextState.includes(action.track)) {
-                
-                return nextState;
+                const newState = nextState.filter(track => track.id != action.track.id);
+                newState.push(action.track);
+                return newState;
             } else {
                 nextState.push(action.track);
                 return nextState;
