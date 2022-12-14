@@ -1,6 +1,7 @@
 export const ADD_SONG = 'playlist/ADD_SONG';
 export const REMOVE_SONG = 'playlist/DELETE_SONG';
 export const CLEAR_SONGS = 'playlist/CLEAR_SONGS';
+export const SHUFFLE_SONGS = 'playlist/SHUFFLE_SONGS';
 
 export const addSong = (track) => ({
     type: ADD_SONG,
@@ -14,6 +15,10 @@ export const removeSong = (trackId) =>  ({
 
 export const clearSongs = () => ({
     type: CLEAR_SONGS
+});
+
+export const shufflePlaylist = () => ({
+    type: SHUFFLE_SONGS
 });
 
 // export const getPlaylist = ({playlist}) => playlist ? Object.values(playlist) : [];
@@ -45,6 +50,8 @@ const playListReducer = (state = [], action) => {
                 delete nextState[key];
             }
             return nextState;
+        case SHUFFLE_SONGS:
+            return nextState.sort(() => Math.random() - 0.5);
         default:
             return state;
     }

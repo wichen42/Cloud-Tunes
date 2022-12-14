@@ -16,7 +16,6 @@ const PlaylistTrackItem = ({track}) => {
         for (let i = 0; i < playlist.length; i++) {
             if (playlist[i] === track) idx = i;
         }
-        console.log(idx);
         dispatch(playListActions.removeSong(idx));
     }
 

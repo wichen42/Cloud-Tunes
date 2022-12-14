@@ -43,7 +43,6 @@ const PlaylistItem = ({track, users, sessionUser, followList, user, followData})
 
     const handlePlay = (e) => {
         e.preventDefault();
-        console.log(track);
         dispatch(playlistActions.addSong(track));
     }
     
@@ -59,7 +58,6 @@ const PlaylistItem = ({track, users, sessionUser, followList, user, followData})
             if (follow === true) {
                 setFollow(false);
                 setFstyle(followingStyle)
-                console.log(trackUser);
 
                 // await csrfFetch(`/api/follows`, {
                 //     method: "POST",

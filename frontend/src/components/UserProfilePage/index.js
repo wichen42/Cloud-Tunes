@@ -40,7 +40,6 @@ const UserProfilePage = () => {
     }, [])
 
     useEffect(() => {
-        console.log(followList);
         followList.forEach((follow) => {
             const followData = {followedId: id, followerId: sessionUser.id}
             if (Object.entries(follow).sort().toString() === Object.entries(followData).sort().toString()) {

@@ -87,7 +87,6 @@ const TrackDisplay = ({track}) => {
     const handleShowMore = (e) => {
         e.preventDefault();
         setShowMore(!showMore);
-        console.log(showMore);
     }
 
     const handleDeleteTrack = (e) => {

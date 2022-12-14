@@ -15,9 +15,6 @@ const PlayListBar = ({tracks, close}) => {
         setTrackList(tracks);
     }, [tracks]);
 
-    console.log(trackList);
-
-
     const handleClose = (e) => {
         e.preventDefault();
         close();
@@ -25,7 +22,6 @@ const PlayListBar = ({tracks, close}) => {
 
     const handleClear = (e) => {
         e.preventDefault();
-        console.log("clear")
         setTrackList([]);
         dispatch(playlistActions.clearSongs());
     }

@@ -6,7 +6,7 @@ import volLow from '../../assets/icons/volume-low-solid.svg';
 import volHigh from '../../assets/icons/volume-high-solid.svg';
 import volMute from '../../assets/icons/volume-xmark-solid.svg';
 import { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as trackActions from '../../store/track';
 import * as playlistActions from '../../store/playlist';
 import * as userActions from '../../store/users';
@@ -16,6 +16,7 @@ import { useHistory } from 'react-router-dom';
 
 const AudioPlayerBar = () => {
     
+    const dispatch = useDispatch();
     const playUrl = `url(${play})`;
     const pauseUrl = `url(${pause})`;
     const volLowUrl = `url(${volLow})`;
@@ -102,6 +103,10 @@ const AudioPlayerBar = () => {
         };
     };
 
+    const handleShuffle = (e) => {
+        dispatch(playlistActions.shufflePlaylist());
+    }; 
+
     const handlePrev = (e) => {
         e.preventDefault();
         if (trackNum <= 0) {
@@ -131,7 +136,6 @@ const AudioPlayerBar = () => {
 
     const handleVolume = (e) => {
         setVolume(e.target.value);
-        console.log(volume);
         audioPlayer.current.volume = (volume / 10);
     };
 
@@ -174,7 +178,8 @@ const AudioPlayerBar = () => {
                 ></button>
                 <button className='next-track'
                 onClick={(e) => handleNext(e)}></button>
-                <button className='shuffle-track'           
+                <button className='shuffle-track'
+                onClick={(e) => handleShuffle(e)}
                 ></button>
                 <button className='repeat-track'></button>
             </div>
