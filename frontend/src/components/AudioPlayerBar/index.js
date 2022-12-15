@@ -41,6 +41,21 @@ const AudioPlayerBar = () => {
     useEffect(() => {
         audioPlayer.current.play();       
     }, [trackNum]);
+
+    useEffect(() => {
+        setIsPlaying(!isPlaying);
+        playPause === playUrl ? setPlayPause(pauseUrl) : setPlayPause(playUrl);
+
+        if (!isPlaying) {
+            if(!trackNum) setTrackNum(0);
+            audioPlayer.current.play();
+            sliderRef.current = requestAnimationFrame(whilePlay);
+        } else {
+            audioPlayer.current.pause();
+            cancelAnimationFrame(sliderRef.current);
+        };
+
+    }, [playlist]);
     
     useEffect(() => {
         const seconds = Math.floor(audioPlayer.current.duration)
@@ -52,7 +67,6 @@ const AudioPlayerBar = () => {
         const prevState = isPlaying;
 
         playPause === playUrl ? setPlayPause(pauseUrl) : setPlayPause(playUrl);
-
         setIsPlaying(!prevState);
 
         if (!prevState) {
@@ -64,6 +78,7 @@ const AudioPlayerBar = () => {
             cancelAnimationFrame(sliderRef.current);
         };
     };
+
 
     const whilePlay = () => {
         progressBar.current.value = audioPlayer.current.currentTime;
