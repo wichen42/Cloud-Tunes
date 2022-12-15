@@ -49,7 +49,9 @@ const AudioPlayerBar = () => {
             setTrackNum(0);
             audioPlayer.current.play();
             sliderRef.current = requestAnimationFrame(whilePlay);
-        }
+            // console.log(trackList);
+        };
+
 
     }, [playlist]);
     

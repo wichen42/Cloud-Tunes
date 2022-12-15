@@ -36,10 +36,10 @@ const playListReducer = (state = [], action) => {
         case ADD_SONG:
             if (nextState.includes(action.track)) {
                 const newState = nextState.filter(track => track.id != action.track.id);
-                newState.push(action.track);
+                newState.unshift(action.track);
                 return newState;
             } else {
-                nextState.push(action.track);
+                nextState.unshift(action.track);
                 return nextState;
             }
         case REMOVE_SONG:
