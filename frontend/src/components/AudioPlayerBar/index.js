@@ -54,7 +54,6 @@ const AudioPlayerBar = () => {
             setTrackNum(0);
             audioPlayer.current.play();
             sliderRef.current = requestAnimationFrame(whilePlay);
-            // console.log(trackList);
         };
 
 
@@ -167,6 +166,11 @@ const AudioPlayerBar = () => {
         console.log(playlist[trackNum].username);
     }
 
+    const handleRepeat = (e) => {
+        e.preventDefault();
+        setRepeat(!repeat);
+    }
+
     return ( 
         <>
 
@@ -199,7 +203,9 @@ const AudioPlayerBar = () => {
                 <button className='shuffle-track'
                 onClick={(e) => handleShuffle(e)}
                 ></button>
-                <button className='repeat-track'></button>
+                <button className='repeat-track'
+                onClick={(e) => handleRepeat(e)}
+                ></button>
             </div>
 
 
