@@ -33,6 +33,7 @@ const AudioPlayerBar = () => {
     const [playListClicked, setPlayListClicked] = useState(false);
     const [showVol, setShowVol] = useState(false);
     const [volume, setVolume] = useState(5);
+    const [repeat, setRepeat] = useState(false);
     const playlist = useSelector(playlistActions.getPlaylist);
     const users = useSelector(userActions.getUsers);
     const trackList = playlist.map(track => track.trackUrl);
@@ -41,6 +42,10 @@ const AudioPlayerBar = () => {
     useEffect(() => {
         audioPlayer.current.play();       
     }, [trackNum]);
+
+    useEffect(() => {
+        if (repeat) setTrackNum(0);
+    }, [repeat])
 
     useEffect(() => {
         if (trackList.length > 0) {
