@@ -3,6 +3,7 @@ import sample from '../../assets/temp_music/sample.mp3';
 import play from '../../assets/icons/play-solid.svg';
 import pause from '../../assets/icons/pause-solid.svg';
 import volLow from '../../assets/icons/volume-low-solid.svg';
+import one from '../../assets/icons/1-solid.svg';
 import volHigh from '../../assets/icons/volume-high-solid.svg';
 import volMute from '../../assets/icons/volume-xmark-solid.svg';
 import { useEffect, useRef, useState } from 'react';
@@ -206,6 +207,9 @@ const AudioPlayerBar = () => {
                 <button className='repeat-track'
                 onClick={(e) => handleRepeat(e)}
                 ></button>
+                {repeat && (
+                    <img src={one} alt="one" className='audio-one' />
+                )}
             </div>
 
 
