@@ -46,10 +46,11 @@ const playListReducer = (state = [], action) => {
             nextState.splice(action.trackId, 1);
             return nextState;
         case CLEAR_SONGS:
-            for (const key in nextState) {
-                delete nextState[key];
-            }
-            return nextState;
+            // for (const key in nextState) {
+            //     delete nextState[key];
+            // }
+            // return nextState;
+            return [];
         case SHUFFLE_SONGS:
             return nextState.sort(() => Math.random() - 0.5);
         default:

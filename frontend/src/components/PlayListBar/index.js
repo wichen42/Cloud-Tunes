@@ -29,7 +29,7 @@ const PlayListBar = ({tracks, close, clear}) => {
 
     const playListItem = trackList.map(track => 
         {
-            return <PlaylistTrackItem track={track}/>
+            return <PlaylistTrackItem track={track} key={track.id}/>
         }
     )
 
