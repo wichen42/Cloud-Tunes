@@ -38,7 +38,7 @@ const AudioPlayerBar = () => {
     const [clear, setClear] = useState(false);
     const playlist = useSelector(playlistActions.getPlaylist);
     const users = useSelector(userActions.getUsers);
-    const trackList = playlist.map(track => track.trackUrl);
+    let trackList = playlist.map(track => track.trackUrl);
     // const [trackList, setTrackList] = useState(playlist.map(track => track.trackUrl));
     const history = useHistory();
 
@@ -57,10 +57,15 @@ const AudioPlayerBar = () => {
             setTrackNum(0);
             audioPlayer.current.play();
             sliderRef.current = requestAnimationFrame(whilePlay);
+        } else if (playlist.length === 0) {
+            console.log("0");
         };
+        
     }, [playlist]);
 
-
+    useEffect(() => {
+        "clear pressed";
+    }, [clear])
     
     useEffect(() => {
         const seconds = Math.floor(audioPlayer.current.duration)
