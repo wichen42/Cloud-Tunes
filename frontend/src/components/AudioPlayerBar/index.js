@@ -57,14 +57,13 @@ const AudioPlayerBar = () => {
             setTrackNum(0);
             audioPlayer.current.play();
             sliderRef.current = requestAnimationFrame(whilePlay);
-        } else if (playlist.length === 0) {
-            // console.log("0");
         };
         
     }, [playlist]);
 
     useEffect(() => {
-        console.log(playlist);
+        setPlayPause(playUrl);
+        setIsPlaying(false);
     }, [clear])
     
     useEffect(() => {
