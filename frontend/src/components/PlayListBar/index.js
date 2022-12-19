@@ -5,7 +5,7 @@ import './PlayListBar.css';
 import PlaylistTrackItem from '../PlayListTrackItem';
 import { useEffect } from 'react';
 
-const PlayListBar = ({tracks, close}) => {
+const PlayListBar = ({tracks, close, clear}) => {
 
     const dispatch = useDispatch();
     const [remove, showRemove] = useState(false);
@@ -24,6 +24,7 @@ const PlayListBar = ({tracks, close}) => {
         e.preventDefault();
         setTrackList([]);
         dispatch(playlistActions.clearSongs());
+        clear();
     }
 
     const playListItem = trackList.map(track => 

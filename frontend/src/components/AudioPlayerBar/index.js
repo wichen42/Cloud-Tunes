@@ -35,9 +35,11 @@ const AudioPlayerBar = () => {
     const [showVol, setShowVol] = useState(false);
     const [volume, setVolume] = useState(5);
     const [repeat, setRepeat] = useState(false);
+    const [clear, setClear] = useState(false);
     const playlist = useSelector(playlistActions.getPlaylist);
     const users = useSelector(userActions.getUsers);
     const trackList = playlist.map(track => track.trackUrl);
+    // const [trackList, setTrackList] = useState(playlist.map(track => track.trackUrl));
     const history = useHistory();
 
     useEffect(() => {
@@ -46,7 +48,7 @@ const AudioPlayerBar = () => {
 
     useEffect(() => {
         if (repeat) setTrackNum(0);
-    }, [repeat])
+    }, [repeat]);
 
     useEffect(() => {
         if (trackList.length > 0) {
@@ -56,9 +58,9 @@ const AudioPlayerBar = () => {
             audioPlayer.current.play();
             sliderRef.current = requestAnimationFrame(whilePlay);
         };
-
-
     }, [playlist]);
+
+
     
     useEffect(() => {
         const seconds = Math.floor(audioPlayer.current.duration)
@@ -127,8 +129,9 @@ const AudioPlayerBar = () => {
 
     const handlePrev = (e) => {
         e.preventDefault();
-        if (trackNum <= 0) {
-            setTrackNum(4);
+        console.log(trackNum);
+        if (trackNum === 0) {
+            setTrackNum(trackList.length-1);
         } else {
             setTrackNum(trackNum-1);
         };
@@ -262,7 +265,7 @@ const AudioPlayerBar = () => {
                     onClick={(e) => handlePlaylist(e)}
                     ></button>
                 </div>
-                {playListClicked && <PlayListBar tracks={playlist} close={() => setPlayListClicked(!playListClicked )}/>}
+                {playListClicked && <PlayListBar tracks={playlist} clear={() => setClear(!clear)} close={() => setPlayListClicked(!playListClicked )}/>}
             </div>
         </div>
         </div>
