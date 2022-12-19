@@ -38,8 +38,9 @@ const AudioPlayerBar = () => {
     const [clear, setClear] = useState(false);
     const playlist = useSelector(playlistActions.getPlaylist);
     const users = useSelector(userActions.getUsers);
-    const trackList = playlist.map(track => track.trackUrl);
+    // const trackList = playlist.map(track => track.trackUrl);
     const history = useHistory();
+
 
     useEffect(() => {
         audioPlayer.current.play();       
@@ -50,7 +51,7 @@ const AudioPlayerBar = () => {
     }, [repeat]);
 
     useEffect(() => {
-        if (trackList.length > 0) {
+        if (playlist.length > 0) {
             setPlayPause(pauseUrl);
             setIsPlaying(true);
             setTrackNum(0);
@@ -120,7 +121,7 @@ const AudioPlayerBar = () => {
     };
 
     const handleNext = (e) => {
-        if (trackNum >= trackList.length-1 ) {
+        if (trackNum >= playlist.length-1 ) {
             setTrackNum(0);
         } else {
             setTrackNum(trackNum + 1);
@@ -135,7 +136,7 @@ const AudioPlayerBar = () => {
         e.preventDefault();
         console.log(trackNum);
         if (trackNum === 0) {
-            setTrackNum(trackList.length-1);
+            setTrackNum(playlist.length-1);
         } else {
             setTrackNum(trackNum-1);
         };
@@ -197,7 +198,7 @@ const AudioPlayerBar = () => {
             </div>
         )}
             <div className='audio-bar'>
-            <audio src={trackList[trackNum]} ref={audioPlayer} id='myAudio'></audio>
+            <audio src={playlist[trackNum] ? playlist[trackNum].trackUrl : ""} ref={audioPlayer} id='myAudio'></audio>
             <div className='button-container'>
                 <button className='prev-track'
                 onClick={(e) => handlePrev(e)}
