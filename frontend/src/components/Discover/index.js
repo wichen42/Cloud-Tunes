@@ -24,16 +24,33 @@ const DiscoverPage = () => {
     const [refresh, setRefresh] = useState(0);
     // const [artistFollow, setArtistFollow] = useState([]);
     // const [sideTracks, setSideTracks] = useState([]);
-    const [testTracks, setTestTracks] = useState([]);
     const [likes, setLikes] = useState([]);
+    const [userList, setUserList] = useState([]);
+    const [sideTracks, setSideTracks] = useState([]);
+
     const history = useHistory();
 
     
     function shuffleArr(arr, num) {
         const res = [...arr].sort(() => 0.5 - Math.random());
         return res.slice(0, num);
-    }
+    };
 
+
+
+    useEffect(() => {
+        dispatch(userActions.fetchUsers());
+    }, []);
+
+    useEffect(() => {
+        setUserList(shuffleArr(users, 10));
+    }, [users]);
+
+    useEffect(() => {
+        setSideTracks(shuffleArr(tracks, 3));
+    }, [tracks]);
+
+    const [artistFollow, setArtistFollow] = useState(shuffleArr(users, 3));
 
     useEffect(() => {
         const likeData = likeList.filter(function (el) {
@@ -47,8 +64,8 @@ const DiscoverPage = () => {
     const artistList = shuffleArr(users, 10);
     const demolitionTracks = tracks.filter(track => track.userId === 1);
     const biggieTracks = tracks.filter(track => track.userId === 17);
-    const sideTracks = shuffleArr(tracks, 3);
-    const artistFollow = shuffleArr(users, 3);
+    // const sideTracks = shuffleArr(tracks, 3);
+    // const artistFollow = shuffleArr(users, 3);
 
     const sideTrackItem = sideTracks.map(track => {
         return <SideTrackItem track={track} key={track.id}/>
@@ -62,6 +79,7 @@ const DiscoverPage = () => {
     const handleRefresh = (e) => {
         e.preventDefault();
         setRefresh(val => val + 1);
+        setArtistFollow(shuffleArr(users, 3));
     }
 
     const handleViewAll = (e) => {
@@ -72,7 +90,7 @@ const DiscoverPage = () => {
     return (
         <div className="discover-container">
             <div className="discover-body">
-                < DiscoverSlider title={"Discover Artists"} data={artistList}/>
+                < DiscoverSlider title={"Discover Artists"} data={userList}/>
                 < DiscoverSlider title={"More from demolition"} data={biggieTracks}/>
                 < DiscoverSlider title={"More from biggie"} data={demolitionTracks}/>
                 < Playlist tracks={tracks} users={users} sessionUser={sessionUser} followList={follows}/>
