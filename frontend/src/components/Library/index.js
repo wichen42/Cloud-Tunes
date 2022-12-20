@@ -1,10 +1,16 @@
 import { useSelector } from 'react-redux';
 import * as trackActions from '../../store/track';
+import * as userActions from '../../store/users';
 import './Library.css';
 
 const Library = () => {
 
     const tracks = useSelector(trackActions.getTracks);
+    const users = useSelector(userActions.getUsers);
+
+    const handleUser = (track) => {
+        console.log(track);
+    };
 
     return ( 
         <div className='library-container'>
@@ -22,7 +28,8 @@ const Library = () => {
                             </div>
                             <div className='track-detail-container'>
                                 <div>Username:</div>
-                                <div>{track.username}</div>
+                                <div
+                                >{track.username}</div>
                             </div>
                             <div className='track-detail-container'>
                                 <div>Genre:</div>
