@@ -23,20 +23,16 @@ const DiscoverPage = () => {
     const likeList = useSelector(likeActions.getLikes);
     const [refresh, setRefresh] = useState(0);
     const [artistFollow, setArtistFollow] = useState([]);
-    // const [sideTracks, setSideTracks] = useState([]);
     const [likes, setLikes] = useState([]);
     const [userList, setUserList] = useState([]);
     const [sideTracks, setSideTracks] = useState([]);
 
     const history = useHistory();
-
     
     function shuffleArr(arr, num) {
         const res = [...arr].sort(() => 0.5 - Math.random());
         return res.slice(0, num);
     };
-
-
 
     useEffect(() => {
         dispatch(userActions.fetchUsers());
@@ -51,8 +47,6 @@ const DiscoverPage = () => {
         setSideTracks(shuffleArr(tracks, 3));
     }, [tracks]);
 
-    // const [artistFollow, setArtistFollow] = useState(shuffleArr(users, 3));
-
     useEffect(() => {
         const likeData = likeList.filter(function (el) {
             if (sessionUser) return el.userId === sessionUser.id;
@@ -65,9 +59,6 @@ const DiscoverPage = () => {
     const artistList = shuffleArr(users, 10);
     const demolitionTracks = tracks.filter(track => track.userId === 1);
     const biggieTracks = tracks.filter(track => track.userId === 17);
-    // const sideTracks = shuffleArr(tracks, 3);
-    // const artistFollow = shuffleArr(users, 3);
-
     const sideTrackItem = sideTracks.map(track => {
         return <SideTrackItem track={track} key={track.id}/>
     })
