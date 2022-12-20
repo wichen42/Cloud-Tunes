@@ -22,7 +22,7 @@ const DiscoverPage = () => {
     const sessionUser = useSelector(sessionActions.getSession);
     const likeList = useSelector(likeActions.getLikes);
     const [refresh, setRefresh] = useState(0);
-    // const [artistFollow, setArtistFollow] = useState([]);
+    const [artistFollow, setArtistFollow] = useState([]);
     // const [sideTracks, setSideTracks] = useState([]);
     const [likes, setLikes] = useState([]);
     const [userList, setUserList] = useState([]);
@@ -44,13 +44,14 @@ const DiscoverPage = () => {
 
     useEffect(() => {
         setUserList(shuffleArr(users, 10));
+        setArtistFollow(shuffleArr(users, 3))
     }, [users]);
 
     useEffect(() => {
         setSideTracks(shuffleArr(tracks, 3));
     }, [tracks]);
 
-    const [artistFollow, setArtistFollow] = useState(shuffleArr(users, 3));
+    // const [artistFollow, setArtistFollow] = useState(shuffleArr(users, 3));
 
     useEffect(() => {
         const likeData = likeList.filter(function (el) {
