@@ -71,6 +71,17 @@ const AudioPlayerBar = () => {
         setDuration(seconds);
         progressBar.current.max = seconds;
     }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState]);
+
+    useEffect(() => {
+        if (volume <= 0 && volume < 5) {
+            setVolbackground(`url(${volMute})`);
+        } else if (volume > 6) {
+            setVolbackground(`url(${volHigh})`);
+        } else {
+            setVolbackground(volLowUrl);
+        }
+        
+    }, [volume]);
     
     const handlePlay = (e) => {
         const prevState = isPlaying;
@@ -162,6 +173,7 @@ const AudioPlayerBar = () => {
     const handleVolume = (e) => {
         setVolume(e.target.value);
         audioPlayer.current.volume = (volume / 10);
+        console.log(volume);
     };
 
     const handleLike = (e) => {
