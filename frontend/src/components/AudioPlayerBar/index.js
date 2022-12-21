@@ -8,6 +8,8 @@ import volHigh from '../../assets/icons/volume-high-solid.svg';
 import volMute from '../../assets/icons/volume-xmark-solid.svg';
 import heart from '../../assets/icons/heart-solid.svg';
 import heart_orange from '../../assets/icons/heart-solid-orange.svg';
+import follow from '../../assets/icons/user-plus-solid.svg';
+import follow_orange from '../../assets/icons/follow-orange.svg';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as trackActions from '../../store/track';
@@ -42,13 +44,13 @@ const AudioPlayerBar = () => {
     const [clear, setClear] = useState(false);
     const playlist = useSelector(playlistActions.getPlaylist);
     const users = useSelector(userActions.getUsers);
-    const [likeBackground, setLikeBackground] = useState(heartUrl);
-    const [likeStyle, setLikeStyle] = useState({backgroundImage: likeBackground});
-    const [follow, setFollow] = useState(false);
+    const [likeStyle, setLikeStyle] = useState({backgroundImage: heartUrl});
+    const [followStyle, setFollowStyle] = useState({backgroundImage: `url${follow}`});
+    const [like, setLike] = useState(false);
+    const [followStatus, setFollowStatus] = useState(false);
     // const trackList = playlist.map(track => track.trackUrl);
     const history = useHistory();
 
-    console.log(follow);
 
     useEffect(() => {
         audioPlayer.current.play();       
@@ -92,7 +94,7 @@ const AudioPlayerBar = () => {
     }, [volume]);
 
     useEffect(() => {
-        if (follow) {
+        if (like) {
             setLikeStyle({
                 backgroundImage: heartOrangeUrl,
                 backgroundSize: '120%'
@@ -100,7 +102,18 @@ const AudioPlayerBar = () => {
         } else {
             setLikeStyle({backgroundImage: heartUrl})
         }
-    }, [follow])
+    }, [like]);
+
+    useEffect(() => {
+        if (followStatus) {
+            setFollowStyle({
+                backgroundImage: `url(${follow_orange})`,
+                backgroundSize: '109%',
+            });
+        } else {
+            setFollowStyle({backgroundImage: `url(${follow})`});
+        }
+    }, [followStatus]);
     
     const handlePlay = (e) => {
         const prevState = isPlaying;
@@ -196,13 +209,14 @@ const AudioPlayerBar = () => {
 
     const handleLike = (e) => {
         e.preventDefault();
-        setFollow(!follow);
-        console.log(follow);
+        setLike(!like);
+        console.log(likeStyle);
     };
 
     const handleFollow = (e) => {
         e.preventDefault();
-        console.log(playlist[trackNum].username);
+        setFollowStatus(!followStatus);
+        console.log(followStatus);
     }
 
     const handleRepeat = (e) => {
@@ -296,6 +310,7 @@ const AudioPlayerBar = () => {
                     ></button>
                     <button className='artist-follow'
                     onClick={(e) => handleFollow(e)}
+                    style={followStyle}
                     ></button>
                     <button className='playlist-tab'
                     onClick={(e) => handlePlaylist(e)}

@@ -190,17 +190,10 @@
 .track-socials button{
     width: 24px;
     height: 24px;
-    background-repeat: no-repeat;
-    background-position: center;
     margin-right: 12px;
     margin-left: 12px;
     cursor: pointer;
-    background-color: transparent;
     border: none;
-}
-
-.artist-follow {
-    background-image: url('../../assets/icons/user-plus-solid.svg');
 }
 
 .playlist-tab {
