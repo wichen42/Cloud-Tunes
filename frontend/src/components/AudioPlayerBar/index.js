@@ -6,6 +6,8 @@ import volLow from '../../assets/icons/volume-low-solid.svg';
 import one from '../../assets/icons/1-solid.svg';
 import volHigh from '../../assets/icons/volume-high-solid.svg';
 import volMute from '../../assets/icons/volume-xmark-solid.svg';
+import heart from '../../assets/icons/heart-solid.svg';
+import heart_orange from '../../assets/icons/heart-solid-orange.svg';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as trackActions from '../../store/track';
@@ -21,6 +23,8 @@ const AudioPlayerBar = () => {
     const playUrl = `url(${play})`;
     const pauseUrl = `url(${pause})`;
     const volLowUrl = `url(${volLow})`;
+    const heartUrl = `url(${heart})`;
+    const heartOrangeUrl = `url(${heart_orange})`;
     const [isPlaying, setIsPlaying] = useState(false);
     const [playPause, setPlayPause] = useState(playUrl);
     const audioPlayer = useRef();
@@ -38,9 +42,13 @@ const AudioPlayerBar = () => {
     const [clear, setClear] = useState(false);
     const playlist = useSelector(playlistActions.getPlaylist);
     const users = useSelector(userActions.getUsers);
+    const [likeBackground, setLikeBackground] = useState(heartUrl);
+    const [likeStyle, setLikeStyle] = useState({backgroundImage: likeBackground});
+    const [follow, setFollow] = useState(false);
     // const trackList = playlist.map(track => track.trackUrl);
     const history = useHistory();
 
+    console.log(follow);
 
     useEffect(() => {
         audioPlayer.current.play();       
@@ -82,6 +90,17 @@ const AudioPlayerBar = () => {
         }
         
     }, [volume]);
+
+    useEffect(() => {
+        if (follow) {
+            setLikeStyle({
+                backgroundImage: heartOrangeUrl,
+                backgroundSize: '120%'
+            })
+        } else {
+            setLikeStyle({backgroundImage: heartUrl})
+        }
+    }, [follow])
     
     const handlePlay = (e) => {
         const prevState = isPlaying;
@@ -173,12 +192,12 @@ const AudioPlayerBar = () => {
     const handleVolume = (e) => {
         setVolume(e.target.value);
         audioPlayer.current.volume = (volume / 10);
-        console.log(volume);
     };
 
     const handleLike = (e) => {
         e.preventDefault();
-        console.log(playlist[trackNum]);
+        setFollow(!follow);
+        console.log(follow);
     };
 
     const handleFollow = (e) => {
@@ -272,6 +291,7 @@ const AudioPlayerBar = () => {
 
                 <div className='track-socials'>
                     <button className='track-like'
+                    style={likeStyle}
                     onClick={(e) => handleLike(e)}
                     ></button>
                     <button className='artist-follow'

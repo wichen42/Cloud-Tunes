@@ -199,10 +199,6 @@
     border: none;
 }
 
-.track-like {
-    background-image: url('../../assets/icons/heart-solid.svg');
-}
-
 .artist-follow {
     background-image: url('../../assets/icons/user-plus-solid.svg');
 }
