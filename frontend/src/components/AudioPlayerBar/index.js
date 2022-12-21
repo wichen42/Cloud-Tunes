@@ -16,6 +16,7 @@ import * as trackActions from '../../store/track';
 import * as playlistActions from '../../store/playlist';
 import * as userActions from '../../store/users';
 import * as likeActions from '../../store/like';
+import * as sessionActions from '../../store/session';
 import PlayListBar from '../PlayListBar';
 import { useHistory } from 'react-router-dom';
 
@@ -48,9 +49,23 @@ const AudioPlayerBar = () => {
     const [followStyle, setFollowStyle] = useState({backgroundImage: `url${follow}`});
     const [like, setLike] = useState(false);
     const [followStatus, setFollowStatus] = useState(false);
-    // const trackList = playlist.map(track => track.trackUrl);
+    const sessionUser = useSelector(sessionActions.getSession);
+    const likeList = useSelector(likeActions.getLikes);
+    const [userLikes, setUserLikes] = useState([]);
     const history = useHistory();
 
+    useEffect(() => {
+        dispatch(likeActions.fetchLikes());
+    }, []);
+
+    useEffect(() => {
+        const data = likeList.filter(function (el) {
+            return el.userId === sessionUser.id;
+        });
+        setUserLikes(data);
+    }, [likeList])
+
+    // console.log(likeList);
 
     useEffect(() => {
         audioPlayer.current.play();       
@@ -67,6 +82,11 @@ const AudioPlayerBar = () => {
             setTrackNum(0);
             audioPlayer.current.play();
             sliderRef.current = requestAnimationFrame(whilePlay);
+
+            if (userLikes.some((track) => track.id === playlist[trackNum].id)) {
+                console.log("in like list");
+            }
+
         };
         
     }, [playlist]);
