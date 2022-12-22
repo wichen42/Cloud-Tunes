@@ -51,24 +51,19 @@ const AudioPlayerBar = () => {
     const [followStatus, setFollowStatus] = useState(false);
     const sessionUser = useSelector(sessionActions.getSession);
     const likeList = useSelector(likeActions.getLikes);
+    const [likeData, setLikeData] = useState([]);
     const [userLikes, setUserLikes] = useState([]);
     const history = useHistory();
 
+
+
     useEffect(() => {
         dispatch(likeActions.fetchLikes());
+        dispatch(sessionActions.fetchSession());
     }, []);
 
     useEffect(() => {
-        const data = likeList.filter(function (el) {
-            return el.userId === sessionUser.id;
-        });
-        setUserLikes(data);
-    }, [likeList])
-
-    // console.log(likeList);
-
-    useEffect(() => {
-        audioPlayer.current.play();       
+        audioPlayer.current.play();
     }, [trackNum]);
 
     useEffect(() => {
@@ -83,10 +78,9 @@ const AudioPlayerBar = () => {
             audioPlayer.current.play();
             sliderRef.current = requestAnimationFrame(whilePlay);
 
-            if (userLikes.some((track) => track.id === playlist[trackNum].id)) {
-                console.log("in like list");
-            }
-
+            // if (userLikes.some((track) => track.id === playlist[trackNum].id)) {
+            //     console.log("in like list");
+            // }
         };
         
     }, [playlist]);
@@ -94,6 +88,7 @@ const AudioPlayerBar = () => {
     useEffect(() => {
         setPlayPause(playUrl);
         setIsPlaying(false);
+        setTrackNum();
     }, [clear])
     
     useEffect(() => {
@@ -128,12 +123,21 @@ const AudioPlayerBar = () => {
         if (followStatus) {
             setFollowStyle({
                 backgroundImage: `url(${follow_orange})`,
-                backgroundSize: '109%',
+                backgroundSize: '108%',
+
             });
         } else {
             setFollowStyle({backgroundImage: `url(${follow})`});
         }
     }, [followStatus]);
+
+    useEffect(() => {
+        const userList = likeList.filter(function (el) {
+            return el.userId === sessionUser.user.id;
+        });
+        // console.log(userList);
+        setUserLikes(userList);
+    }, [likeList && sessionUser])
     
     const handlePlay = (e) => {
         const prevState = isPlaying;
@@ -230,7 +234,19 @@ const AudioPlayerBar = () => {
     const handleLike = (e) => {
         e.preventDefault();
         setLike(!like);
-        console.log(likeStyle);
+        if (typeof trackNum === "number"){
+            // check if the current playing track is in userLikes.
+            const hasLikedTrack = (likes, trackId) => {
+                return likes.find((track) => track.trackId === trackId) !== undefined;
+            }
+            if (hasLikedTrack(userLikes, playlist[trackNum].id)) {
+                console.log("in liked list");
+            } else {
+                console.log("not in liked list")
+                console.log(userLikes);
+                console.log(playlist[trackNum].id);
+            }
+        }
     };
 
     const handleFollow = (e) => {
