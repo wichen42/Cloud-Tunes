@@ -88,17 +88,19 @@ const AudioPlayerBar = () => {
                 return likes.find((track) => track.trackId === trackId) !== undefined;
             }
             if (hasLikedTrack(userLikes, playlist[trackNum].id)) {
-                // console.log("in liked list");
-                // console.log(playlist[trackNum]);
+                console.log(userLikes);
+                console.log(playlist[trackNum]);
                 setLike(true);
-            } else {
-                // console.log("not in liked list")
-                // console.log(userLikes);
-                // console.log(playlist[trackNum].id);
+                console.log(like);
+            } else if (!hasLikedTrack(userLikes, playlist[trackNum].id)) {
+                console.log(userLikes);
+                console.log(playlist[trackNum]);
                 setLike(false);
+                console.log(like);
             }
         }
-    }, [playlist && trackNum])
+        if (isNaN(trackNum)) setLike(false);
+    }, [(playlist && trackNum), playlist])
 
     useEffect(() => {
         setPlayPause(playUrl);
@@ -129,7 +131,7 @@ const AudioPlayerBar = () => {
                 backgroundImage: heartOrangeUrl,
                 backgroundSize: '120%'
             })
-        } else {
+        } else if (like === false) {
             setLikeStyle({backgroundImage: heartUrl})
         }
     }, [like]);
