@@ -55,8 +55,6 @@ const AudioPlayerBar = () => {
     const [userLikes, setUserLikes] = useState([]);
     const history = useHistory();
 
-
-
     useEffect(() => {
         dispatch(likeActions.fetchLikes());
         dispatch(sessionActions.fetchSession());
@@ -77,13 +75,30 @@ const AudioPlayerBar = () => {
             setTrackNum(0);
             audioPlayer.current.play();
             sliderRef.current = requestAnimationFrame(whilePlay);
-
-            // if (userLikes.some((track) => track.id === playlist[trackNum].id)) {
-            //     console.log("in like list");
-            // }
         };
+
+
         
     }, [playlist]);
+
+    useEffect(() => {
+        if (typeof trackNum === "number"){
+            // check if the current playing track is in userLikes.
+            const hasLikedTrack = (likes, trackId) => {
+                return likes.find((track) => track.trackId === trackId) !== undefined;
+            }
+            if (hasLikedTrack(userLikes, playlist[trackNum].id)) {
+                // console.log("in liked list");
+                // console.log(playlist[trackNum]);
+                setLike(true);
+            } else {
+                // console.log("not in liked list")
+                // console.log(userLikes);
+                // console.log(playlist[trackNum].id);
+                setLike(false);
+            }
+        }
+    }, [playlist && trackNum])
 
     useEffect(() => {
         setPlayPause(playUrl);
@@ -234,19 +249,7 @@ const AudioPlayerBar = () => {
     const handleLike = (e) => {
         e.preventDefault();
         setLike(!like);
-        if (typeof trackNum === "number"){
-            // check if the current playing track is in userLikes.
-            const hasLikedTrack = (likes, trackId) => {
-                return likes.find((track) => track.trackId === trackId) !== undefined;
-            }
-            if (hasLikedTrack(userLikes, playlist[trackNum].id)) {
-                console.log("in liked list");
-            } else {
-                console.log("not in liked list")
-                console.log(userLikes);
-                console.log(playlist[trackNum].id);
-            }
-        }
+
     };
 
     const handleFollow = (e) => {
