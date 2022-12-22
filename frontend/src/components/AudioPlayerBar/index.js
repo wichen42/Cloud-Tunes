@@ -17,6 +17,7 @@ import * as playlistActions from '../../store/playlist';
 import * as userActions from '../../store/users';
 import * as likeActions from '../../store/like';
 import * as sessionActions from '../../store/session';
+import * as utilActions from '../../Util/';
 import PlayListBar from '../PlayListBar';
 import { useHistory } from 'react-router-dom';
 
@@ -55,6 +56,8 @@ const AudioPlayerBar = () => {
     const [userLikes, setUserLikes] = useState([]);
     const history = useHistory();
 
+
+
     useEffect(() => {
         dispatch(likeActions.fetchLikes());
         dispatch(sessionActions.fetchSession());
@@ -88,15 +91,15 @@ const AudioPlayerBar = () => {
                 return likes.find((track) => track.trackId === trackId) !== undefined;
             }
             if (hasLikedTrack(userLikes, playlist[trackNum].id)) {
-                console.log(userLikes);
-                console.log(playlist[trackNum]);
+                // console.log(userLikes);
+                // console.log(playlist[trackNum]);
                 setLike(true);
-                console.log(like);
+                // console.log(like);
             } else if (!hasLikedTrack(userLikes, playlist[trackNum].id)) {
-                console.log(userLikes);
-                console.log(playlist[trackNum]);
+                // console.log(userLikes);
+                // console.log(playlist[trackNum]);
                 setLike(false);
-                console.log(like);
+                // console.log(like);
             }
         }
         if (isNaN(trackNum)) setLike(false);
@@ -130,10 +133,21 @@ const AudioPlayerBar = () => {
             setLikeStyle({
                 backgroundImage: heartOrangeUrl,
                 backgroundSize: '120%'
-            })
+            });
+            // if track is liked already, change style back to black and dispatch unlike
         } else if (like === false) {
-            setLikeStyle({backgroundImage: heartUrl})
+            setLikeStyle({backgroundImage: heartUrl});
+            // if track is not liked already, change style to orange and dispatch like
         }
+
+        // if (utilActions.isEqual(likeStyle, {backgroundImage: heartOrangeUrl, backgroundSize: '120%'})) {
+        //     console.log("orange")
+        //     console.log(likeStyle)
+        // } else if (utilActions.isEqual(likeStyle, {backgroundImage: heartUrl})) {
+        //     console.log("black")
+        //     console.log(likeStyle)
+
+        // }
     }, [like]);
 
     useEffect(() => {
@@ -251,7 +265,6 @@ const AudioPlayerBar = () => {
     const handleLike = (e) => {
         e.preventDefault();
         setLike(!like);
-
     };
 
     const handleFollow = (e) => {
