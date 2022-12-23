@@ -10,6 +10,7 @@ const WelcomeBack = ({welcomeOpen, welcomeClose, username}) => {
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
     const [showPassword, setShowPassword] = useState(false);
+    const [hint, setHint] = useState(false);
 
     if (!welcomeOpen) return null;
 
@@ -103,8 +104,14 @@ const WelcomeBack = ({welcomeOpen, welcomeClose, username}) => {
                     </div>
                 </div>
 
-                <div className='welcome-end-text'>
+                <div className='welcome-end-text'
+                onMouseEnter={() => setHint(true)}
+                onMouseLeave={() => setHint(false)}
+                >
                     Don't know your password?
+                    {hint && (
+                        <div className='password-hint'>It's probably "password"</div>
+                    )}
                 </div>
 
             </div>

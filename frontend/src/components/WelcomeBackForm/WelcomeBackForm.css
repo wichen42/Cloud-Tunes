@@ -7,7 +7,7 @@
 
 .wmodal-container {
     width: 20%;
-    height: 40%;
+    height: 35%;
     position: absolute;
     top: 25%;
     left: 50%;
@@ -125,6 +125,11 @@
     color: blue;
     font-family: overpass-light;
     font-size: 14px;
+    position: relative;
+}
+
+.password-hint {
+    position: absolute;
 }
 
 .wpassword-eye {

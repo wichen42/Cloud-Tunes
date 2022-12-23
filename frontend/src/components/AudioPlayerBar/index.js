@@ -60,7 +60,6 @@ const AudioPlayerBar = () => {
 
     useEffect(() => {
         dispatch(likeActions.fetchLikes());
-        dispatch(sessionActions.fetchSession());
     }, []);
 
     useEffect(() => {
@@ -162,13 +161,13 @@ const AudioPlayerBar = () => {
         }
     }, [followStatus]);
 
-    useEffect(() => {
-        const userList = likeList.filter(function (el) {
-            return el.userId === sessionUser.user.id;
-        });
-        // console.log(userList);
-        setUserLikes(userList);
-    }, [likeList && sessionUser])
+    // useEffect(() => {
+    //     const userList = likeList.filter(function (el) {
+    //         return el.userId === sessionUser.user.id;
+    //     });
+    //     // console.log(userList);
+    //     setUserLikes(userList);
+    // }, [likeList && sessionUser])
     
     const handlePlay = (e) => {
         const prevState = isPlaying;
