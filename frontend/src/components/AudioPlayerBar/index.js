@@ -94,12 +94,12 @@ const AudioPlayerBar = () => {
             const hasLikedTrack = (likes, trackId) => {
                 return likes.find((track) => track.trackId === trackId) !== undefined;
             }
-            if (hasLikedTrack(userLikes, playlist[trackNum].id)) {
+            if (playlist[trackNum] && hasLikedTrack(userLikes, playlist[trackNum].id)) {
                 // console.log(userLikes);
                 // console.log(playlist[trackNum]);
                 setLike(true);
                 // console.log(like);
-            } else if (!hasLikedTrack(userLikes, playlist[trackNum].id)) {
+            } else if (!playlist[trackNum] || !hasLikedTrack(userLikes, playlist[trackNum].id)) {
                 // console.log(userLikes);
                 // console.log(playlist[trackNum]);
                 setLike(false);
@@ -167,12 +167,14 @@ const AudioPlayerBar = () => {
     }, [followStatus]);
 
     useEffect(() => {
-        
-        const userList = likeList.filter(function (el) {
-            return el.userId === user.id;
-        });
-        // console.log(userList);
-        setUserLikes(userList);
+        if (user) {
+            const userList = likeList.filter(function (el) {
+                return el.userId === user.id;
+            });
+            // console.log(userList);
+            setUserLikes(userList);
+        }
+
     }, [likeList])
     
     const handlePlay = (e) => {
