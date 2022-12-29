@@ -54,13 +54,18 @@ const AudioPlayerBar = () => {
     const likeList = useSelector(likeActions.getLikes);
     const [likeData, setLikeData] = useState([]);
     const [userLikes, setUserLikes] = useState([]);
+    const [user, setUser] = useState({});
     const history = useHistory();
 
-
+    console.log(sessionUser);
 
     useEffect(() => {
         dispatch(likeActions.fetchLikes());
     }, []);
+
+    useEffect(() => {
+        setUser(sessionUser);
+    }, [sessionUser])
 
     useEffect(() => {
         audioPlayer.current.play();
@@ -161,13 +166,14 @@ const AudioPlayerBar = () => {
         }
     }, [followStatus]);
 
-    // useEffect(() => {
-    //     const userList = likeList.filter(function (el) {
-    //         return el.userId === sessionUser.user.id;
-    //     });
-    //     // console.log(userList);
-    //     setUserLikes(userList);
-    // }, [likeList && sessionUser])
+    useEffect(() => {
+        
+        const userList = likeList.filter(function (el) {
+            return el.userId === user.id;
+        });
+        // console.log(userList);
+        setUserLikes(userList);
+    }, [likeList])
     
     const handlePlay = (e) => {
         const prevState = isPlaying;
