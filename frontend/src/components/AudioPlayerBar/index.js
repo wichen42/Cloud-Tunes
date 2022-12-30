@@ -17,6 +17,7 @@ import * as playlistActions from '../../store/playlist';
 import * as userActions from '../../store/users';
 import * as likeActions from '../../store/like';
 import * as sessionActions from '../../store/session';
+import * as followActions from '../../store/follow';
 import * as utilActions from '../../Util/';
 import PlayListBar from '../PlayListBar';
 import { useHistory } from 'react-router-dom';
@@ -46,26 +47,37 @@ const AudioPlayerBar = () => {
     const [clear, setClear] = useState(false);
     const playlist = useSelector(playlistActions.getPlaylist);
     const users = useSelector(userActions.getUsers);
+    const follows = useSelector(followActions.getFollows);
     const [likeStyle, setLikeStyle] = useState({backgroundImage: heartUrl});
     const [followStyle, setFollowStyle] = useState({backgroundImage: `url${follow}`});
     const [like, setLike] = useState(false);
     const [followStatus, setFollowStatus] = useState(false);
     const sessionUser = useSelector(sessionActions.getSession);
     const likeList = useSelector(likeActions.getLikes);
-    const [likeData, setLikeData] = useState([]);
     const [userLikes, setUserLikes] = useState([]);
+    const [userFollow, setUserFollow] = useState([]);
     const [user, setUser] = useState({});
     const history = useHistory();
 
-    console.log(sessionUser);
-
     useEffect(() => {
         dispatch(likeActions.fetchLikes());
+        dispatch(followActions.fetchFollows());
     }, []);
 
     useEffect(() => {
         setUser(sessionUser);
     }, [sessionUser])
+
+    useEffect(() => {
+        if (user) {
+            const data = follows.filter(function (el) {
+                return el.followerId === user.id;
+            });
+            setUserFollow(data);
+        }
+    }, [follows])
+
+    console.log(userFollow);
 
     useEffect(() => {
         audioPlayer.current.play();
@@ -84,8 +96,6 @@ const AudioPlayerBar = () => {
             sliderRef.current = requestAnimationFrame(whilePlay);
         };
 
-
-        
     }, [playlist]);
 
     useEffect(() => {
@@ -156,7 +166,6 @@ const AudioPlayerBar = () => {
             const userList = likeList.filter(function (el) {
                 return el.userId === user.id;
             });
-            // console.log(userList);
             setUserLikes(userList);
         }
 
