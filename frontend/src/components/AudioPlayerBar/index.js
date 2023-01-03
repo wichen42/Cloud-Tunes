@@ -77,8 +77,6 @@ const AudioPlayerBar = () => {
         }
     }, [follows])
 
-    console.log(userFollow);
-
     useEffect(() => {
         audioPlayer.current.play();
     }, [trackNum]);
@@ -104,13 +102,26 @@ const AudioPlayerBar = () => {
             const hasLikedTrack = (likes, trackId) => {
                 return likes.find((track) => track.trackId === trackId) !== undefined;
             }
+            const hasFollowUser = (userFollow, userId) => {
+                return userFollow.find((follow) => follow.userId === userId) !== undefined;
+            }
+            const followData = {followerId: user.id, followedId: playlist[trackNum].userId}
+            // console.log(playlist[trackNum])
+            if (userFollow.some(data => data.followedId === playlist[trackNum].userId)) {
+                setFollowStatus(true);
+            } else {
+                setFollowStatus(false);
+            }
             if (playlist[trackNum] && hasLikedTrack(userLikes, playlist[trackNum].id)) {
                 setLike(true);
             } else if (!playlist[trackNum] || !hasLikedTrack(userLikes, playlist[trackNum].id)) {
                 setLike(false);
             }
         }
-        if (isNaN(trackNum)) setLike(false);
+        if (isNaN(trackNum)) {
+            setLike(false);
+            setFollowStatus(false);
+        };
     }, [(playlist && trackNum), playlist])
 
     useEffect(() => {
@@ -154,7 +165,6 @@ const AudioPlayerBar = () => {
             setFollowStyle({
                 backgroundImage: `url(${follow_orange})`,
                 backgroundSize: '108%',
-
             });
         } else {
             setFollowStyle({backgroundImage: `url(${follow})`});
