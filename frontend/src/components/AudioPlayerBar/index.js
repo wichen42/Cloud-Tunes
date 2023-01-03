@@ -105,8 +105,6 @@ const AudioPlayerBar = () => {
             const hasFollowUser = (userFollow, userId) => {
                 return userFollow.find((follow) => follow.userId === userId) !== undefined;
             }
-            const followData = {followerId: user.id, followedId: playlist[trackNum].userId}
-            // console.log(playlist[trackNum])
             if (userFollow.some(data => data.followedId === playlist[trackNum].userId)) {
                 setFollowStatus(true);
             } else {
