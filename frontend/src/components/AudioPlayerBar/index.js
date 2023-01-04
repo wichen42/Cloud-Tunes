@@ -277,10 +277,10 @@ const AudioPlayerBar = () => {
             console.log("no track selected");
         } else if (!isNaN(trackNum)) {
             if (like) { 
-                console.log("unliked");
+                // console.log("unliked");
                 dispatch(likeActions.deleteLike(playlist[trackNum].id))            
             } else {
-                console.log("liked");
+                // console.log("liked");
                 dispatch(likeActions.addLike(playlist[trackNum].id))
             }
         }
@@ -289,8 +289,19 @@ const AudioPlayerBar = () => {
 
     const handleFollow = (e) => {
         e.preventDefault();
+        if (isNaN(trackNum)) {
+            console.log("no track selected");
+        } else if (!isNaN(trackNum)) {
+            if (followStatus) {
+                console.log("unfollow");
+                dispatch(followActions.deleteFollow(playlist[trackNum].userId));
+            } else {
+                console.log("follow");
+                const followData = {followedId: playlist[trackNum].userId, followerId: sessionUser.id}
+                dispatch(followActions.addFollow(followData));
+            }
+        }
         setFollowStatus(!followStatus);
-        console.log(followStatus);
     }
 
     const handleRepeat = (e) => {
