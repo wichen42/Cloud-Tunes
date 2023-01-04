@@ -30,6 +30,12 @@ export const deleteLike = (trackId) => async dispatch => {
     dispatch(removeLike(trackId));
 }
 
+export const addLike = (trackId) => async dispatch => {
+    const res = await csrfFetch(`/api/tracks/${trackId}/like`, {
+        method: 'POST'
+    });
+    dispatch(fetchLikes());
+}
 
 const likesReducer = (state = {}, action) => {
     Object.freeze(state);

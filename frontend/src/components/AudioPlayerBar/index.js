@@ -273,6 +273,17 @@ const AudioPlayerBar = () => {
 
     const handleLike = (e) => {
         e.preventDefault();
+        if (isNaN(trackNum)) {
+            console.log("no track selected");
+        } else if (!isNaN(trackNum)) {
+            if (like) { 
+                console.log("unliked");
+                dispatch(likeActions.deleteLike(playlist[trackNum].id))            
+            } else {
+                console.log("liked");
+                dispatch(likeActions.addLike(playlist[trackNum].id))
+            }
+        }
         setLike(!like);
     };
 
