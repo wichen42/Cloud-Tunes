@@ -306,7 +306,17 @@ const AudioPlayerBar = () => {
 
     const handleRepeat = (e) => {
         e.preventDefault();
-        setRepeat(!repeat);
+        if (isNaN(trackNum)) {
+            console.log("no track selected");
+        } else if(!isNaN(trackNum)) {
+            if (repeat) {
+                setRepeat(false);
+                audioPlayer.current.loop = false;
+            } else {
+                setRepeat(true);
+                audioPlayer.current.loop = true;
+            }
+        }
     }
 
     return ( 
