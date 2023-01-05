@@ -1,5 +1,4 @@
 import './AudioPlayerBar.css';
-import sample from '../../assets/temp_music/sample.mp3';
 import play from '../../assets/icons/play-solid.svg';
 import pause from '../../assets/icons/pause-solid.svg';
 import volLow from '../../assets/icons/volume-low-solid.svg';
@@ -12,13 +11,11 @@ import follow from '../../assets/icons/user-plus-solid.svg';
 import follow_orange from '../../assets/icons/follow-orange.svg';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import * as trackActions from '../../store/track';
 import * as playlistActions from '../../store/playlist';
 import * as userActions from '../../store/users';
 import * as likeActions from '../../store/like';
 import * as sessionActions from '../../store/session';
 import * as followActions from '../../store/follow';
-import * as utilActions from '../../Util/';
 import PlayListBar from '../PlayListBar';
 import { useHistory } from 'react-router-dom';
 
@@ -57,12 +54,19 @@ const AudioPlayerBar = () => {
     const [userLikes, setUserLikes] = useState([]);
     const [userFollow, setUserFollow] = useState([]);
     const [user, setUser] = useState({});
+    const [end, setEnd] = useState(0);
     const history = useHistory();
 
     useEffect(() => {
         dispatch(likeActions.fetchLikes());
         dispatch(followActions.fetchFollows());
+
     }, []);
+
+    useEffect(() => {
+        console.log(end);
+        console.log(playlist);
+    }, [end])
 
     useEffect(() => {
         setUser(sessionUser);
@@ -82,10 +86,6 @@ const AudioPlayerBar = () => {
     }, [trackNum]);
 
     useEffect(() => {
-        if (repeat) setTrackNum(0);
-    }, [repeat]);
-
-    useEffect(() => {
         if (playlist.length > 0) {
             setPlayPause(pauseUrl);
             setIsPlaying(true);
@@ -102,10 +102,7 @@ const AudioPlayerBar = () => {
             const hasLikedTrack = (likes, trackId) => {
                 return likes.find((track) => track.trackId === trackId) !== undefined;
             }
-            const hasFollowUser = (userFollow, userId) => {
-                return userFollow.find((follow) => follow.userId === userId) !== undefined;
-            }
-            if (userFollow.some(data => data.followedId === playlist[trackNum].userId)) {
+            if (playlist[trackNum] && userFollow.some(data => data.followedId === playlist[trackNum].userId)) {
                 setFollowStatus(true);
             } else {
                 setFollowStatus(false);
@@ -115,7 +112,7 @@ const AudioPlayerBar = () => {
             } else if (!playlist[trackNum] || !hasLikedTrack(userLikes, playlist[trackNum].id)) {
                 setLike(false);
             }
-        }
+        } 
         if (isNaN(trackNum)) {
             setLike(false);
             setFollowStatus(false);
@@ -132,7 +129,20 @@ const AudioPlayerBar = () => {
         const seconds = Math.floor(audioPlayer.current.duration)
         setDuration(seconds);
         progressBar.current.max = seconds;
+
+        const handleEnded = () => {
+            console.log("track ends");
+            console.log(trackNum);
+            handleNext();
+        }
+
+        audioPlayer.current.addEventListener('ended', handleEnded)
+
     }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState]);
+
+    useEffect(() => {
+        console.log("track ended");
+    }, [audioPlayer?.current?.ended])
 
     useEffect(() => {
         if (volume <= 0 && volume < 5) {
@@ -226,7 +236,7 @@ const AudioPlayerBar = () => {
         setCurrentTime(progressBar.current.value);
     };
 
-    const handleNext = (e) => {
+    const handleNext = () => {
         if (trackNum >= playlist.length-1 ) {
             setTrackNum(0);
         } else {
@@ -337,7 +347,8 @@ const AudioPlayerBar = () => {
             </div>
         )}
             <div className='audio-bar'>
-            <audio src={playlist[trackNum] ? playlist[trackNum].trackUrl : ""} ref={audioPlayer} id='myAudio'></audio>
+            <audio src={playlist[trackNum] ? playlist[trackNum].trackUrl : ""} 
+            ref={audioPlayer} id='myAudio'></audio>
             <div className='button-container'>
                 <button className='prev-track'
                 onClick={(e) => handlePrev(e)}
@@ -347,7 +358,7 @@ const AudioPlayerBar = () => {
                 onClick={(e) => handlePlay(e)}
                 ></button>
                 <button className='next-track'
-                onClick={(e) => handleNext(e)}></button>
+                onClick={() => handleNext()}></button>
                 <button className='shuffle-track'
                 onClick={(e) => handleShuffle(e)}
                 ></button>
