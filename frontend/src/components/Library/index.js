@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import LibraryItem from '../../LibraryItem';
 import * as trackActions from '../../store/track';
 import * as userActions from '../../store/users';
 import './Library.css';
@@ -8,45 +9,17 @@ const Library = () => {
     const tracks = useSelector(trackActions.getTracks);
     const users = useSelector(userActions.getUsers);
 
-    const handleUser = (track) => {
-        console.log(track);
-    };
-
     return ( 
         <div className='library-container'>
-                <h1>All Tracks</h1>
-            <div>
-                <ul>
+            <div className='library-header'>
+                All Tracks
+            </div>
+            <div className='library-track-container'>
+                
                     {tracks.map(track => {
-                       return(
-                        <li key={track.id}
-                        className="track-item"
-                        >
-                            <div className='track-detail-container'>
-                                <div>Title:</div>
-                                <div>{track.title}</div>
-                            </div>
-                            <div className='track-detail-container'>
-                                <div>Username:</div>
-                                <div
-                                >{track.username}</div>
-                            </div>
-                            <div className='track-detail-container'>
-                                <div>Genre:</div>
-                                <div>{track.genre}</div>
-                            </div>
-                            <div className='track-detail-container'>
-                                <div>Description</div>
-                                <div>{track.description}</div>
-                            </div>
-                            <div className='track-detail-container'>
-                                <div>URL:</div>
-                                <div><a href={track.trackUrl} target="_blank">Link</a></div>
-                            </div>
-                        </li>
-                       ) 
+                        return <LibraryItem track={track}/>
                     })}
-                </ul>
+                
             </div>
         </div>
      );
