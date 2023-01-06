@@ -17,7 +17,7 @@ const Library = () => {
             <div className='library-track-container'>
                 
                     {tracks.map(track => {
-                        return <LibraryItem track={track}/>
+                        return <LibraryItem track={track} users={users}/>
                     })}
                 
             </div>

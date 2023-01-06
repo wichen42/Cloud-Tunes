@@ -1,7 +1,6 @@
 import './SideTrackItem.css';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as playlistActions from '../../store/playlist';
 
 const SideTrackItem = ({track}) => {  
