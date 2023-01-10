@@ -1,4 +1,3 @@
-require 'aws-sdk-s3'
 require 'faker'
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
@@ -7,25 +6,6 @@ require 'faker'
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-
-# Grab links out of Amazon S3 folders
-s3 = Aws::S3::Resource.new(region: 'us-east-1')
-
-bucket_name = 'cloud-tunes-dev'
-banner_folder = 'banner/'
-profile_folder = 'profile/'
-
-# Arrays to hold URL links
-banner_urls = []
-profile_urls = []
-
-25.times do |i| 
-  profile_urls << "https://cloud-tunes-dev.s3.amazonaws.com/profile/profile#{i+1}.jpg"
-end
-
-25.times do |i| 
-  banner_urls << "https://cloud-tunes-dev.s3.amazonaws.com/banner/banner#{i+1}.jpg"
-end
 
 
 # s3.list_objects(bucket: bucket_name, prefix: banner_folder).contents.each do |object|
@@ -47,7 +27,9 @@ ApplicationRecord.transaction do
   
     puts "Creating users..."
     # Create one user with an easy to remember username, email, and password:
-    User.create!(
+
+    puts "Creating demouser"
+    demo = User.create!(
       username: 'demolition', 
       password: 'password',
       created_at: Faker::Time.between(from: 2.days.ago, to: Time.now),
@@ -55,7 +37,53 @@ ApplicationRecord.transaction do
       about: Faker::Lorem.paragraph,
       location: "#{Faker::Address.city}, #{Faker::Address.country}",
     )
+    puts "Attaching demo user image and banner"
+    demoImage = URI.open('https://cloud-tunes-dev.s3.amazonaws.com/cat.jpg')
+    demo.image.attach(io: demoImage, filename: 'cat.jpg')
+
+    demoBanner = URI.open('https://cloud-tunes-dev.s3.amazonaws.com/sky-tape.jpg')
+    demo.banner.attach(io: demoBanner, filename: 'sky-tape.jpg')
+
+    puts "Creating tracks for demouser"
+
+    demouserTrack1 = Track.create!(
+      title: Faker::Music.album,
+      username: "demouser",
+      genre: Faker::Music.genre,
+      description: Faker::Lorem.paragraph
+      created_at: Faker::Time.between(from: 2.days.ago, to: Time.now),
+      updated_at: Faker::Time.between(from: 2.days.ago, to: Time.now),
+      user_id: demouser.id
+    )
+
+    demoTrack1 = URI.open('https://cloud-tunes-dev.s3.amazonaws.com/tracks/track1.mp3')
+    demouserTrack1.track.attach(io: demoTrack1, filename: 'track1.mp3')
+    
+    demoTrack2 = URI.open('https://cloud-tunes-dev.s3.amazonaws.com/tracks/track2.mp3'
+    demoTrack3 = URI.open('https://cloud-tunes-dev.s3.amazonaws.com/tracks/track3.mp3'
+    demoTrack4 = URI.open('https://cloud-tunes-dev.s3.amazonaws.com/tracks/track4.mp3'
+    demoTrack5 = URI.open('https://cloud-tunes-dev.s3.amazonaws.com/tracks/track5.mp3'
+
+    
+    
+
   
+
+    puts "Creating Biggie"
+    biggie = User.create!(
+      username: 'biggie',
+      password: 'password',
+      created_at: Faker::Time.between(from: 2.days.ago, to: Time.now),
+      updated_at: Faker::Time.between(from: 2.days.ago, to: Time.now),
+      about: Faker::Lorem.paragraph,
+      location: "#{Faker::Address.city}, #{Faker::Address.country}",
+    )
+
+    biggieProfile = URI.open('https://cloud-tunes-dev.s3.amazonaws.com/profile16.jpg')
+    user.image.attach(io: profile, filename: 'profile16.jpg')
+
+    biggieBanner = URI.open('https://cloud-tunes-dev.s3.amazonaws.com/banner12.jpg')
+    user.banner.attach(io: banner, filename: 'banner12.jpg')
     # More users
     # 10.times do 
     #   User.create!({
@@ -64,6 +92,7 @@ ApplicationRecord.transaction do
     #   }) 
     # end
 
+    puts "Creating other users"
     25.times do |i|
       user = User.create!(
         username: Faker::Internet.username,
@@ -73,8 +102,14 @@ ApplicationRecord.transaction do
         about: Faker::Lorem.paragraph,
         location: "#{Faker::Address.city}, #{Faker::Address.country}",
       )
-      
-      profileUrl = s3.bucket('cloud-tunes-dev').object(`profile#{i+1}`)
+      puts "creating and attaching profile image for user #{i+1}"
+      profile = URI.open("https://cloud-tunes-dev.s3.amazonaws.com/profile#{i+1}.jpg")
+      user.image.attach(io: profile, filename: "profile#{i+1}.jpg")
+
+      puts "creating and attaching banner image for user #{i+1}"
+      banner = URI.open("https://cloud-tunes-dev.s3.amazonaws.com/banner#{i+1}.jpg")
+      user.banner.attach(io: banner, filename: "banner#{i+1}.jpg")
+
     end
   
     puts "Done!"
