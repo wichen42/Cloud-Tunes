@@ -1,17 +1,22 @@
+import { useState } from 'react';
 import PlaylistItem from '../PlaylistItem';
 import './Playlist.css';
 
 const Playlist = ({tracks, users, sessionUser, followList}) => {
+    
+    const [trackImage, setTrackImage] = useState();
 
-    const shuffledTracks = tracks.sort(() => 0.5 - Math.random()).slice(0,12);
-    console.log(shuffledTracks);
+    const shuffledTracks = [];
+    const playlistTracks = [...new Map(tracks.map(track => [track["username"], track]).values())]
 
-    const playlistItems = shuffledTracks.map((track) => {
+    playlistTracks.forEach(track => shuffledTracks.push(track[1]));
+
+    const playlistItems = shuffledTracks.slice(0,12).map((track) => {
         const trackUser = users.filter(function (el) {
             return el.username === track.username;
         });
         const followData = {followedId: track.userId, followerId: sessionUser.id}
-        return <PlaylistItem track={track} user={trackUser[0]} followData={followData} key={track.id} sessionUser={sessionUser} users={users} followList={followList} />
+        return <PlaylistItem track={track} user={trackUser[0]} followData={followData} key={track.id} sessionUser={sessionUser} users={users} followList={followList} setTrackImage={setTrackImage}/>
     });
 
 
@@ -24,7 +29,7 @@ const Playlist = ({tracks, users, sessionUser, followList}) => {
             <div className='discover-playlist-container'>
             <div className='discover-playlist-container-body'>
                 <div className='discover-playlist-image-container'>
-                    <img src="https://cloud-tunes-dev.s3.amazonaws.com/playlist-background-square.jpg"
+                    <img src={trackImage ? trackImage : "https://cloud-tunes-dev.s3.amazonaws.com/playlist-background-square.jpg"}
                     className='discover-playlist-image'
                     />
                 </div>

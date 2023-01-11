@@ -29,7 +29,6 @@
     height: 100%;
     background-color: #612F31;
     display: flex;
-    display: flex;
 }
 
 .discover-playlist-image-container {
@@ -43,8 +42,10 @@
 }
 
 .discover-playlist-image {
-    width: 100%;
-    height: 100%;
+    height: 225px;
+    width: 225px;
+    margin-bottom: 40px;
+    margin-top: 20px;
 }
 
 .discover-playlist-details-container {
@@ -86,6 +87,7 @@
     align-items: center;
     cursor: pointer;
     position: relative;
+    margin-top: -4px;
 }
 
 .playlist-track-name-container {

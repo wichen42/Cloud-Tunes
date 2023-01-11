@@ -7,7 +7,7 @@ import * as followActions from '../../store/follow';
 import * as playlistActions from '../../store/playlist';
 import { useDispatch, useSelector } from 'react-redux';
 
-const PlaylistItem = ({track, users, sessionUser, followList, user, followData}) => {
+const PlaylistItem = ({track, users, sessionUser, followList, user, followData, setTrackImage}) => {
 
     const followStyle = {
         color: "white"
@@ -77,14 +77,17 @@ const PlaylistItem = ({track, users, sessionUser, followList, user, followData})
             }
     }
 
-
-
+    const handleClick = (e) => {
+        e.preventDefault();
+        setTrackImage(track.imageUrl);
+    }
 
     return ( 
         <div 
             className='discover-track-playlist-details'
             onMouseEnter={() => setShowButtons(true)}
             onMouseLeave={() => setShowButtons(false)}
+            onClick={(e) => handleClick(e)}
             >
                 {showButtons && 
                     <div className='discover-playlist-buttons' >
