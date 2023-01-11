@@ -45,7 +45,10 @@
 .discover-slider-item-title {
     margin-top: 15px;
     word-wrap: break-word;
+    overflow-wrap: break-word;
+    display: flex;
 }
+
 
 .discover-slider-header {
     font-size: 25px;

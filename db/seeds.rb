@@ -49,10 +49,10 @@ ApplicationRecord.transaction do
 
     10.times do |i| 
       demouserTrack = Track.create!(
-        title: Faker::Music.album,
+        title: Faker::Music::RockBand.song,
         username: "demolition",
         genre: Faker::Music.genre,
-        description: Faker::Lorem.paragraph(number: 3),
+        description: Faker::Lorem.paragraphs(number: 3),
         created_at: Faker::Time.between(from: 2.days.ago, to: Time.now),
         updated_at: Faker::Time.between(from: 2.days.ago, to: Time.now),
         user_id: demo.id,
@@ -86,7 +86,7 @@ ApplicationRecord.transaction do
 
     10.times do |i|
       biggieTrack = Track.create!(
-        title: Faker::Music.album,
+        title: Faker::Music::RockBand.song,
         username: "biggie",
         genre: Faker::Music.genre,
         description: Faker::Lorem.paragraph(sentence_count: 5),
@@ -102,7 +102,7 @@ ApplicationRecord.transaction do
       biggieTrack.track.attach(io: biggieTrackFile, filename: "tracks/track#{i+11}.mp3")
       
       biggieTrackImage = URI.open("https://cloud-tunes-dev.s3.amazonaws.com/track-cover/cover#{i+1}.jpg")
-      biggieTrack.image.attach(io: biggieTrackImage, filename: "track-cover/cover#{i+1}.jpg")
+      biggieTrack.image.attach(io: biggieTrackImage, filename: "track-cover/cover#{i+11}.jpg")
 
     end
 
@@ -122,6 +122,29 @@ ApplicationRecord.transaction do
 
       banner = URI.open("https://cloud-tunes-dev.s3.amazonaws.com/banner/banner#{i+1}.jpg")
       user.banner.attach(io: banner, filename: "banner#{i+1}.jpg")
+
+      puts "creating tracks for user #{1}"
+
+      3.times do |i|
+        userTrack = Track.create!(
+          title: Faker::Music::RockBand.song,
+          username: user.username,
+          genre: Faker::Music.genre,
+          description: Faker::Lorem.paragraph(sentence_count: 5),
+          created_at: Faker::Time.between(from: 2.days.ago, to: Time.now),
+          updated_at: Faker::Time.between(from: 2.days.ago, to: Time.now),
+          user_id: user.id,
+        )
+        randomNum = rand(1...33);
+        puts "creating track #{i}"
+
+        userTrackFile = URI.open("https://cloud-tunes-dev.s3.amazonaws.com/tracks/track#{randomNum}.mp3")
+        userTrack.track.attach(io: userTrackFile, filename: "track#{randomNum}.mp3")
+    
+        userTrackImage = URI.open("https://cloud-tunes-dev.s3.amazonaws.com/track-cover/cover#{rand(1...33)}.jpg")
+        userTrack.image.attach(io: userTrackImage, filename: "cover#{rand(1...33)}.jpg")
+
+      end
 
     end
   

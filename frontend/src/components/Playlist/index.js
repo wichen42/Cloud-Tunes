@@ -3,8 +3,10 @@ import './Playlist.css';
 
 const Playlist = ({tracks, users, sessionUser, followList}) => {
 
+    const shuffledTracks = tracks.sort(() => 0.5 - Math.random()).slice(0,12);
+    console.log(shuffledTracks);
 
-    const playlistItems = tracks.map((track) => {
+    const playlistItems = shuffledTracks.map((track) => {
         const trackUser = users.filter(function (el) {
             return el.username === track.username;
         });
