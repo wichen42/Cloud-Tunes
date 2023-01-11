@@ -58,7 +58,7 @@ const DiscoverPage = () => {
 
     const artistList = shuffleArr(users, 10);
     const demolitionTracks = tracks.filter(track => track.userId === 1);
-    const biggieTracks = tracks.filter(track => track.userId === 17);
+    const biggieTracks = tracks.filter(track => track.userId === 2);
     const sideTrackItem = sideTracks.map(track => {
         return <SideTrackItem track={track} key={track.id}/>
     })
