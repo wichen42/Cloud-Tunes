@@ -7,15 +7,6 @@ require 'faker'
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-
-# s3.list_objects(bucket: bucket_name, prefix: banner_folder).contents.each do |object|
-#   banner_urls << "https://s3.#{s3.config.region}.amazonaws.com/#{bucket_name}/#{object.key}"
-# end
-
-# s3.list_objects(bucket: bucket_name, prefix: profile_folder).contents.each do |object|
-#   profile_urls << "https://s3.#{s3.config.region}.amazonaws.com/#{bucket_name}/#{object.key}"
-# end
-
 ApplicationRecord.transaction do 
     puts "Destroying tables..."
     # Unnecessary if using `rails db:seed:replant`
@@ -48,6 +39,7 @@ ApplicationRecord.transaction do
     puts "Creating tracks for demouser"
 
     10.times do |i| 
+      puts "creating track #{i+1} for demouser"
       demouserTrack = Track.create!(
         title: Faker::Music::RockBand.song,
         username: "demolition",
@@ -64,6 +56,7 @@ ApplicationRecord.transaction do
       demoTrack1Image = URI.open("https://cloud-tunes-dev.s3.amazonaws.com/track-cover/cover#{i+1}.jpg")
       demouserTrack.image.attach(io: demoTrack1Image, filename: "cover#{i+1}.jpg")
     end
+
 
   
     puts "Creating Biggie"
@@ -109,7 +102,7 @@ ApplicationRecord.transaction do
     puts "Creating other users"
     25.times do |i|
       user = User.create!(
-        username: Faker::Internet.username,
+        username: Faker::Internet.username(specifier: 3..30),
         password: 'password',
         created_at: Faker::Time.between(from: 2.days.ago, to: Time.now),
         updated_at: Faker::Time.between(from: 2.days.ago, to: Time.now),
@@ -123,9 +116,9 @@ ApplicationRecord.transaction do
       banner = URI.open("https://cloud-tunes-dev.s3.amazonaws.com/banner/banner#{i+1}.jpg")
       user.banner.attach(io: banner, filename: "banner#{i+1}.jpg")
 
-      puts "creating tracks for user #{1}"
+      puts "creating tracks for user #{i+1}"
 
-      3.times do |i|
+      rand(3...7).times do |i|
         userTrack = Track.create!(
           title: Faker::Music::RockBand.song,
           username: user.username,
@@ -136,7 +129,7 @@ ApplicationRecord.transaction do
           user_id: user.id,
         )
         randomNum = rand(1...33);
-        puts "creating track #{i}"
+        puts "creating track #{i+1}"
 
         userTrackFile = URI.open("https://cloud-tunes-dev.s3.amazonaws.com/tracks/track#{randomNum}.mp3")
         userTrack.track.attach(io: userTrackFile, filename: "track#{randomNum}.mp3")
@@ -147,7 +140,34 @@ ApplicationRecord.transaction do
       end
 
     end
-  
+    
+    puts "creating comments"
+
+    Track.all.each do |track|
+      puts "creating comments for track #{track.id}"
+      rand(3...6).times do |i|
+        puts "creating comment #{i+1}"
+        Comment.create!(
+          user_id: rand(1...27),
+          track_id: track.id,
+          body: Faker::Lorem.sentence(word_count: 5)
+        )
+      end
+    end
+       
+    
+    puts "creating likes for demouser"
+
+    15.times do |i| 
+      puts "create like #{i+1} for demouser"
+      Like.create!(
+        user_id: demo.id,
+        track_id: i+1,
+      )
+    end
+
+    puts "creating follows"
+
     puts "Done!"
     # More users
     # 10.times do 
