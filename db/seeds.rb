@@ -167,6 +167,17 @@ ApplicationRecord.transaction do
     end
 
     puts "creating follows"
+    
+    User.all.each do |user|
+      puts "create follows for #{user.username}"
+      27.times do |i|
+        puts "creating follow {i}"
+        Follow.create!(
+          follower_id: user.id,
+          followed_id: i+1
+          )
+      end
+    end
 
     puts "Done!"
     # More users
