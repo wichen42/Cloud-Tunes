@@ -8,6 +8,7 @@ import * as trackActions from '../../store/track';
 import './UserProfilePage.css';
 import TrackDisplay from '../TrackDisplayBar';
 import * as sessionActions from '../../store/session';
+import * as likeActions from '../../store/like';
 import csrfFetch from '../../store/csrf';
 
 const UserProfilePage = () => {
@@ -28,6 +29,9 @@ const UserProfilePage = () => {
     const [openEdit, setOpenEdit] = useState(false);
     const [showTracks, setShowTracks] = useState(true);
     const [followList, setFollowList] = useState([]);
+    const [followCount, setFollowCount] = useState();
+    const likeList = useSelector(likeActions.getLikes);
+    const [likeCount, setLikeCount] = useState();
     const trackItem = userTracks.map(track => <TrackDisplay key={track.id} track={track}/>)
 
     useEffect(() => {
@@ -37,7 +41,15 @@ const UserProfilePage = () => {
             setFollowList(Object.values(data));
         } 
         fetchFollows();
+
     }, [])
+
+    useEffect(() => {
+        const userLikeList = likeList.filter(function (el) {
+            return el.userId === user.id;
+        });
+        setLikeCount(userLikeList.length);
+    }, [likeList])
 
     useEffect(() => {
         followList.forEach((follow) => {
@@ -47,6 +59,11 @@ const UserProfilePage = () => {
                 setFstyle(followingStyle)
             }
         });
+        // filter out follow list for id in params
+        const userFollowList = followList.filter(function (el) {
+            return el.followedId === user.id;
+        })
+        setFollowCount(userFollowList.length);
     }, [followList])
 
 
@@ -221,15 +238,15 @@ const UserProfilePage = () => {
                             <div className='profile-about-socials'>
                                 <div className='profile-likes'>
                                     <div>Likes</div>
-                                    <div>42</div>
+                                    <div>{likeCount}</div>
                                 </div>
                                 <div className='profile-follows'>
                                     <div>Followers</div>
-                                    <div>2</div>
+                                    <div>{followCount}</div>
                                 </div>
                                 <div className='profile-tracks'>
                                     <div>Tracks</div>
-                                    <div>80</div>
+                                    <div>{userTracks.length}</div>
                                 </div>
                             </div>
                             <div className='profile-about'>
