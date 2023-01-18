@@ -210,6 +210,15 @@ onst handlePlay = (e) => {
 
 
 ```
+
+<br>
+
+**Search Functionality**
+
+![image](https://user-images.githubusercontent.com/103459101/213256877-ccc46d1a-33e8-4fb2-91bd-21cefd9b548f.png)
+
+Users are able to search up other usernames or track titles. Search bar will link to the user's profile page where you can browse the searched user's tracks and track comments.
+
 <br>
 
 **Technologies, Libraries, and APIs**
@@ -229,6 +238,6 @@ onst handlePlay = (e) => {
 <br>
 
 - Track Show page with Audio waveform and time-marked comments.
-- Search bar functionality for users and audio files.
-- User follows and track likes.
-- Adding specific track to audio navbar play-list.
+- ~~Search bar functionality for users and audio files.~~
+- ~~User follows and track likes.~~
+- ~~Adding specific track to audio navbar play-list.~~
