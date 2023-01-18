@@ -84,7 +84,7 @@ Cloud-Tunes is a SoundCloud clone, an online music distributiuon platform and mu
 
 <br>
 
-- Users are able to customize and make their profile page their own. When logged in, User can change their About Section, location, profile image, banner image, as well as upload their own audio filee. Other users are able to create accounts and leave their comments on your uploaded tracks. Images and audio tracks are converted into formData and stored in Amazon S3 buckets.  
+- Users are able to customize and make their profile page their own. When logged in, User can change their About Section, location, profile image, banner image, as well as upload their own audio files. Other users are able to create accounts and leave their comments on your uploaded tracks and can follow a user or like their tracks. Images and audio tracks are converted into formData and stored in Amazon S3 buckets.  
 
 <br>
 
