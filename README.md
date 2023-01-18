@@ -154,14 +154,14 @@ Cloud-Tunes is a SoundCloud clone, an online music distributiuon platform and mu
 
 <br>
 
-- Uploaded audio files are able to be played via the Audio Bar on the bottom of the page. Audio play/pause, play next track, play previous track, skip to specific time, and playlist functionality. 
+- Uploaded audio files are able to be played via the Audio Bar on the bottom of the page. Users are able to utilize all of the common audio streaming functionality including, play next/previous track, repeat track, shuffle tracks, as well as queue up tracks in a playlist.
 <br>
 
-![image](https://user-images.githubusercontent.com/103459101/197086742-26c9a897-3191-4078-85b5-0109f7808e25.png)
+![image](https://user-images.githubusercontent.com/103459101/213255948-dca8f8b3-6337-43b5-aa36-2dfed9351881.png)
 
 <br>
 
-- The Audio navbar works with the implementation of several React hooks working together. The Audio element is referenced and manipulated via the useRef hook, the audio file URL is saved in an array using the State hook, and the audio progress bar implementaion consists of the State hook to track audio's current time in conjunction with the requestAnimationFrame method.
+- The Audio navbar works with the implementation of several React hooks working together. The Audio element is referenced and manipulated via the useRef hook, the audio file URL is saved in an array using the State hook, and the audio progress bar implementaion consists of the State hook to track audio's current time in conjunction with the requestAnimationFrame method that updates a slider element to emulate current track progress.
 
 <br>
 
