@@ -29,7 +29,7 @@ Cloud-Tunes is a SoundCloud clone, an online music distributiuon platform and mu
 
 <br>
 
-![image](https://user-images.githubusercontent.com/103459101/197089136-1220cbf7-b3bb-49b8-8b79-826337ac6bbb.png)
+![image](https://user-images.githubusercontent.com/103459101/213255215-2465aee3-113e-4e13-aa13-84506b12f0c1.png)
 
 <br>
 
