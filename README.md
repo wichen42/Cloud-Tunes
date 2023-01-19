@@ -29,7 +29,7 @@ Cloud-Tunes is a SoundCloud clone, an online music distributiuon platform and mu
 
 <br>
 
-![image](https://user-images.githubusercontent.com/103459101/197089136-1220cbf7-b3bb-49b8-8b79-826337ac6bbb.png)
+![image](https://user-images.githubusercontent.com/103459101/213255215-2465aee3-113e-4e13-aa13-84506b12f0c1.png)
 
 <br>
 
@@ -84,7 +84,7 @@ Cloud-Tunes is a SoundCloud clone, an online music distributiuon platform and mu
 
 <br>
 
-- Users are able to customize and make their profile page their own. When logged in, User can change their About Section, location, profile image, banner image, as well as upload their own audio filee. Other users are able to create accounts and leave their comments on your uploaded tracks. Images and audio tracks are converted into formData and stored in Amazon S3 buckets.  
+- Users are able to customize and make their profile page their own. When logged in, User can change their About Section, location, profile image, banner image, as well as upload their own audio files. Other users are able to create accounts and leave their comments on your uploaded tracks and can follow a user or like their tracks. Images and audio tracks are converted into formData and stored in Amazon S3 buckets.  
 
 <br>
 
@@ -154,14 +154,14 @@ Cloud-Tunes is a SoundCloud clone, an online music distributiuon platform and mu
 
 <br>
 
-- Uploaded audio files are able to be played via the Audio Bar on the bottom of the page. Audio play/pause, play next track, play previous track, skip to specific time, and playlist functionality. 
+- Uploaded audio files are able to be played via the Audio Bar on the bottom of the page. Users are able to utilize all of the common audio streaming functionality including, play next/previous track, repeat track, shuffle tracks, as well as queue up tracks in a playlist.
 <br>
 
-![image](https://user-images.githubusercontent.com/103459101/197086742-26c9a897-3191-4078-85b5-0109f7808e25.png)
+![image](https://user-images.githubusercontent.com/103459101/213255948-dca8f8b3-6337-43b5-aa36-2dfed9351881.png)
 
 <br>
 
-- The Audio navbar works with the implementation of several React hooks working together. The Audio element is referenced and manipulated via the useRef hook, the audio file URL is saved in an array using the State hook, and the audio progress bar implementaion consists of the State hook to track audio's current time in conjunction with the requestAnimationFrame method.
+- The Audio navbar works with the implementation of several React hooks working together. The Audio element is referenced and manipulated via the useRef hook, the audio file URL is saved in an array using the State hook, and the audio progress bar implementaion consists of the State hook to track audio's current time in conjunction with the requestAnimationFrame method that updates a slider element to emulate current track progress.
 
 <br>
 
@@ -210,11 +210,18 @@ onst handlePlay = (e) => {
 
 
 ```
+
+<br>
+
+**Search Functionality**
+
+![image](https://user-images.githubusercontent.com/103459101/213256877-ccc46d1a-33e8-4fb2-91bd-21cefd9b548f.png)
+
+- Users are able to search up other usernames or track titles. Search bar will link to the user's profile page where you can browse the searched user's tracks and track comments.
+
 <br>
 
 **Technologies, Libraries, and APIs**
-
-<br>
 
 - React Javascript Library
 - Ruby on Rails backend
@@ -226,9 +233,7 @@ onst handlePlay = (e) => {
 
 **Future Features**
 
-<br>
-
 - Track Show page with Audio waveform and time-marked comments.
-- Search bar functionality for users and audio files.
-- User follows and track likes.
-- Adding specific track to audio navbar play-list.
+- ~~Search bar functionality for users and audio files.~~
+- ~~User follows and track likes.~~
+- ~~Adding specific track to audio navbar play-list.~~
