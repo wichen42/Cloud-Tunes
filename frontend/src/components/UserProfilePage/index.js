@@ -9,13 +9,15 @@ import './UserProfilePage.css';
 import TrackDisplay from '../TrackDisplayBar';
 import * as sessionActions from '../../store/session';
 import * as likeActions from '../../store/like';
+import * as userActions from '../../store/users';
 import csrfFetch from '../../store/csrf';
 
 const UserProfilePage = () => {
 
     const dispatch = useDispatch();
     const {id} = useParams();
-    const user = useSelector(sessionActions.getSession);
+    const users = useSelector(userActions.getUsers);
+    const [user, setUser] = useState({});
     const sessionUser = useContext(SessionContext)
     const [follow, setFollow] = useState('Follow');
     const [profileUrl, setPhotoUrl] = useState('');
@@ -32,8 +34,9 @@ const UserProfilePage = () => {
     const [followCount, setFollowCount] = useState();
     const likeList = useSelector(likeActions.getLikes);
     const [likeCount, setLikeCount] = useState();
+    const [userList, setUserList] = useState([]);
     const trackItem = userTracks.map(track => <TrackDisplay key={track.id} track={track}/>)
-
+    
     useEffect(() => {
         const fetchFollows = async () => {
             const res = await csrfFetch('/api/follows')
@@ -45,14 +48,30 @@ const UserProfilePage = () => {
     }, [])
 
     useEffect(() => {
-        const userLikeList = likeList.filter(function (el) {
+        setUserList(users);
+    }, [users]);
+
+    useEffect(() => {
+        if (id) {
+        const paramUser = userList.filter(function (el) {
+            return el.id === parseInt(id);
+        })
+        setUser(paramUser[0])
+        }
+    }, [userList])
+
+    useEffect(() => {
+        if (user) {
+            const userLikeList = likeList.filter(function (el) {
             return el.userId === user.id;
         });
         setLikeCount(userLikeList.length);
+        }
     }, [likeList])
 
     useEffect(() => {
-        followList.forEach((follow) => {
+        if (user) {
+            followList.forEach((follow) => {
             const followData = {followedId: id, followerId: sessionUser.id}
             if (Object.entries(follow).sort().toString() === Object.entries(followData).sort().toString()) {
                 setFollow("Following");
@@ -64,6 +83,7 @@ const UserProfilePage = () => {
             return el.followedId === user.id;
         })
         setFollowCount(userFollowList.length);
+        }
     }, [followList])
 
 
