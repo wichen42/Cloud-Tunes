@@ -26,7 +26,6 @@ const DiscoverPage = () => {
     const [likes, setLikes] = useState([]);
     const [userList, setUserList] = useState([]);
     const [sideTracks, setSideTracks] = useState([]);
-    const [newUserList, setNewUserList] = useState([]);
 
     const history = useHistory();
     
@@ -34,6 +33,8 @@ const DiscoverPage = () => {
         const res = [...arr].sort(() => 0.5 - Math.random());
         return res.slice(0, num);
     };
+
+    const userNums = [1, 5, 14, 4, 7, 20, 2, 21, 8, 12];
 
     useEffect(() => {
         dispatch(userActions.fetchUsers());
