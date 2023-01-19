@@ -34,10 +34,11 @@ const DiscoverPage = () => {
         return res.slice(0, num);
     };
 
-    const userNums = [1, 5, 14, 4, 7, 20, 2, 21, 8, 12];
+    // const userNums = [1, 5, 14, 4, 7, 20, 2, 21, 8, 12];
 
     useEffect(() => {
         dispatch(userActions.fetchUsers());
+
     }, []);
 
     useEffect(() => {
