@@ -26,6 +26,7 @@ const DiscoverPage = () => {
     const [likes, setLikes] = useState([]);
     const [userList, setUserList] = useState([]);
     const [sideTracks, setSideTracks] = useState([]);
+    const [newUserList, setNewUserList] = useState([]);
 
     const history = useHistory();
     

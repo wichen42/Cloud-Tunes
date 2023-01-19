@@ -53,7 +53,8 @@ ApplicationRecord.transaction do
       demoTrack = URI.open("https://cloud-tunes-dev.s3.amazonaws.com/tracks/track#{i+1}.mp3")
       demouserTrack.track.attach(io: demoTrack, filename: "track#{i+1}.mp3")
   
-      demoTrack1Image = URI.open("https://cloud-tunes-dev.s3.amazonaws.com/track-cover/cover#{i+1}.jpg")
+      # demoTrack1Image = URI.open("https://cloud-tunes-dev.s3.amazonaws.com/track-cover/cover#{i+1}.jpg")
+      demoTrack1Image = URI.open("https://cloud-tunes-dev.s3.amazonaws.com/cover-compressed/cover#{i+1}.jpg")
       demouserTrack.image.attach(io: demoTrack1Image, filename: "cover#{i+1}.jpg")
     end
 
@@ -69,7 +70,8 @@ ApplicationRecord.transaction do
       location: "#{Faker::Address.city}, #{Faker::Address.country}",
     )
 
-    biggieProfile = URI.open('https://cloud-tunes-dev.s3.amazonaws.com/profile/profile18.jpg')
+    # biggieProfile = URI.open('https://cloud-tunes-dev.s3.amazonaws.com/profile/profile18.jpg')
+    biggieProfile = URI.open('https://cloud-tunes-dev.s3.amazonaws.com/profile-compressed/profile18.jpg')
     biggie.image.attach(io: biggieProfile, filename: 'profile18.jpg')
 
     biggieBanner = URI.open('https://cloud-tunes-dev.s3.amazonaws.com/banner/banner12.jpg')
@@ -94,8 +96,9 @@ ApplicationRecord.transaction do
       biggieTrackFile = URI.open(uri)
       biggieTrack.track.attach(io: biggieTrackFile, filename: "tracks/track#{i+11}.mp3")
       
-      biggieTrackImage = URI.open("https://cloud-tunes-dev.s3.amazonaws.com/track-cover/cover#{i+1}.jpg")
-      biggieTrack.image.attach(io: biggieTrackImage, filename: "track-cover/cover#{i+11}.jpg")
+      # biggieTrackImage = URI.open("https://cloud-tunes-dev.s3.amazonaws.com/track-cover/cover#{i+1}.jpg")
+      biggieTrackImage = URI.open("https://cloud-tunes-dev.s3.amazonaws.com/cover-compressed/cover#{i+1}.jpg")
+      biggieTrack.image.attach(io: biggieTrackImage, filename: "cover#{i+11}.jpg")
 
     end
 
@@ -110,7 +113,8 @@ ApplicationRecord.transaction do
         location: "#{Faker::Address.city}, #{Faker::Address.country}",
       )
       puts "creating and attaching profile and banner image for user #{i+1}"
-      profile = URI.open("https://cloud-tunes-dev.s3.amazonaws.com/profile/profile#{i+1}.jpg")
+      # profile = URI.open("https://cloud-tunes-dev.s3.amazonaws.com/profile/profile#{i+1}.jpg")
+      profile = URI.open("https://cloud-tunes-dev.s3.amazonaws.com/profile-compressed/profile#{i+1}.jpg")
       user.image.attach(io: profile, filename: "profile#{i+1}.jpg")
 
       banner = URI.open("https://cloud-tunes-dev.s3.amazonaws.com/banner/banner#{i+1}.jpg")
@@ -134,7 +138,8 @@ ApplicationRecord.transaction do
         userTrackFile = URI.open("https://cloud-tunes-dev.s3.amazonaws.com/tracks/track#{randomNum}.mp3")
         userTrack.track.attach(io: userTrackFile, filename: "track#{randomNum}.mp3")
     
-        userTrackImage = URI.open("https://cloud-tunes-dev.s3.amazonaws.com/track-cover/cover#{rand(1...33)}.jpg")
+        # userTrackImage = URI.open("https://cloud-tunes-dev.s3.amazonaws.com/track-cover/cover#{rand(1...33)}.jpg")
+        userTrackImage = URI.open("https://cloud-tunes-dev.s3.amazonaws.com/cover-compressed/cover#{rand(1...33)}.jpg")
         userTrack.image.attach(io: userTrackImage, filename: "cover#{rand(1...33)}.jpg")
 
       end
@@ -168,7 +173,7 @@ ApplicationRecord.transaction do
 
     puts "creating follows"
     
-    User.all.each do |user|m
+    User.all.each do |user|
       puts "create follows for #{user.username}"
       27.times do |i|
         puts "creating follow {i}"
