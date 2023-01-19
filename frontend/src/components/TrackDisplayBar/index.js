@@ -6,6 +6,7 @@ import TrackComments from '../TrackComments';
 import * as commentActions from '../../store/comment';
 import * as trackActions from '../../store/track';
 import * as likeActions from '../../store/like';
+import * as playlistActions from '../../store/playlist';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './TrackDisplay.css';
 
@@ -111,6 +112,10 @@ const TrackDisplay = ({track}) => {
         }
     }
 
+    const handlePlay = (e) => {
+        e.preventDefault();
+        dispatch(playlistActions.addSong(track))}
+
     return ( 
         <div className='track-container'>
             <div className='track-display-container'
@@ -122,7 +127,9 @@ const TrackDisplay = ({track}) => {
             <div className='track-details container'>
                 <div className='track-info'>
                     <div className='track-name-title'>
-                        <div className='tnt-image'><button></button></div>
+                        <div className='tnt-image'><button
+                        onClick={(e) => handlePlay(e)}
+                        ></button></div>
                         <div>
                             <div className='track-artist'>{track.username}</div>
                             <div className='track-title'>{track.title}</div>

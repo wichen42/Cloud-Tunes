@@ -15,7 +15,7 @@ const UserProfilePage = () => {
 
     const dispatch = useDispatch();
     const {id} = useParams();
-    const user = useSelector(getUser(id));
+    const user = useSelector(sessionActions.getSession);
     const sessionUser = useContext(SessionContext)
     const [follow, setFollow] = useState('Follow');
     const [profileUrl, setPhotoUrl] = useState('');

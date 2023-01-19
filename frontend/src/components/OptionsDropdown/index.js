@@ -19,19 +19,16 @@ const OptionsDropdown = () => {
 
     return ( 
         <div className='options-dropdown'>
-            <a href="#"
+            <a href="https://wilsonchen.dev/"
+            target="_blank"
             className='sessionMenuItem'
-            >About Us</a>
-            <a href="#"
-            className='sessionMenuItem'
-            >Attributions</a>
-            <a href="#"
-            className='sessionMenuItem'
-            >Github Wiki</a>
-            <a href="#"
+            >About Me</a>
+            <a href="https://github.com/wichen42/Cloud-Tunes"
+            target="_blank"
             className='sessionMenuItem'
             >Github</a>
-            <a href="#"
+            <a href="https://www.linkedin.com/in/wchen42"
+            target="_blank"
             className='sessionMenuItem'
             >LinkedIn</a>
             <a href="#"

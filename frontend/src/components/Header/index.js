@@ -63,7 +63,6 @@ const Header = () => {
     }
 
     const handleOptions = (e) => {
-        e.preventDefault();
         setOptionsClicked(!optionsClicked);
     }
 
