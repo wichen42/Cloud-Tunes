@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import csrfFetch from '../../store/csrf';
 import * as followActions from '../../store/follow';
 import * as playlistActions from '../../store/playlist';
+import * as likeActions from '../../store/like';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import heart_white from '../../assets/icons/heart-solid-white.svg';
@@ -39,11 +40,15 @@ const orangeLikeStyle = {
     backgroundPosition: 'center'
 };
 
-const PlaylistItem = ({track, sessionUser, followList, user, setTrackImage, likeList}) => {
+const PlaylistItem = ({track, sessionUser, user, setTrackImage, setTrackPlay, setTrack}) => {
 
     const dispatch = useDispatch();
+    const likeData = useSelector(likeActions.getLikes);
+    const followData = useSelector(followActions.getFollows);
+    const [likeList, setLikeList] = useState([]);
+    const [followList, setFollowList] = useState([]);
     const [showButtons, setShowButtons] = useState(false);
-    // const [following, setFollowing] = useState(false);
+    const [following, setFollowing] = useState(false);
     const [trackUser, setTrackUser] = useState({});
     const [render, setRender] = useState(false);
     const [followStyle, setFollowStyle] = useState(whiteFollowStyle);
@@ -55,21 +60,27 @@ const PlaylistItem = ({track, sessionUser, followList, user, setTrackImage, like
     }, []);
 
     useEffect(() => {
-        const userFollowList = followList.filter(function (el) {
-            return el.followerId === sessionUser.id;
-        });
+        setFollowList(followData)
+    }, [followData])
+
+    useEffect(() => {
+        setLikeList(likeData)
+    }, [likeData])
+
+    useEffect(() => {
         if (hover) {
             // Find Users that are followed
-            const followMatch = userFollowList.some(function (el) {
+            const followMatch = followList.some(function (el) {
                 return el.followerId === sessionUser.id && el.followedId === trackUser.id;
             });
             // Change styling for followed Users
            if (followMatch) {
-            // setFollowing(true);
-            setFollowStyle(orangeFollowStyle);
+            setFollowing(true);
+            // setFollowStyle(orangeFollowStyle);
+            
            } else {
-            // setFollowing(false);
-            setFollowStyle(whiteFollowStyle);
+            setFollowing(false);
+            // setFollowStyle(whiteFollowStyle);
            };
 
            // Find tracks that are liked
@@ -83,7 +94,7 @@ const PlaylistItem = ({track, sessionUser, followList, user, setTrackImage, like
             setLikeStyle(whiteLikeStyle);
            }
         }
-    }, [hover])
+    }, [hover, following])
 
     const handlePlay = (e) => {
         e.preventDefault();
@@ -92,42 +103,35 @@ const PlaylistItem = ({track, sessionUser, followList, user, setTrackImage, like
     
     const handleLike = (e) => {
         e.preventDefault();
-        console.log("Like");
-       
+        if (likeStyle === whiteLikeStyle) {
+            console.log("start like logic");
+        } else if (likeStyle === orangeLikeStyle) {
+            console.log("start unlike logic");
+        }
     }
 
-    const handleFollow = (e) => {
+    const handleFollow = async (e) => {
         e.preventDefault();
-        console.log("follow");
+        const followData = {followerId: sessionUser.id, followedId: trackUser.id}
+        if (followStyle === whiteFollowStyle) {
+            console.log("dispatch addFollow")
+            // setFollowStyle(orangeFollowStyle);
+            setFollowing(true);
+            dispatch(followActions.addFollow(followData));
+        } else if (followStyle === orangeFollowStyle) {
+            console.log("dispatch deleteFollow");
+            // setFollowStyle(whiteFollowStyle);
+            setFollowing(false);
+            console.log(track.userId);
+            dispatch(followActions.deleteFollow(track.userId));
+        }
     }
-    // const handleFollow = async (e) => {
-    //     e.preventDefault();
-
-    //         if (follow === true) {
-    //             setFollow(false);
-    //             setFstyle(followingStyle)
-
-    //             // await csrfFetch(`/api/follows`, {
-    //             //     method: "POST",
-    //             //     body: JSON.stringify(followData)
-    //             // });
-
-    //             dispatch(followActions.addFollow(followData));
-    //             setRender(!render);
-    //         } else {
-    //             setFollow(true);
-    //             setFstyle(followStyle)
-    //             // await csrfFetch(`/api/follows/${track.userId}`, {
-    //             //     method: "DELETE"
-    //             // })
-    //             dispatch(followActions.deleteFollow(track.userId));
-    //             setRender(!render);
-    //         }
-    // }
 
     const handleClick = (e) => {
         e.preventDefault();
         setTrackImage(track.imageUrl);
+        setTrackPlay();
+        setTrack(track);
     }
 
     return ( 
@@ -143,7 +147,7 @@ const PlaylistItem = ({track, sessionUser, followList, user, setTrackImage, like
                     onMouseLeave={() => setHover(false)}
                     >
                         <div className='discover-playlist-buttons-container'>
-                            <div className='discover-playlist-play'
+                            {/* <div className='discover-playlist-play'
                             onClick={(e) => handlePlay(e)} 
                             ><FontAwesomeIcon icon="fa-solid fa-play" /></div>
 
@@ -151,11 +155,11 @@ const PlaylistItem = ({track, sessionUser, followList, user, setTrackImage, like
                             onClick={(e) => handleLike(e)}
                             style={likeStyle}                     
                             ></div>
-                            
+
                             <div className='discover-playlist-follow'
                             onClick={(e) => handleFollow(e)}
-                            style={followStyle}
-                            ></div>
+                            style={following ? orangeFollowStyle : whiteFollowStyle}
+                            ></div> */}
                         </div>
                     </div>
                 }
