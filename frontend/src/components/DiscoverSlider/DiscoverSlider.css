@@ -49,6 +49,11 @@
     display: flex;
 }
 
+.discover-slider-item-title:hover {
+    text-decoration: underline;
+    color: #FF5500;
+    
+}
 
 .discover-slider-header {
     font-size: 25px;
