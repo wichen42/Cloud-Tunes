@@ -146,10 +146,12 @@ const PlaylistItem = ({track, sessionUser, followList, user, setTrackImage, like
                             <div className='discover-playlist-play'
                             onClick={(e) => handlePlay(e)} 
                             ><FontAwesomeIcon icon="fa-solid fa-play" /></div>
+
                             <div className='discover-playlist-like'
                             onClick={(e) => handleLike(e)}
                             style={likeStyle}                     
                             ></div>
+                            
                             <div className='discover-playlist-follow'
                             onClick={(e) => handleFollow(e)}
                             style={followStyle}
