@@ -34,21 +34,19 @@ const DiscoverPage = () => {
         return res.slice(0, num);
     };
 
-    // const userNums = [1, 5, 14, 4, 7, 20, 2, 21, 8, 12];
-
     useEffect(() => {
         dispatch(userActions.fetchUsers());
-
     }, []);
 
     useEffect(() => {
         setUserList(shuffleArr(users, 10));
-        setArtistFollow(shuffleArr(users, 3))
-    }, [users]);
+        setArtistFollow(shuffleArr(users, 3));
+    }, [users.length])
 
     useEffect(() => {
         setSideTracks(shuffleArr(tracks, 3));
-    }, [tracks]);
+    }, [tracks.length])
+
 
     useEffect(() => {
         const likeData = likeList.filter(function (el) {
