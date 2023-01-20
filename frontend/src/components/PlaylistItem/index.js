@@ -1,45 +1,78 @@
 import { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './PlaylistItem.css';
 import { useEffect } from 'react';
 import csrfFetch from '../../store/csrf';
 import * as followActions from '../../store/follow';
 import * as playlistActions from '../../store/playlist';
 import { useDispatch, useSelector } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import heart_white from '../../assets/icons/heart-solid-white.svg';
+import heart_orange from '../../assets/icons/heart-solid-orange.svg';
+import follow_white from '../../assets/icons/user-plus-solid-white.svg';
+import follow_orange from '../../assets/icons/follow-orange.svg';
+
+const whiteFollowStyle = {
+    backgroundImage: `url('${follow_white}')`, 
+    backgroundSize: '28px 28px', 
+    backgroundRepeat: 'no-repeat', 
+    backgroundPosition: 'center',
+};
+
+const orangeFollowStyle = {
+    backgroundImage: `url('${follow_orange}')`, 
+    backgroundSize: '28px 28px', 
+    backgroundRepeat: 'no-repeat', 
+    backgroundPosition: 'center',
+};
+
+const whiteLikeStyle = {
+    backgroundImage: `url('${heart_white}')`,
+    backgroundSize: '22px 22px', 
+    backgroundRepeat: 'no-repeat', 
+    backgroundPosition: 'center'
+};
+
+const orangeLikeStyle = {
+    backgroundImage: `url('${heart_orange}')`,
+    backgroundSize: '30px 30px', 
+    backgroundRepeat: 'no-repeat', 
+    backgroundPosition: 'center'
+};
 
 const PlaylistItem = ({track, users, sessionUser, followList, user, followData, setTrackImage}) => {
 
-    const followStyle = {
-        color: "white"
-    }
-
-    const followingStyle = {
-        color: "#FF5500"
-    }
-
-    const noStyle = {
-        color: "black"
-    }
-
     const dispatch = useDispatch();
     const [showButtons, setShowButtons] = useState(false);
-    const [follow, setFollow] = useState();
+    const [following, setFollowing] = useState(false);
     const [trackUser, setTrackUser] = useState({});
-    const [fStyle, setFstyle] = useState(followStyle);
     const [render, setRender] = useState(false);
+    const [followStyle, setFollowStyle] = useState(whiteFollowStyle);
+    const [likeStyle, setLikeStyle] = useState(whiteLikeStyle);
+    const [hover, setHover] = useState(false);
 
     useEffect(() => {
         setTrackUser(user);
-        followList.forEach((follow) => {
-            if (Object.entries(follow).sort().toString() === Object.entries(followData).sort().toString()) {
-                setFollow(false);
-                setFstyle(followingStyle);
-            } else {
-                setFollow(true)
-                setFstyle(followStyle)
-            }
-        });
     }, []);
+
+    useEffect(() => {
+        const userFollowList = followList.filter(function (el) {
+            return el.followerId === sessionUser.id;
+        });
+        const data = {followerId: sessionUser.id, followedId: trackUser.id}
+        if (hover) {
+            // 
+            const followMatch = userFollowList.some(function (el) {
+                return el.followerId === sessionUser.id && el.followedId === trackUser.id;
+            });
+           if (followMatch) {
+            setFollowing(true);
+            setFollowStyle(orangeFollowStyle);
+           } else {
+            setFollowing(false);
+            setFollowStyle(whiteFollowStyle);
+           }
+        }
+    }, [hover])
 
     const handlePlay = (e) => {
         e.preventDefault();
@@ -49,33 +82,37 @@ const PlaylistItem = ({track, users, sessionUser, followList, user, followData, 
     const handleLike = (e) => {
         e.preventDefault();
         console.log("Like");
-        console.log(followList);
+       
     }
 
-    const handleFollow = async (e) => {
+    const handleFollow = (e) => {
         e.preventDefault();
-
-            if (follow === true) {
-                setFollow(false);
-                setFstyle(followingStyle)
-
-                // await csrfFetch(`/api/follows`, {
-                //     method: "POST",
-                //     body: JSON.stringify(followData)
-                // });
-
-                dispatch(followActions.addFollow(followData));
-                setRender(!render);
-            } else {
-                setFollow(true);
-                setFstyle(followStyle)
-                // await csrfFetch(`/api/follows/${track.userId}`, {
-                //     method: "DELETE"
-                // })
-                dispatch(followActions.deleteFollow(track.userId));
-                setRender(!render);
-            }
+        console.log("follow");
     }
+    // const handleFollow = async (e) => {
+    //     e.preventDefault();
+
+    //         if (follow === true) {
+    //             setFollow(false);
+    //             setFstyle(followingStyle)
+
+    //             // await csrfFetch(`/api/follows`, {
+    //             //     method: "POST",
+    //             //     body: JSON.stringify(followData)
+    //             // });
+
+    //             dispatch(followActions.addFollow(followData));
+    //             setRender(!render);
+    //         } else {
+    //             setFollow(true);
+    //             setFstyle(followStyle)
+    //             // await csrfFetch(`/api/follows/${track.userId}`, {
+    //             //     method: "DELETE"
+    //             // })
+    //             dispatch(followActions.deleteFollow(track.userId));
+    //             setRender(!render);
+    //         }
+    // }
 
     const handleClick = (e) => {
         e.preventDefault();
@@ -90,18 +127,22 @@ const PlaylistItem = ({track, users, sessionUser, followList, user, followData, 
             onClick={(e) => handleClick(e)}
             >
                 {showButtons && 
-                    <div className='discover-playlist-buttons' >
+                    <div className='discover-playlist-buttons' 
+                    onMouseEnter={() => setHover(true)}
+                    onMouseLeave={() => setHover(false)}
+                    >
                         <div className='discover-playlist-buttons-container'>
                             <div className='discover-playlist-play'
                             onClick={(e) => handlePlay(e)} 
                             ><FontAwesomeIcon icon="fa-solid fa-play" /></div>
                             <div className='discover-playlist-like'
-                            onClick={(e) => handleLike(e)}                          
-                            ><FontAwesomeIcon icon="fa-solid fa-heart" /></div>
+                            onClick={(e) => handleLike(e)}
+                            style={likeStyle}                     
+                            ></div>
                             <div className='discover-playlist-follow'
                             onClick={(e) => handleFollow(e)}
-                            style={fStyle}  
-                            ><FontAwesomeIcon icon="fa-solid fa-user-plus" /></div>
+                            style={followStyle}
+                            ></div>
                         </div>
                     </div>
                 }
