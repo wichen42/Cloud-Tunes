@@ -2,7 +2,7 @@ import { useState } from 'react';
 import PlaylistItem from '../PlaylistItem';
 import './Playlist.css';
 
-const Playlist = ({tracks, users, sessionUser, followList}) => {
+const Playlist = ({tracks, users, sessionUser, followList, likeList}) => {
     
     const [trackImage, setTrackImage] = useState();
 
@@ -16,7 +16,7 @@ const Playlist = ({tracks, users, sessionUser, followList}) => {
             return el.username === track.username;
         });
         const followData = {followedId: track.userId, followerId: sessionUser.id}
-        return <PlaylistItem track={track} user={trackUser[0]} followData={followData} key={track.id} sessionUser={sessionUser} users={users} followList={followList} setTrackImage={setTrackImage}/>
+        return <PlaylistItem track={track} user={trackUser[0]} key={track.id} sessionUser={sessionUser} followList={followList} setTrackImage={setTrackImage} likeList={likeList}/>
     });
 
 

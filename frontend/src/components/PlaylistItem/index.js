@@ -39,11 +39,11 @@ const orangeLikeStyle = {
     backgroundPosition: 'center'
 };
 
-const PlaylistItem = ({track, users, sessionUser, followList, user, followData, setTrackImage}) => {
+const PlaylistItem = ({track, sessionUser, followList, user, setTrackImage, likeList}) => {
 
     const dispatch = useDispatch();
     const [showButtons, setShowButtons] = useState(false);
-    const [following, setFollowing] = useState(false);
+    // const [following, setFollowing] = useState(false);
     const [trackUser, setTrackUser] = useState({});
     const [render, setRender] = useState(false);
     const [followStyle, setFollowStyle] = useState(whiteFollowStyle);
@@ -58,18 +58,29 @@ const PlaylistItem = ({track, users, sessionUser, followList, user, followData, 
         const userFollowList = followList.filter(function (el) {
             return el.followerId === sessionUser.id;
         });
-        const data = {followerId: sessionUser.id, followedId: trackUser.id}
         if (hover) {
-            // 
+            // Find Users that are followed
             const followMatch = userFollowList.some(function (el) {
                 return el.followerId === sessionUser.id && el.followedId === trackUser.id;
             });
+            // Change styling for followed Users
            if (followMatch) {
-            setFollowing(true);
+            // setFollowing(true);
             setFollowStyle(orangeFollowStyle);
            } else {
-            setFollowing(false);
+            // setFollowing(false);
             setFollowStyle(whiteFollowStyle);
+           };
+
+           // Find tracks that are liked
+           const likeMatch = likeList.some(function (el) {
+            return el.userId === sessionUser.id && el.trackId === track.id;
+           });
+           // Change styling for liked tracks
+           if (likeMatch) {
+            setLikeStyle(orangeLikeStyle);
+           } else {
+            setLikeStyle(whiteLikeStyle);
            }
         }
     }, [hover])

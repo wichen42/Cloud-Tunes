@@ -86,7 +86,7 @@ const DiscoverPage = () => {
                 < DiscoverSlider title={"Discover Artists"} data={userList}/>
                 < DiscoverSlider title={"More from biggie"} data={biggieTracks}/>
                 < DiscoverSlider title={"More from demolition"} data={demolitionTracks}/>
-                < Playlist tracks={tracks} users={users} sessionUser={sessionUser} followList={follows}/>
+                < Playlist tracks={tracks} users={users} sessionUser={sessionUser} followList={follows} likeList={likeList}/>
 
                 <div className="discover-playlist">
 
